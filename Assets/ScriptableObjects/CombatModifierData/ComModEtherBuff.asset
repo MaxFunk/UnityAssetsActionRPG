@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28cd3a99a2da04468b5673627397052, type: 3}
+  m_Name: ComModEtherBuff
+  m_EditorClassIdentifier: Assembly-CSharp::CombatModifierData
+  modifierType: 1
+  tickInterval: 0
+  showInPanels: 1
+  infinite: 0
+  unremovable: 0
+  exlusiveWithModifier: {fileID: 11400000, guid: 410234b745280f244a892d64f45cf1f0, type: 2}
+  icon: {fileID: 2800000, guid: 0f12f85dc7175cc458b41f0ca4394558, type: 3}

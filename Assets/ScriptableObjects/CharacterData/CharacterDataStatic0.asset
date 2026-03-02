@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e15565b9607ca247a333d185ba36e70, type: 3}
+  m_Name: CharacterDataStatic0
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDataStatic
+  characterName: M
+  characterIndex: 0
+  startLevel: 1
+  statsLevel1:
+    health: 110
+    attack: 8
+    ether: 6
+    agility: 4
+    luck: 4
+    physicalDefense: 0.15
+    etherDefense: 0.15
+  statsLevel99:
+    health: 4530
+    attack: 265
+    ether: 224
+    agility: 210
+    luck: 232
+    physicalDefense: 0.15
+    etherDefense: 0.15
+  initArtSaveDatas:
+  - artId: 6
+    artLevel: 0
+    artSlot: 0
+  - artId: 21
+    artLevel: 0
+    artSlot: 5
+  levelUpArts:
+  - {x: 1, y: 6}
+  - {x: 2, y: 7}
+  - {x: 3, y: 8}
+  - {x: 4, y: 9}
+  - {x: 5, y: 10}
+  iconMenuFull: {fileID: 2800000, guid: 62851860678a3c34e8fa60a1d2b10f3c, type: 3}

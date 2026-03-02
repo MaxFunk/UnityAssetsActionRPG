@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6135634459973ba4695a2f9f78c9db50, type: 3}
+  m_Name: ItemDataEnergyCrystal
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  id: 1
+  sellValue: 500
+  buyValue: 1000
+  itemName: Energy Crystal
+  description: Strange crystal loaded with pure energy
+  type: 0
+  rarity: 1
+  icon: {fileID: 2800000, guid: c113f82045e193945bbd11571764dd25, type: 3}
+  effect: {fileID: 0}

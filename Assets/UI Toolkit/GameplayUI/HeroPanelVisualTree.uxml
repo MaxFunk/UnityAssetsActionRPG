@@ -1,0 +1,38 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/CombatUIStyle.uss?fileID=7433441132597879392&amp;guid=4bfa582d5cc299c429b1153efde69985&amp;type=3#CombatUIStyle" />
+    <ui:VisualElement name="HeroPanelRoot" data-source-type="CombatData, Assembly-CSharp" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.5); flex-direction: row;">
+        <ui:VisualElement style="width: 80%;">
+            <ui:VisualElement style="flex-grow: 0; flex-direction: row; height: 50%;">
+                <ui:Label text="Character" name="LabelName" class="hero-panel-text" style="width: 60%;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="charName" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="Lv" class="hero-panel-text" style="width: 25%; -unity-text-align: upper-right;" />
+                <ui:Label text="99" name="LabelLevel" class="hero-panel-text" style="flex-grow: 1;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="level" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:VisualElement style="width: 80%;">
+                    <ui:ProgressBar value="22" name="HealthBar" class="hero-health-bar">
+                        <Bindings>
+                            <ui:DataBinding property="highValue" data-source-path="maxHealth" binding-mode="ToTarget" />
+                            <ui:DataBinding property="value" data-source-path="curHealth" binding-mode="ToTarget" />
+                        </Bindings>
+                    </ui:ProgressBar>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1;">
+                    <ui:Label text="999" name="LabelHealth" class="hero-panel-text" style="-unity-text-align: upper-center;">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="curHealth" binding-mode="ToTarget" />
+                        </Bindings>
+                    </ui:Label>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="ContainerModifiers" style="width: 20%; flex-direction: row; flex-wrap: wrap;" />
+    </ui:VisualElement>
+</ui:UXML>

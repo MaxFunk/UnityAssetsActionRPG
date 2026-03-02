@@ -1,0 +1,58 @@
+:root {
+}
+
+.number-player {
+    font-size: 48px;
+    position: absolute;
+    text-shadow: 4px 2px 0 rgb(0, 0, 0);
+    -unity-text-outline-color: rgb(255, 255, 255);
+    -unity-text-outline-width: 0.5px;
+}
+
+.number-ally {
+    font-size: 36px;
+    position: absolute;
+    text-shadow: 4px 2px 0 rgb(0, 0, 0);
+}
+
+.number-damage-physical {
+    color: rgb(255, 99, 0);
+    -unity-font-style: bold;
+}
+
+.number-damage-ether {
+    color: rgb(56, 148, 241);
+    -unity-font-style: bold;
+}
+
+.number-damage-soul {
+    color: rgb(53, 229, 180);
+    -unity-font-style: bold;
+}
+
+.number-damage-effect {
+    color: rgb(231, 21, 83);
+    font-size: 30px;
+    -unity-font-style: bold;
+}
+
+.number-healing {
+    color: rgb(38, 217, 43);
+    font-size: 30px;
+    -unity-font-style: bold;
+}
+
+.number-crit {
+    border-bottom-color: rgb(255, 255, 255);
+    border-bottom-width: 2px;
+}
+
+.number-damage-enemy {
+    color: rgb(178, 174, 174);
+    font-size: 30px;
+    -unity-font-style: bold;
+}
+
+.number-evade {
+    -unity-font-style: italic;
+}

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataGuardWave
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Guard Wave
+  castType: 1
+  category: 2
+  descriptionLong: 
+  descriptionShort: Phys Def Up / AOE
+  isUlt: 0
+  isSelfCast: 1
+  ultCost: 0
+  maxCastDistance: 5
+  castDuration: 1
+  cancelAfter: 0.8
+  cancelWindow: 0.2
+  basePower: 0000000000000000000000000000000000000000
+  artCooldown:
+  - 14
+  - 13
+  - 12
+  - 11
+  - 10
+  hits:
+  - 0.6
+  ArtEffects:
+  - effectType: 4
+    value: 0.2
+    duration: 10
+    combatModifier: {fileID: 11400000, guid: c5b4658a1c69cdd4a8de12f4f3a36dae, type: 2}
+  ArtCastPrefab: {fileID: 8040575257465353033, guid: 14d33d3b9ef3eff489bcac3a49ca5322, type: 3}
+  icon: {fileID: 2800000, guid: d6a602c481d6bde468e0bdb4854c2fd8, type: 3}

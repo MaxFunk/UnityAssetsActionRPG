@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/SaveFileStyle.uss?fileID=7433441132597879392&amp;guid=9a26e856490faff4d9425ba630933ebf&amp;type=3#SaveFileStyle" />
+    <ui:VisualElement name="Container" data-source-type="SaveDataPreview, Assembly-CSharp" class="save-file-view" style="flex-grow: 1;">
+        <ui:Label text="File X" name="LabelFileIndex" class="label-file">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="fileText" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+        <ui:Label text="00:00:000" name="LabelTimePlayed" class="label-file">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="gameTimeText" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+    </ui:VisualElement>
+</ui:UXML>

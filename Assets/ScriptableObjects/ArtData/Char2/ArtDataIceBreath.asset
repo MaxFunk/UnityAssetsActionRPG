@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataIceBreath
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Ice Breath
+  castType: 1
+  category: 1
+  descriptionLong: 
+  descriptionShort: Ether Dmg / AOE / 3 Hits
+  isUlt: 0
+  isSelfCast: 0
+  ultCost: 0
+  maxCastDistance: 8
+  castDuration: 1.5
+  cancelAfter: 1
+  cancelWindow: 0.5
+  basePower: 0a000000140000001e0000002800000032000000
+  artCooldown:
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  hits:
+  - 0.5
+  - 0.7
+  - 0.9
+  ArtEffects: []
+  ArtCastPrefab: {fileID: 8219113054954937553, guid: e3b3b9fa7178d9d438d78f22bc0b96a4, type: 3}
+  icon: {fileID: 2800000, guid: e3f210d8431a8e5479519b12ce9c8200, type: 3}

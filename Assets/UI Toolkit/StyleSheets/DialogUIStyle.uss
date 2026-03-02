@@ -1,0 +1,37 @@
+:root {
+}
+
+.label-speaker {
+    -unity-font-style: bold;
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+}
+
+.label-text {
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    white-space: normal;
+}
+
+.container-background {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.label-prompt {
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+    height: 60px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 20px;
+    -unity-text-align: middle-left;
+}
+
+.prompt-selected {
+    -unity-font-style: bold;
+}

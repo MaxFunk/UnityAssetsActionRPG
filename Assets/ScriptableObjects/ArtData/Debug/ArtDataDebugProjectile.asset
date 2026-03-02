@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataDebugProjectile
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Debug Projectile
+  castType: 2
+  category: 0
+  descriptionLong: 
+  descriptionShort: 
+  isUlt: 0
+  ultCost: 25
+  castDuration: 1.2
+  cancelAfter: 0.75
+  cancelWindow: 0.25
+  basePower: 1400000014000000140000001400000014000000
+  artCooldown:
+  - 6
+  - 6
+  - 6
+  - 6
+  - 6
+  hits:
+  - 0.5
+  ArtCastPrefab: {fileID: 779837255045824658, guid: 6071578f06b60174586c54cbde89c00b, type: 3}
+  ArtEffects: []

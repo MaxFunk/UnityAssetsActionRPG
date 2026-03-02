@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataChargedBolts
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Charged Bolts
+  castType: 2
+  category: 1
+  descriptionLong: Shoots a barrage of Ether projectiles towards the target
+  descriptionShort: Ether Dmg / 8 Hits
+  isUlt: 0
+  isSelfCast: 0
+  ultCost: 0
+  maxCastDistance: 10
+  castDuration: 1
+  cancelAfter: 0.7
+  cancelWindow: 0.3
+  basePower: 060000000700000008000000090000000a000000
+  artCooldown:
+  - 8
+  - 7.5
+  - 7
+  - 6.5
+  - 6
+  hits:
+  - 0.3
+  - 0.35
+  - 0.4
+  - 0.45
+  - 0.5
+  - 0.55
+  - 0.6
+  - 0.65
+  ArtEffects: []
+  ArtCastPrefab: {fileID: 779837255045824658, guid: 927a39868849b57429c716a296fa3872, type: 3}
+  icon: {fileID: 2800000, guid: e3f210d8431a8e5479519b12ce9c8200, type: 3}

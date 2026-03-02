@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataDebugArea
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Debug Area
+  castType: 1
+  category: 0
+  descriptionLong: 
+  descriptionShort: 
+  isUlt: 0
+  ultCost: 25
+  castDuration: 1.5
+  cancelAfter: 1
+  cancelWindow: 0.5
+  basePower: 1400000014000000140000001400000014000000
+  artCooldown:
+  - 6
+  - 6
+  - 6
+  - 6
+  - 6
+  hits:
+  - 0.5
+  ArtCastPrefab: {fileID: 8219113054954937553, guid: e3b3b9fa7178d9d438d78f22bc0b96a4, type: 3}
+  ArtEffects: []

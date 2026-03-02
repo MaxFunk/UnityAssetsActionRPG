@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4067243119729688142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1703427014873240784}
+  - component: {fileID: 7129202847131131799}
+  m_Layer: 0
+  m_Name: PlayerSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1703427014873240784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067243119729688142}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7129202847131131799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067243119729688142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa48ba5d9780d1b4f87706300a25f898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner
+  PlayerPrefab: {fileID: 3573256397902566109, guid: fde04674b914a3a4782c3785179c5e48, type: 3}
+  HeroPrefab: {fileID: 6864973939656862138, guid: 6026d0ce9ef6ff64e9bd2e37002be866, type: 3}
+  CameraPrefab: {fileID: 3018909971000013271, guid: 3cf8a6e831c27194b94bbfdb0f8aac5a, type: 3}
+  Controller:
+  - {fileID: 22100000, guid: f360fd1746cdcc14e98b8b22e68d9c20, type: 2}
+  - {fileID: 22100000, guid: 9a740f40c96e981488f0fb240cb75cc0, type: 2}
+  - {fileID: 22100000, guid: 66ca1f32411351940a2cb1f1d3ce39c0, type: 2}
+  HeroModels:
+  - {fileID: 5866666021909216657, guid: d592e79e0ade64f47b3a3005288af7ee, type: 3}
+  - {fileID: 5866666021909216657, guid: de256f4bb9b26d0499b8ff28d4180720, type: 3}
+  - {fileID: 5866666021909216657, guid: 10b394640c2038b408cad1a1fb94eda8, type: 3}
+  DebugRespawn: 0

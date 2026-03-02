@@ -1,0 +1,36 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/DialogUIStyle.uss?fileID=7433441132597879392&amp;guid=3c49c543f602f98479ca9abdf32c81e3&amp;type=3#DialogUIStyle" />
+    <ui:VisualElement name="ContainerMain" data-source-type="DialogUserInterface, Assembly-CSharp" style="flex-grow: 1;">
+        <ui:VisualElement name="Icon" style="position: absolute; width: 250px; height: 250px; bottom: 5%; left: 10%; -unity-background-scale-mode: scale-to-fit; background-image: none;">
+            <Bindings>
+                <ui:DataBinding property="style.backgroundImage" data-source-path="stepData.speakerIcon" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:VisualElement>
+        <ui:VisualElement name="TextContainer" class="container-background" style="width: 50%; height: 20%; position: absolute; bottom: 5%; left: 25%;">
+            <ui:Label text="Speaker" name="LabelSpeaker" class="label-speaker" style="height: 20%;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="stepData.speakerName" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Label text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren." name="LabelText" class="label-text" style="height: 70%;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="dialogText" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:VisualElement name="IconContinue" style="position: absolute; width: 20px; height: 20px; bottom: 10px; right: 10px; background-color: rgb(255, 255, 255);">
+                <Bindings>
+                    <ui:DataBinding property="style.display" data-source-path="displayIconContinue" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="PromptContainer" class="container-background" style="position: absolute; width: 250px; height: 180px; bottom: 5%; left: auto; right: 10%;">
+            <ui:Label text="Label" name="LabelPrompt" class="label-prompt prompt-selected" />
+            <ui:Label text="Label" name="LabelPrompt" class="label-prompt" />
+            <ui:Label text="Label" name="LabelPrompt" class="label-prompt" />
+            <Bindings>
+                <ui:DataBinding property="style.display" data-source-path="displayPromptContainer" binding-mode="ToTarget" />
+                <ui:DataBinding property="style.height" data-source-path="heightPromptContainer" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

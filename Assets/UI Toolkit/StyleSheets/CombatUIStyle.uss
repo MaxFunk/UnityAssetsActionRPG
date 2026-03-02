@@ -1,0 +1,115 @@
+:root {
+}
+
+.active {
+    display: flex;
+}
+
+.hero-health-bar .unity-progress-bar__container {
+    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
+}
+
+.hero-health-bar .unity-progress-bar__progress {
+    background-color: lightgreen;
+}
+
+.hero-health-bar .unity-progress-bar__background {
+    background-color: black;
+    border-width: 0;
+}
+
+.enemy-health-bar .unity-progress-bar__container {
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+.enemy-health-bar .unity-progress-bar__progress {
+    background-color: red;
+}
+
+.enemy-health-bar .unity-progress-bar__background {
+    background-color: black;
+    border-width: 0;
+}
+
+.art-label {
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+}
+
+.art-view {
+}
+
+.hero-panel-text {
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+}
+
+.target-panel-text {
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+}
+
+.art-panel-text {
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-text-align: middle-left;
+}
+
+.art-cooldown-bar {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 60px;
+    height: 60px;
+    rotate: -90deg;
+}
+
+.art-cooldown-bar .unity-progress-bar {
+}
+
+.art-cooldown-bar .unity-progress-bar__container {
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
+    padding-left: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 2px;
+}
+
+.art-cooldown-bar .unity-progress-bar__progress {
+    background-color: white;
+}
+
+.art-cooldown-bar .unity-progress-bar__background {
+    background-color: black;
+    border-width: 0;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.hero-panel-icon-mod {
+    width: 50px;
+    height: 50px;
+}
+
+.target-panel-icon-mod {
+    width: 50px;
+    height: 50px;
+}

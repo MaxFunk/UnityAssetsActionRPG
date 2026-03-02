@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataShieldStrike
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Shield Strike
+  castType: 0
+  category: 0
+  descriptionLong: 
+  descriptionShort: Phys Dmg
+  isUlt: 0
+  ultCost: 0
+  castDuration: 1.5
+  cancelAfter: 1
+  cancelWindow: 0.5
+  basePower: 1e00000023000000280000002d00000032000000
+  artCooldown:
+  - 7
+  - 6.5
+  - 6
+  - 5.5
+  - 5
+  hits:
+  - 0.8
+  ArtEffects: []
+  ArtCastPrefab: {fileID: 740551383174017213, guid: 4b79fc0cd1c3bf547bf281761684f1ff, type: 3}
+  icon: {fileID: 2800000, guid: 8dc54dd3dee49cf478cda4e8c76858a6, type: 3}

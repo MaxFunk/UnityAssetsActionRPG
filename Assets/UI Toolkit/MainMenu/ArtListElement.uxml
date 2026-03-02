@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="ArtView" data-source-type="ArtData, Assembly-CSharp" style="flex-direction: row;">
+        <ui:VisualElement name="Icon" style="-unity-background-scale-mode: scale-to-fit; background-image: resource(&apos;Icons/Arts/icon_spell_none&apos;); margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; padding-top: 25px; padding-right: 25px; padding-bottom: 25px; padding-left: 25px;">
+            <Bindings>
+                <ui:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:VisualElement>
+        <ui:Label text="Art Name" name="Label" class="art-panel-text" style="-unity-text-align: middle-left; flex-grow: 1; font-size: 36px; color: rgb(255, 255, 255); -unity-font-style: normal; padding-bottom: 8px;">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="artName" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+    </ui:VisualElement>
+</ui:UXML>

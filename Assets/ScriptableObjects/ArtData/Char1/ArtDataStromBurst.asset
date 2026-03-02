@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataStromBurst
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Storm Burst
+  castType: 2
+  category: 1
+  descriptionLong: 
+  descriptionShort: Ether Dmg / AOE / 6 Hits
+  isUlt: 1
+  isSelfCast: 0
+  ultCost: 40
+  maxCastDistance: 10
+  castDuration: 2
+  cancelAfter: 0
+  cancelWindow: 0
+  basePower: 14000000190000001e0000002300000028000000
+  artCooldown:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  hits:
+  - 0.5
+  - 0.75
+  - 1
+  - 1.25
+  - 1.5
+  - 1.75
+  ArtEffects: []
+  ArtCastPrefab: {fileID: 779837255045824658, guid: 144c02e458b143543bee7acd9ea7f194, type: 3}
+  icon: {fileID: 2800000, guid: e3f210d8431a8e5479519b12ce9c8200, type: 3}

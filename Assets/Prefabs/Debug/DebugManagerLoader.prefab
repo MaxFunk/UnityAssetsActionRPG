@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7137482119941152219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4338345710270552739}
+  - component: {fileID: 5873432292270141985}
+  - component: {fileID: 6254391548386542728}
+  - component: {fileID: 8316402298118845239}
+  - component: {fileID: 6251869511043040260}
+  - component: {fileID: 3377145843849291668}
+  m_Layer: 0
+  m_Name: DebugManagerLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4338345710270552739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137482119941152219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5873432292270141985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137482119941152219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be4d571c851d3294495b0a1f2537f5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gameDataGeneral:
+    gameTime: 0
+    money: 0
+  eventFlags:
+    placerholderFlag1: 0
+    placerholderFlag2: 0
+    placerholderFlag3: 0
+  characterDatas: []
+  partyData: 
+  ItemDropPrefab: {fileID: 7652423904107115051, guid: ae6e9b5c5d4085b4eb9d1f0a5c720b4d, type: 3}
+  DebugMode: 1
+--- !u!114 &6254391548386542728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137482119941152219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ff9cb3a92a0f548be327dfe1ba91d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatManager
+  PrefabReviveCirle: {fileID: 5406002348782152802, guid: a7e9590df4a8d164eba9175aba8b4235, type: 3}
+  combatants: []
+  heroCombatants: []
+  enemyCombatants: []
+--- !u!114 &8316402298118845239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137482119941152219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e988714a7bf357343837c8122a1ad014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UserInterfaceManager
+  PrefabGameplayUi: {fileID: 1353123828438435260, guid: 466d71a13063e2a4795231c7f1cd2a2a, type: 3}
+  PrefabMainMenu: {fileID: 997486046442622723, guid: 37d657ec900830841ba3be0017758d13, type: 3}
+  PrefabLoadingScreen: {fileID: 3072511597152876081, guid: d2069d46580517542806e69d13c14194, type: 3}
+  gameplayUI: {fileID: 0}
+  mainMenu: {fileID: 0}
+  loadingScreen: {fileID: 0}
+--- !u!114 &6251869511043040260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137482119941152219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596d0dbf6bbeb804ead8bab807c4f59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  inputBlocked: 0
+  inputMenuOnly: 0
+  inputActionsAsset: {fileID: -944628639613478452, guid: e3fbc3e8d740b604288ccd194ea4b805, type: 3}
+--- !u!114 &3377145843849291668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137482119941152219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a6c6657d3a3274b93e98590b9c287f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScriptableManager
+  characterDataStatic:
+  - {fileID: 11400000, guid: 2e2d77b04d7b97847b9bfb36ebf5c7e8, type: 2}
+  - {fileID: 11400000, guid: 075836a8094942347ad2e8a401b9070a, type: 2}
+  - {fileID: 11400000, guid: b7817404e20a7994fb752e22ed50e1b4, type: 2}
+  artsPreload: {fileID: 11400000, guid: 02c1da00caa77134a98c6a3748f8fb76, type: 2}
+  itemPreload: {fileID: 11400000, guid: 2039e2220dd4f144d97f24e1820611d5, type: 2}

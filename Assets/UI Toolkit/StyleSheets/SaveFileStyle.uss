@@ -1,0 +1,17 @@
+:root {
+}
+
+.label-file {
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+}
+
+.save-file-view {
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(0, 0, 0);
+}
+
+.save-file-view:hover {
+    background-color: rgb(64, 64, 64);
+}

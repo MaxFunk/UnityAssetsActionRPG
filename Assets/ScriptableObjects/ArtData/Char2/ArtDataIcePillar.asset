@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataIcePillar
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Ice Pillar
+  castType: 1
+  category: 1
+  descriptionLong: 
+  descriptionShort: High Ether Dmg / AOE
+  isUlt: 1
+  isSelfCast: 0
+  ultCost: 40
+  maxCastDistance: 10
+  castDuration: 1.5
+  cancelAfter: 0
+  cancelWindow: 0
+  basePower: 780000008c000000a0000000b4000000c8000000
+  artCooldown:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  hits:
+  - 0.5
+  ArtEffects: []
+  ArtCastPrefab: {fileID: 8040575257465353033, guid: a13efb1a0080f824e9c692515da01026, type: 3}
+  icon: {fileID: 2800000, guid: e3f210d8431a8e5479519b12ce9c8200, type: 3}

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a618d891a0bb0c4ea1fd75c8f31b78c, type: 3}
+  m_Name: ArtDataBodyCharge
+  m_EditorClassIdentifier: Assembly-CSharp::ArtData
+  artName: Body Charge
+  castType: 0
+  category: 2
+  descriptionLong: Gain 30% additional Crit Chance for all Attacks and Arts
+  descriptionShort: Crit Change Up
+  isUlt: 0
+  isSelfCast: 1
+  ultCost: 0
+  maxCastDistance: 5
+  castDuration: 1
+  cancelAfter: 0.5
+  cancelWindow: 0.5
+  basePower: 0000000000000000000000000000000000000000
+  artCooldown:
+  - 15
+  - 14
+  - 13
+  - 12
+  - 11
+  hits:
+  - 0.5
+  ArtEffects:
+  - effectType: 4
+    value: 0.3
+    duration: 10
+    combatModifier: {fileID: 11400000, guid: 10c0d999b69c401478ed76b59ae3613c, type: 2}
+  ArtCastPrefab: {fileID: 740551383174017213, guid: 4b79fc0cd1c3bf547bf281761684f1ff, type: 3}
+  icon: {fileID: 2800000, guid: d6a602c481d6bde468e0bdb4854c2fd8, type: 3}

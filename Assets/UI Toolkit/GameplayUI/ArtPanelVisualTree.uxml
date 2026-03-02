@@ -1,0 +1,16 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ArtViewVisualTree" src="project://database/Assets/UI%20Toolkit/GameplayUI/ArtViewVisualTree.uxml?fileID=9197481963319205126&amp;guid=b6c297d1cfef774469a367c3db78efb5&amp;type=3#ArtViewVisualTree" />
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/CombatUIStyle.uss?fileID=7433441132597879392&amp;guid=4bfa582d5cc299c429b1153efde69985&amp;type=3#CombatUIStyle" />
+    <ui:VisualElement name="ArtPanelRoot" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement style="width: 50%; justify-content: space-evenly;">
+            <ui:Instance template="ArtViewVisualTree" name="ArtView1" />
+            <ui:Instance template="ArtViewVisualTree" name="ArtView2" />
+            <ui:Instance template="ArtViewVisualTree" name="ArtView3" />
+        </ui:VisualElement>
+        <ui:VisualElement style="width: 50%; justify-content: space-evenly;">
+            <ui:Instance template="ArtViewVisualTree" name="ArtView4" />
+            <ui:Instance template="ArtViewVisualTree" name="ArtView5" />
+            <ui:Instance template="ArtViewVisualTree" name="UltView" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

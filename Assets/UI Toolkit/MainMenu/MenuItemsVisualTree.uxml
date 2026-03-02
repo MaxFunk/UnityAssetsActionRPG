@@ -1,0 +1,48 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MenuItemStyle.uss?fileID=7433441132597879392&amp;guid=5acf4976403b51341ab025f733ef9bdf&amp;type=3#MenuItemStyle" />
+    <ui:VisualElement name="ItemsView" style="flex-grow: 1;">
+        <ui:VisualElement name="Header" style="flex-grow: 0; height: 10%; flex-direction: row;">
+            <ui:Label text="Materials&#10;" class="header-label" />
+            <ui:Label text="Consumables" class="header-label" />
+            <ui:Label text="Ingredients" class="header-label" />
+            <ui:Label text="Gear" class="header-label" />
+            <ui:Label text="Key Items" class="header-label" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ItemList" style="flex-grow: 0; width: 800px; height: 840px; top: 15%; position: absolute; left: 5%;">
+            <ui:ScrollView mouse-wheel-scroll-size="60" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ItemDetail" data-source-type="ItemManager+Item, Assembly-CSharp" style="position: absolute; width: 800px; height: 900px; top: 15%; right: 5%;">
+            <ui:VisualElement name="Icon" style="position: absolute; width: 200px; height: 200px; left: 300px; right: 300px;">
+                <Bindings>
+                    <ui:DataBinding property="style.backgroundImage" data-source-path="data.icon" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:VisualElement>
+            <ui:Label text="Label" name="ItemName" class="item-header-text" style="position: absolute; height: 100px; width: 550px; top: 250px;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="data.itemName" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Label text="Label" name="ItemAmount" class="item-header-text" style="position: absolute; top: 250px; left: 550px; width: 250px; height: 100px; -unity-text-align: upper-right;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="amount" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Label text="Label" name="ItemType" class="item-header-text item-description-text" style="position: absolute; height: 75px; width: 550px; top: 350px; -unity-font-style: normal;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="data.type" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Label text="Label" name="ItemRarity" class="item-header-text item-description-text" style="position: absolute; height: 75px; width: 550px; top: 425px; -unity-font-style: normal;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="data.rarity" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Label text="Label" name="ItemDescription" class="item-description-text" style="position: absolute; top: 500px; width: 800px; height: 300px;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="data.description" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Button text="Use Item" name="ButtonUseItem" double-click-selects-word="false" triple-click-selects-line="false" class="button-use" style="position: absolute; top: 810px; left: 100px; width: 600px; height: 80px; font-size: 40px; -unity-font-style: bold; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
