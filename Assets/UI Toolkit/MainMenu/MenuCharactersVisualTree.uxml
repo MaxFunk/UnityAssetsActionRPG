@@ -1,101 +1,101 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="ArtListElement" src="project://database/Assets/UI%20Toolkit/MainMenu/ArtListElement.uxml?fileID=9197481963319205126&amp;guid=17b0ccf4a82b00c43bb91c02c0fa582f&amp;type=3#ArtListElement" />
-    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MenuCharacterStyle.uss?fileID=7433441132597879392&amp;guid=91297677ed42e7f4a91c034366684e59&amp;type=3#MenuCharacterStyle" />
+    <ui:Template name="ArtListElement" src="project://database/Assets/UI%20Toolkit/MainMenu/ArtListElement.uxml?fileID=9197481963319205126&amp;guid=17b0ccf4a82b00c43bb91c02c0fa582f&amp;type=3#ArtListElement"/>
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MainMenu/MenuCharacterStyle.uss?fileID=7433441132597879392&amp;guid=91297677ed42e7f4a91c034366684e59&amp;type=3#MenuCharacterStyle"/>
     <ui:VisualElement name="ContainerCharSelect" class="container" style="flex-grow: 1; justify-content: center;">
         <ui:VisualElement style="width: 1680px; height: 800px; align-self: center; flex-direction: row; flex-wrap: wrap;">
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
@@ -106,26 +106,26 @@
             <ui:VisualElement style="height: 70%;">
                 <ui:VisualElement name="CharacterIcon" style="width: 60%; height: 80%; top: 10%; left: 20%; background-color: rgb(255, 255, 255);">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="staticData.iconMenuFull" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="staticData.iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement style="flex-direction: row; flex-wrap: wrap; height: 30%;">
                 <ui:Label text="Character" name="LabelCharName" class="overview-general-label" style="width: 100%; -unity-font-style: bold;">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="staticData.characterName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="staticData.characterName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
-                <ui:Label text="Level" class="overview-general-label" />
+                <ui:Label text="Level" class="overview-general-label"/>
                 <ui:Label text="99" name="LabelLevel" class="overview-general-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterData.level" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterData.level" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
-                <ui:Label text="Total Exp" class="overview-general-label" />
+                <ui:Label text="Total Exp" class="overview-general-label"/>
                 <ui:Label text="999999" name="LabelExpTotal" class="overview-general-label">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="characterData.totalExp" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="characterData.totalExp" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
@@ -133,85 +133,85 @@
         <ui:VisualElement style="flex-grow: 1;">
             <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
                 <ui:VisualElement name="OverviewStats" class="clickable-container" style="width: 40%; flex-direction: row; flex-wrap: wrap;">
-                    <ui:Label text="Stats:" class="overview-stats-label" style="width: 100%; -unity-font-style: bold;" />
-                    <ui:Label text="Health" class="overview-stats-label" />
+                    <ui:Label text="Stats:" class="overview-stats-label" style="width: 100%; -unity-font-style: bold;"/>
+                    <ui:Label text="Health" class="overview-stats-label"/>
                     <ui:Label text="9999" class="overview-stats-label">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="stats.health" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="stats.health" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Attack" class="overview-stats-label" />
+                    <ui:Label text="Attack" class="overview-stats-label"/>
                     <ui:Label text="999" class="overview-stats-label">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="stats.attack" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="stats.attack" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Ether" class="overview-stats-label" />
+                    <ui:Label text="Ether" class="overview-stats-label"/>
                     <ui:Label text="999" class="overview-stats-label">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="stats.ether" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="stats.ether" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Agility" class="overview-stats-label" />
+                    <ui:Label text="Agility" class="overview-stats-label"/>
                     <ui:Label text="999" class="overview-stats-label">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="stats.agility" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="stats.agility" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Luck" class="overview-stats-label" />
+                    <ui:Label text="Luck" class="overview-stats-label"/>
                     <ui:Label text="999" class="overview-stats-label">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="stats.luck" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="stats.luck" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Phys Def" class="overview-stats-label" />
+                    <ui:Label text="Phys Def" class="overview-stats-label"/>
                     <ui:Label text="0%" class="overview-stats-label">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="stats.physicalDefense" binding-mode="ToTarget" source-to-ui-converters="Float To Percent" />
+                            <ui:DataBinding property="text" data-source-path="stats.physicalDefense" binding-mode="ToTarget" source-to-ui-converters="Float To Percent"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Eth Def" class="overview-stats-label" />
+                    <ui:Label text="Eth Def" class="overview-stats-label"/>
                     <ui:Label text="0%" class="overview-stats-label">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="stats.etherDefense" binding-mode="ToTarget" source-to-ui-converters="Float To Percent" />
+                            <ui:DataBinding property="text" data-source-path="stats.etherDefense" binding-mode="ToTarget" source-to-ui-converters="Float To Percent"/>
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
                 <ui:VisualElement name="OverviewGear" class="clickable-container" style="width: 60%; padding-left: 20px;">
-                    <ui:Label text="Gear:" style="color: rgb(255, 255, 255); font-size: 48px; -unity-font-style: bold; height: 10%;" />
+                    <ui:Label text="Gear:" style="color: rgb(255, 255, 255); font-size: 48px; -unity-font-style: bold; height: 10%;"/>
                     <ui:VisualElement name="OverviewGearPanel" data-source-type="ItemData, Assembly-CSharp" class="overview-gear-panel">
                         <ui:Label text="Gear Item" class="overview-gear-label-name">
                             <Bindings>
-                                <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                         <ui:Label text="Short Description" class="overview-gear-label-descr">
                             <Bindings>
-                                <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget" />
+                                <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                     </ui:VisualElement>
                     <ui:VisualElement name="OverviewGearPanel" data-source-type="ItemData, Assembly-CSharp" class="overview-gear-panel">
                         <ui:Label text="Gear Item" class="overview-gear-label-name">
                             <Bindings>
-                                <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                         <ui:Label text="Short Description" class="overview-gear-label-descr">
                             <Bindings>
-                                <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget" />
+                                <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                     </ui:VisualElement>
                     <ui:VisualElement name="OverviewGearPanel" data-source-type="ItemData, Assembly-CSharp" class="overview-gear-panel">
                         <ui:Label text="Gear Item" class="overview-gear-label-name">
                             <Bindings>
-                                <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                         <ui:Label text="Short Description" class="overview-gear-label-descr">
                             <Bindings>
-                                <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget" />
+                                <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget"/>
                             </Bindings>
                         </ui:Label>
                     </ui:VisualElement>
@@ -219,63 +219,63 @@
             </ui:VisualElement>
             <ui:VisualElement name="OverviewArts" class="clickable-container" style="height: 35%; flex-wrap: wrap; flex-direction: row;">
                 <ui:VisualElement style="width: 100%; height: 25%;">
-                    <ui:Label text="Arts:" style="color: rgb(255, 255, 255); font-size: 48px; -unity-font-style: bold;" />
+                    <ui:Label text="Arts:" style="color: rgb(255, 255, 255); font-size: 48px; -unity-font-style: bold;"/>
                 </ui:VisualElement>
-                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel" />
-                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel" />
-                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel" />
-                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel" />
-                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel" />
-                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel" />
+                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel"/>
+                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel"/>
+                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel"/>
+                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel"/>
+                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel"/>
+                <ui:Instance template="ArtListElement" name="OverviewArtPanel" class="overview-arts-panel"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="ContainerGearSelect" class="container" style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement style="width: 50%;">
             <ui:VisualElement style="padding-left: 50px; padding-top: 50px; height: 15%;">
-                <ui:Label text="Gear" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 64px;" />
+                <ui:Label text="Gear" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 64px;"/>
             </ui:VisualElement>
             <ui:VisualElement name="EquipContainer" class="clickable-container gear-equip-container">
                 <ui:VisualElement name="GearEquipedPanel" data-source-type="ItemData, Assembly-CSharp" style="flex-direction: row; flex-wrap: wrap;">
-                    <ui:VisualElement name="GearIcon" style="width: 20%; height: 100px; background-image: resource(&apos;Icons/Items/icon_items_fallback&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:VisualElement name="GearIcon" style="width: 20%; height: 100px; background-image: resource(&quot;Icons/Items/icon_items_fallback&quot;); -unity-background-scale-mode: scale-to-fit;"/>
                     <ui:Label text="Label" name="GearName" class="gear-equip-name" style="width: 80%;">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                     <ui:Label text="Label" name="GearDescription" class="gear-equip-text" style="width: 75%;">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="EquipContainer" class="clickable-container gear-equip-container">
                 <ui:VisualElement name="GearEquipedPanel" data-source-type="ItemData, Assembly-CSharp" style="flex-direction: row; flex-wrap: wrap;">
-                    <ui:VisualElement name="GearIcon" style="width: 20%; height: 100px; background-image: resource(&apos;Icons/Items/icon_items_fallback&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:VisualElement name="GearIcon" style="width: 20%; height: 100px; background-image: resource(&quot;Icons/Items/icon_items_fallback&quot;); -unity-background-scale-mode: scale-to-fit;"/>
                     <ui:Label text="Label" name="GearName" class="gear-equip-name" style="width: 80%;">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                     <ui:Label text="Label" name="GearDescription" class="gear-equip-text" style="width: 75%;">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="EquipContainer" class="clickable-container gear-equip-container">
                 <ui:VisualElement name="GearEquipedPanel" data-source-type="ItemData, Assembly-CSharp" style="flex-direction: row; flex-wrap: wrap;">
-                    <ui:VisualElement name="GearIcon" style="width: 20%; height: 100px; background-image: resource(&apos;Icons/Items/icon_items_fallback&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:VisualElement name="GearIcon" style="width: 20%; height: 100px; background-image: resource(&quot;Icons/Items/icon_items_fallback&quot;); -unity-background-scale-mode: scale-to-fit;"/>
                     <ui:Label text="Label" name="GearName" class="gear-equip-name" style="width: 80%;">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                     <ui:Label text="Label" name="GearDescription" class="gear-equip-text" style="width: 75%;">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="shortDescription" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
@@ -283,22 +283,22 @@
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1;">
             <ui:VisualElement name="GearList" class="gear-list-container" style="flex-grow: 1;">
-                <ui:ScrollView />
+                <ui:ScrollView/>
             </ui:VisualElement>
             <ui:VisualElement name="GearDetail" data-source-type="ItemData, Assembly-CSharp" class="gear-detail-container">
                 <ui:Label text="Label" name="DetailItemName" class="gear-detail-text" style="-unity-font-style: bold;">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
                 <ui:Label text="Label" name="DetailItemType" class="gear-detail-text" style="-unity-font-style: italic;">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="gearData.type" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="gearData.type" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
                 <ui:Label text="Label" name="DetailItemDescr" class="gear-detail-text" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="text" data-source-path="description" binding-mode="ToTarget" />
+                        <ui:DataBinding property="text" data-source-path="description" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
             </ui:VisualElement>
@@ -307,63 +307,63 @@
     <ui:VisualElement name="ContainerArtSelect" class="container container-active" style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement style="width: 50%; padding-right: 10%; padding-left: 2%; padding-top: 2%;">
             <ui:VisualElement name="VisualElement">
-                <ui:Label text="Arts" style="color: rgb(255, 255, 255); font-size: 64px; -unity-font-style: bold;" />
+                <ui:Label text="Arts" style="color: rgb(255, 255, 255); font-size: 64px; -unity-font-style: bold;"/>
             </ui:VisualElement>
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel" />
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel" />
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel" />
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel" />
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel" />
-            <ui:VisualElement />
+            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:VisualElement/>
             <ui:VisualElement>
-                <ui:Label text="Ult" name="Label" style="color: rgb(255, 255, 255); font-size: 64px; -unity-font-style: bold;" />
+                <ui:Label text="Ult" name="Label" style="color: rgb(255, 255, 255); font-size: 64px; -unity-font-style: bold;"/>
             </ui:VisualElement>
-            <ui:Instance template="ArtListElement" name="UltPanel" focusable="true" class="arts-equip-panel" />
-            <ui:VisualElement />
+            <ui:Instance template="ArtListElement" name="UltPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:VisualElement/>
         </ui:VisualElement>
         <ui:VisualElement style="width: 50%;">
-            <ui:ScrollView name="ScrollView" style="padding-top: 50px; padding-bottom: 50px; flex-grow: 1;" />
+            <ui:ScrollView name="ScrollView" style="padding-top: 50px; padding-bottom: 50px; flex-grow: 1;"/>
             <ui:VisualElement name="ContainerDetail" data-source-type="ArtData, Assembly-CSharp" style="height: 40%;">
                 <ui:VisualElement style="flex-direction: row; height: 25%;">
-                    <ui:VisualElement name="Icon" style="background-image: resource(&apos;Icons/Arts/icon_spell_none&apos;); -unity-background-scale-mode: scale-to-fit; width: 15%;">
+                    <ui:VisualElement name="Icon" style="background-image: resource(&quot;Icons/Arts/icon_spell_none&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;">
                         <Bindings>
-                            <ui:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                            <ui:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:VisualElement>
                     <ui:Label text="ArtName" name="ArtName" class="art-detail-header">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="artName" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="artName" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; flex-wrap: wrap;">
-                    <ui:Label text="Category" class="art-detail-text" />
+                    <ui:Label text="Category" class="art-detail-text"/>
                     <ui:Label text="Physical" class="art-detail-text">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="category" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="category" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="BasePower" class="art-detail-text" />
+                    <ui:Label text="BasePower" class="art-detail-text"/>
                     <ui:Label text="0" class="art-detail-text">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="basePower[0]" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="basePower[0]" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Cooldown" class="art-detail-text" />
+                    <ui:Label text="Cooldown" class="art-detail-text"/>
                     <ui:Label text="1.0" class="art-detail-text">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="artCooldown[0]" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="artCooldown[0]" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                     <ui:Label text="Description&#10;Description&#10;Description" class="art-detail-text" style="width: 100%;">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="descriptionLong" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="descriptionLong" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="ContainerLevelUp" class="container" style="flex-grow: 1;" />
-    <ui:Button text="&lt; Back" name="ButtonBack" class="button-back" style="position: absolute; bottom: 0%;" />
+    <ui:VisualElement name="ContainerLevelUp" class="container" style="flex-grow: 1;"/>
+    <ui:Button text="&lt; Back" name="ButtonBack" class="button-back" style="position: absolute; bottom: 0%;"/>
 </ui:UXML>

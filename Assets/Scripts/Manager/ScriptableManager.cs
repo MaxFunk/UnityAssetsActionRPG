@@ -7,6 +7,7 @@ public class ScriptableManager : MonoBehaviour
     public List<CharacterDataStatic> characterDataStatic;
     public ArtsPreload artsPreload;
     public ItemPreload itemPreload;
+    public MissionsPreload missionsPreload;
 
     public static ScriptableManager instance;
 

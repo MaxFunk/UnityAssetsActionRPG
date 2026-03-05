@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(CharacterController), typeof(CombatData), typeof(NavMeshAgent))]
 public class HeroCharacterController : MonoBehaviour
@@ -44,9 +45,11 @@ public class HeroCharacterController : MonoBehaviour
     private Vector3 lastPosition;
 
     private bool isJumping = false;
+    private bool coyoteTimeAvailable = true;
     private bool wasLastActionArt = true;
     private float timerLookAtTarget = 0.0f;
     private float timerPathUpdate = 0.5f;
+    private float timerCoyoteTime = 0.0f;
 
     public bool DebugCanMove = false;
 
@@ -68,6 +71,9 @@ public class HeroCharacterController : MonoBehaviour
     {
         CheckFallenOutOfWorld();
 
+        if (timerCoyoteTime > 0f)
+            timerCoyoteTime -= Time.deltaTime;
+
         if (characterState != CharacterState.Stopped)
         {
             if (IsPlayerControlled)
@@ -82,13 +88,36 @@ public class HeroCharacterController : MonoBehaviour
         if (controller.isGrounded)
         {
             characterVelocity.y = 0f;
+            timerCoyoteTime = 0f;
             isJumping = false;
+            coyoteTimeAvailable = true;
+        }
+        else if (!controller.isGrounded && coyoteTimeAvailable)
+        {
+            timerCoyoteTime = 0.25f;
+            coyoteTimeAvailable = false;
         }
 
         animator.SetBool("isGrounded", controller.isGrounded);
         animator.SetFloat("MoveSpeed", moveSpeed);
 
         DebugCanMove = combatData.CanMove();
+    }
+
+    void LateUpdate()
+    {
+        if (!IsPlayerControlled)
+        {
+            if (characterState == CharacterState.Explore || characterState == CharacterState.CombatInactive)
+            {
+                float distanceToPlayer = Vector3.Distance(playerChar.transform.position, transform.position);
+                if (distanceToPlayer > DistanceTeleport)
+                {
+                    transform.position = playerChar.transform.position;
+                    navAgent.nextPosition = transform.position;
+                }
+            }
+        }
     }
 
 
@@ -100,7 +129,10 @@ public class HeroCharacterController : MonoBehaviour
 
         if (characterState == CharacterState.Explore)
         {
-            if (controller.isGrounded)
+            if (inputHandler.GetJumpInputDown())
+                TryJump();
+
+            if (controller.isGrounded) // maybe also check these with coyote time
             {
                 if (inputHandler.GetOpenMenuInputDown())
                 {
@@ -109,9 +141,6 @@ public class HeroCharacterController : MonoBehaviour
                 }
 
                 if (CheckForInteractables()) return;
-
-                if (inputHandler.GetJumpInputDown() && !isJumping)
-                    Jump();
 
                 if (inputHandler.GetSheatheWeaponInputDown())
                     combatData.SetNewTarget(null);
@@ -123,11 +152,11 @@ public class HeroCharacterController : MonoBehaviour
 
         else if (characterState == CharacterState.CombatInactive)
         {
+            if (inputHandler.GetJumpInputDown())
+                TryJump();
+
             if (controller.isGrounded)
             {
-                if (inputHandler.GetJumpInputDown() && !isJumping)
-                    Jump();
-
                 if (inputHandler.GetSheatheWeaponInputDown())
                     SheatheWeapon();
 
@@ -247,15 +276,8 @@ public class HeroCharacterController : MonoBehaviour
         if (characterState == CharacterState.Explore || characterState == CharacterState.CombatInactive)
         {
             float distanceToPlayer = Vector3.Distance(playerChar.transform.position, transform.position);
-
             if (navAgent.path.corners.Length > 1 && distanceToPlayer > MaxDistanceToPlayer)
                 moveDirection = navAgent.path.corners[1] - transform.position;
-
-            if (distanceToPlayer > DistanceTeleport)
-            {
-                transform.position = playerChar.transform.position;
-                navAgent.nextPosition = transform.position;
-            }
         }
 
         else if (characterState == CharacterState.CombatActive && combatTarget != null)
@@ -304,8 +326,8 @@ public class HeroCharacterController : MonoBehaviour
             var startPos = navAgent.currentOffMeshLinkData.startPos;
             var endPos = navAgent.currentOffMeshLinkData.endPos;
 
-            if (!isJumping && startPos.y < endPos.y)
-                Jump();
+            if (startPos.y < endPos.y)
+                TryJump();
 
             navAgent.CompleteOffMeshLink();
             timerPathUpdate = -1f;
@@ -385,8 +407,10 @@ public class HeroCharacterController : MonoBehaviour
         controller.Move(finalVelocity * Time.deltaTime);
     }
 
-    private void Jump()
+    private void TryJump()
     {
+        if (isJumping || (controller.isGrounded == false && timerCoyoteTime <= 0f)) return;
+
         characterVelocity.y = Mathf.Sqrt(-JumpStrength * Gravity);
         isJumping = true;
         animator.SetTrigger("TrJump");
@@ -503,6 +527,17 @@ public class HeroCharacterController : MonoBehaviour
         else
         {
             combatData.SetNewTarget(null);
+        }
+    }
+
+    public void ForceIntoCombat(CombatData forcer, bool hardForce) // hardFroce = false
+    {
+        characterState = hardForce ? CharacterState.CombatActive : CharacterState.CombatInactive;
+        animator.SetBool("isInCombat", hardForce);
+
+        if (hardForce || IsPlayerControlled)
+        {
+            combatData.SetNewTarget(forcer);
         }
     }
 

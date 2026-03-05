@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1bbf473b3c1154f943935222b7d6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatData
-  characterId: -1
+  characterId: 1
   partyIndex: -1
   charName: Sentinel
   isInCombat: 0
@@ -90,13 +90,14 @@ MonoBehaviour:
     id: 0
     recieveAmount: 1
     recieveChance: 0.5
+  MaxDistanceToHero: 10
   MaxTargetRange: 10
   timeModifierArtUse: 2
   EventModifiersChanged:
     m_PersistentCalls:
       m_Calls: []
   curTarget: {fileID: 0}
-  targetedBy: []
+  aggro: 
   canCancelArt: 0
   tryCastingUlt: 0
 --- !u!114 &1183246050752228969
@@ -118,11 +119,12 @@ MonoBehaviour:
   RotationSpeed: 10
   Gravity: -9.81
   MaxTargetRange: 10
-  TimerNavRepath: 5
+  TimerNavRepathWalking: 3
+  TimerNavRepathCombat: 0.5
   MaxDistanceToSpawn: 10
+  Aggressive: 0
   MaxViewDistance: 8
   MaxViewAngle: 60
-  MaxInitAttackRange: 3
   navBehavior: 1
   timeNextArt: 0
   despawnScaleFactor: 0.5
@@ -207,7 +209,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &7065455063545118195
 LineRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -253,6 +255,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -311,7 +314,6 @@ LineRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MaskInteraction: 0
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1

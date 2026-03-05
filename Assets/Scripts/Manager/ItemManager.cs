@@ -65,6 +65,9 @@ public class ItemManager
         var item = itemList[recieveData.id];
         item.amount = Mathf.Clamp(item.amount + recieveData.recieveAmount, 0, 999);
         itemList[recieveData.id] = item;
+
+        GameManager.Instance.MissionManager.ItemCollected(recieveData.id, recieveData.recieveAmount);
+        // id not correct for everything thats not a collectible -> use itemrecievedata
     }
 
     public void ChangeItem(ItemType itemType, int id, int changeValue)
@@ -79,6 +82,25 @@ public class ItemManager
         var item = itemList[id];
         item.amount = Mathf.Clamp(item.amount + changeValue, 0, 999);
         itemList[id] = item;
+    }
+
+    public int GetItemAmount(int itemId)
+    {
+        return itemId switch
+        {
+            (>= 0) and (< 100) => GetItemFromList(ref itemsMaterial, itemId),
+            (>= 100) and (< 200) => GetItemFromList(ref itemsConsumable, itemId),
+            (>= 200) and (< 300) => GetItemFromList(ref itemsIngredient, itemId),
+            (>= 300) and (< 400) => GetItemFromList(ref itemsGear, itemId),
+            (>= 400) and (< 500) => GetItemFromList(ref itemsKeyitem, itemId),
+            (< 0) or (>= 500) => -1,
+        };
+    }
+
+    private int GetItemFromList(ref List<Item> itemList, int itemId)
+    {
+        if (itemId < 0 || itemId >= itemList.Count) return -1;
+        return itemList[itemId].amount;
     }
 
 

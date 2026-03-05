@@ -16,6 +16,7 @@ public class SaveSystem
         public List<CharacterData> characterDatas;
         public int[] partyData;
         public ItemManager.ItemSaveData itemData;
+        public List<Mission> missions;
     }
 
     public string SaveFilePath(int index)
@@ -40,6 +41,7 @@ public class SaveSystem
         saveData.characterDatas = gameManager.characterDatas;
         saveData.itemData = gameManager.ItemManager.CreateSaveData();
         saveData.partyData = gameManager.partyData;
+        saveData.missions = gameManager.MissionManager.missions;
 
         File.WriteAllText(SaveFilePath(currentFileIndex), JsonUtility.ToJson(saveData, true));
         Debug.Log($"Saved to File Index {saveData.index}");
@@ -59,6 +61,7 @@ public class SaveSystem
             gameManager.ItemManager.LoadItems(saveData.itemData);
             gameManager.characterDatas = saveData.characterDatas;            
             gameManager.partyData = saveData.partyData;
+            gameManager.MissionManager.LoadMissionSaveData(saveData.missions);
 
             for (int i = 0; i < gameManager.characterDatas.Count; i++)
             {

@@ -38,12 +38,15 @@ public class MenuContainerMain : MenuContainer
                 mainMenuEvents.ChangeMenuState(MainMenuEvents.MenuState.Items);
                 break;
             case 3:
-                Debug.Log("TODO MAP");
+                mainMenuEvents.ChangeMenuState(MainMenuEvents.MenuState.Missions);
                 break;
             case 4:
-                GameManager.Instance.SaveSystem.WriteToFile();
+                Debug.Log("TODO MAP");
                 break;
             case 5:
+                GameManager.Instance.SaveSystem.WriteToFile();
+                break;
+            case 6:
                 mainMenuEvents.ReturnToStartscreen();
                 break;
             default:

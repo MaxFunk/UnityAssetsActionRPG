@@ -3,8 +3,11 @@ using UnityEngine.UIElements;
 
 public abstract class MenuContainer
 {
-    public VisualElement containerObj = null;
+    [System.NonSerialized]
     public MainMenuEvents mainMenuEvents = null;
+
+    protected VisualElement containerObj = null;
+    
 
     public abstract void PrepareView(VisualElement rootElement);
 

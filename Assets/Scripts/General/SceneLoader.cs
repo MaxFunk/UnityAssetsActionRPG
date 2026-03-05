@@ -31,6 +31,7 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(delay);
         // yield return new WaitForSecondsRealtime(1f); // other option?
 
+        CombatManager.Instance.Reset();
         StartCoroutine(LoadAsyncScene());
     }
 }

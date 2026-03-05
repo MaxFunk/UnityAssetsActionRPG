@@ -1,0 +1,42 @@
+:root {
+}
+
+.header-label {
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+    -unity-text-align: upper-center;
+    width: 33%;
+}
+
+.container-list {
+    width: 50%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.detail-label-title {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    -unity-font-style: bold;
+}
+
+.detail-label-descrip {
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+}
+
+.container-detail {
+    width: 50%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.list-label {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    white-space: nowrap;
+}

@@ -1,0 +1,237 @@
+:root {
+}
+
+.container {
+    display: none;
+}
+
+.container-active {
+    display: flex;
+}
+
+.char-select-label {
+    align-self: center;
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    -unity-font-style: bold;
+    bottom: 5%;
+    position: absolute;
+}
+
+.char-select-icon {
+    background-color: rgb(255, 255, 255);
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    align-self: center;
+    top: 10%;
+}
+
+.overview-general-label {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 50%;
+    height: 25%;
+    -unity-text-align: middle-left;
+    border-left-width: 50px;
+}
+
+.overview-stats-label {
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 50%;
+    height: 10%;
+    -unity-text-align: middle-left;
+    border-left-width: 20px;
+}
+
+.overview-arts-panel {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 50%;
+    height: 25%;
+}
+
+.overview-gear-panel {
+    height: 25%;
+}
+
+.overview-gear-label-name {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    height: 45%;
+}
+
+.overview-gear-label-descr {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    padding-left: 50px;
+}
+
+.clickable-container {
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.clickable-container:hover {
+    transition-property: all;
+    transition-duration: 0.5s;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.gear-equip-name {
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.gear-equip-text {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 25%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-text-align: upper-left;
+}
+
+.gear-equip-container {
+    background-color: rgb(64, 64, 64);
+}
+
+.gear-detail-container {
+    background-color: rgb(64, 64, 64);
+    margin-top: 25px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    margin-left: 25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    height: 25%;
+}
+
+.gear-detail-text {
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 10px;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 20px;
+}
+
+.gear-list-container {
+    background-color: rgb(34, 29, 29);
+}
+
+.button-back {
+    color: rgb(255, 255, 255);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: rgb(64, 64, 64);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.button-back:hover {
+    -unity-font-style: bold;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    transition-duration: 0.5s;
+}
+
+.arts-list-element {
+}
+
+.arts-equip-panel {
+}
+
+.arts-equip-panel:focus {
+    background-color: rgb(84, 84, 84);
+}
+
+.art-detail-header {
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    -unity-text-align: middle-left;
+}
+
+.art-detail-text {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    width: 50%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}

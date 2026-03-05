@@ -1,19 +1,19 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MenuItemStyle.uss?fileID=7433441132597879392&amp;guid=5acf4976403b51341ab025f733ef9bdf&amp;type=3#MenuItemStyle" />
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MainMenu/MenuItemStyle.uss?fileID=7433441132597879392&amp;guid=5acf4976403b51341ab025f733ef9bdf&amp;type=3#MenuItemStyle"/>
     <ui:VisualElement name="ItemListElement" data-source-type="ItemManager+Item, Assembly-CSharp" style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement name="Icon" style="flex-grow: 0; width: 60px; height: 60px;">
             <Bindings>
-                <ui:DataBinding property="style.backgroundImage" data-source-path="data.icon" binding-mode="ToTarget" />
+                <ui:DataBinding property="style.backgroundImage" data-source-path="data.icon" binding-mode="ToTarget"/>
             </Bindings>
         </ui:VisualElement>
         <ui:Label text="Label" name="Name" class="label-text item-element-text" style="left: 20px; width: 75%;">
             <Bindings>
-                <ui:DataBinding property="text" data-source-path="data.itemName" binding-mode="ToTarget" />
+                <ui:DataBinding property="text" data-source-path="data.itemName" binding-mode="ToTarget"/>
             </Bindings>
         </ui:Label>
         <ui:Label text="Label" name="Amount" class="label-text item-element-text" style="-unity-text-align: upper-right; right: 0%;">
             <Bindings>
-                <ui:DataBinding property="text" data-source-path="amount" binding-mode="ToTarget" />
+                <ui:DataBinding property="text" data-source-path="amount" binding-mode="ToTarget"/>
             </Bindings>
         </ui:Label>
     </ui:VisualElement>

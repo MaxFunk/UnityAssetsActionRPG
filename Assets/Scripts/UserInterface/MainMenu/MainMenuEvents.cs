@@ -9,6 +9,7 @@ public class MainMenuEvents : MonoBehaviour
         Main,
         Characters,
         Items,
+        Missions,
         Todo
     }
 
@@ -22,6 +23,7 @@ public class MainMenuEvents : MonoBehaviour
     private MenuContainerMain containerMain = new();
     private MenuContainerCharacters containerCharacters = new();
     private MenuContainerItems containerItems = new();
+    private MenuContainerMissions containerMissions = new();
     private MenuContainer currentContainer = null;
 
     private bool deleteGameObject = false;
@@ -42,6 +44,7 @@ public class MainMenuEvents : MonoBehaviour
         containerMain.mainMenuEvents = this;
         containerCharacters.mainMenuEvents = this;
         containerItems.mainMenuEvents = this;
+        containerMissions.mainMenuEvents = this;
     }
 
 
@@ -113,6 +116,11 @@ public class MainMenuEvents : MonoBehaviour
                 ShowView("MenuItemsVisualTree");
                 containerItems.PrepareView(document.rootVisualElement);
                 currentContainer = containerItems;
+                break;
+            case MenuState.Missions:
+                ShowView("MenuMissions");
+                containerMissions.PrepareView(document.rootVisualElement);
+                currentContainer = containerMissions;
                 break;
             default:
                 return;

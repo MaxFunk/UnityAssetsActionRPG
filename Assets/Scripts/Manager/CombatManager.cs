@@ -64,9 +64,7 @@ public class CombatManager : MonoBehaviour
         foreach (var cast in autoattackCasts)
             cast.disableHits = true;
 
-        ClearData();
-        CombatActive = false;
-        TimeInCombat = 0f;
+        Reset();
     }
 
 
@@ -116,7 +114,20 @@ public class CombatManager : MonoBehaviour
             EndCombat(false);
     }
 
+    public void EnemyInitiateCombat(CombatData enemyData)
+    {
+        if (CombatActive == false)
+        {
+            var heros = FindObjectsByType<HeroCharacterController>(FindObjectsSortMode.None);
+            foreach (var hero in heros)
+            {
+                CombatantJoin(hero.GetCombatData());
+                hero.ForceIntoCombat(enemyData, false);
+            }
+        }
 
+        CombatantJoin(enemyData);
+    }
 
     // Collects nearby Enemy CombatData and adds them to combat
     public void ApplyAggressionWave(float strength, Vector3 origin)
@@ -260,8 +271,10 @@ public class CombatManager : MonoBehaviour
     }
 
     
-    private void ClearData()
+    public void Reset()
     {
+        CombatActive = false;
+        TimeInCombat = 0f;
         combatants.Clear();
         heroCombatants.Clear();
         enemyCombatants.Clear();

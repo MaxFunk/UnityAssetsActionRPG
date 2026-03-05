@@ -45,13 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4d571c851d3294495b0a1f2537f5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  gameDataGeneral:
-    gameTime: 0
-    money: 0
-  eventFlags:
-    placerholderFlag1: 0
-    placerholderFlag2: 0
-    placerholderFlag3: 0
   characterDatas: []
   partyData: 
   ItemDropPrefab: {fileID: 7652423904107115051, guid: ae6e9b5c5d4085b4eb9d1f0a5c720b4d, type: 3}
@@ -68,13 +61,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a6c6657d3a3274b93e98590b9c287f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableManager
-  characterDataInit:
-  - {fileID: 11400000, guid: 864cb0efd93e2bd479f5f29949e59e3b, type: 2}
-  - {fileID: 11400000, guid: ff1a173a4b0024c4384af8b78f0bea9f, type: 2}
-  - {fileID: 11400000, guid: 5c06c9f0bedace04fbce77d50dfabf1b, type: 2}
   characterDataStatic:
   - {fileID: 11400000, guid: 2e2d77b04d7b97847b9bfb36ebf5c7e8, type: 2}
   - {fileID: 11400000, guid: 075836a8094942347ad2e8a401b9070a, type: 2}
   - {fileID: 11400000, guid: b7817404e20a7994fb752e22ed50e1b4, type: 2}
   artsPreload: {fileID: 11400000, guid: 02c1da00caa77134a98c6a3748f8fb76, type: 2}
   itemPreload: {fileID: 11400000, guid: 2039e2220dd4f144d97f24e1820611d5, type: 2}
+  missionsPreload: {fileID: 11400000, guid: 3c30e825097bed84bb6ae7792deda0ce, type: 2}

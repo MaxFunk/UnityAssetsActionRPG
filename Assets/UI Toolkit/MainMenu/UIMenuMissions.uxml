@@ -1,0 +1,40 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MainMenu/MenuMissionsStyle.uss?fileID=7433441132597879392&amp;guid=abcd4e4bd83e97c4fa764133c9ae91db&amp;type=3#MenuMissionsStyle"/>
+    <ui:VisualElement name="MissionsView" data-source-type="MenuContainerMissions, Assembly-CSharp" style="flex-grow: 1;">
+        <ui:VisualElement name="Header" style="flex-grow: 0; height: 10%; flex-direction: row;">
+            <ui:Label text="Main Missions&#10;" name="HeaderLabel" class="header-label"/>
+            <ui:Label text="Side Missions" name="HeaderLabel" class="header-label"/>
+            <ui:Label text="Tasks" name="HeaderLabel" class="header-label"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="MissionsList" class="container-list">
+                <ui:ScrollView mouse-wheel-scroll-size="60" name="ScrollView"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="MissionsDetail" class="container-detail">
+                <ui:Label text="Name" name="MissionName" class="item-header-text detail-label-title">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="detailMissionData.missionName" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="Step" name="MissionStep" class="item-description-text detail-label-descrip" style="white-space: normal;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="detailMission" binding-mode="ToTarget" source-to-ui-converters="Mission to Step"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="Progress" name="MissionProgress" class="item-description-text detail-label-descrip" style="white-space: normal;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="detailMission" binding-mode="ToTarget" source-to-ui-converters="Mission to Progress"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="Description" name="MissionDescription" class="item-description-text detail-label-descrip" style="white-space: normal;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="detailMission" binding-mode="ToTarget" source-to-ui-converters="Mission to Description"/>
+                    </Bindings>
+                </ui:Label>
+                <Bindings>
+                    <ui:DataBinding property="style.visibility" data-source-path="visibilityDetail" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

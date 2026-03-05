@@ -1,6 +1,8 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.Profiling;
 
 [RequireComponent(typeof(CharacterController), typeof(CombatData), typeof(NavMeshAgent))]
 public class EnemyCharacterController : MonoBehaviour
@@ -24,13 +26,14 @@ public class EnemyCharacterController : MonoBehaviour
     public float RotationSpeed = 10f;
     public float Gravity = -9.81f;
     public float MaxTargetRange = 10f;
-    public float TimerNavRepath = 5f;
+    public float TimerNavRepathWalking = 3f;
+    public float TimerNavRepathCombat = 0.5f;
     public float MaxDistanceToSpawn = 10f;
 
     [Header("Player Detection")]
+    public bool Aggressive = false;
     public float MaxViewDistance = 8f;
     public float MaxViewAngle = 60f;
-    public float MaxInitAttackRange = 3f;
 
     [Header("Specific Data")]
     public NavigationBehavior navBehavior = NavigationBehavior.Static;
@@ -42,12 +45,12 @@ public class EnemyCharacterController : MonoBehaviour
     Animator animator = null;
     NavMeshAgent agent = null;
 
-    private HeroCharacterController targetedHeroChar = null;
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation = Quaternion.identity;
     private Vector3 characterVelocity = Vector3.zero;
     private float timeUntilNavRepath = 1f;
     private bool isDespawning = false;
+    private bool inCombat = false;
 
     void Awake()
     {
@@ -80,167 +83,171 @@ public class EnemyCharacterController : MonoBehaviour
             return;
         }
 
-        if (combatData.isInCombat && timeNextArt > 0)
-            timeNextArt -= Time.deltaTime;
+        bool lookIntoWalkDir = true;
+        bool dontMove = false;
+        timeUntilNavRepath -= Time.deltaTime;
 
-        switch (navBehavior)
+        if (inCombat)
         {
-            case NavigationBehavior.Static:
-                break;
-            case NavigationBehavior.Stationary:
-                UpdateStationary();
-                break;
-            case NavigationBehavior.Patrolling:
-                UpdatePatrolling();
-                break;
-            case NavigationBehavior.Guarding:
-                UpdateGuarding();
-                break;
-            default:
-                break;
+            var currentTarget = combatData.GetCurrentTarget();
+            DrawTargetLine(currentTarget);
+
+            if (currentTarget != null)
+            {
+                // dont walk if in AA range
+                if (Vector3.Distance(transform.position, currentTarget.transform.position) <= combatData.autoAttackRange)
+                {
+                    dontMove = true;
+                    lookIntoWalkDir = false;
+
+                    var lookDir = currentTarget.transform.position - transform.position;
+                    lookDir.y = 0;
+                    Quaternion targetRotation = Quaternion.LookRotation(lookDir.normalized);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+
+                    TryArtCast();
+                }
+
+                if (combatData.CanPerformAutoAttack())
+                {
+                    combatData.PerformAutoAttack();
+                    animator.SetTrigger("TrBasicAttack");
+                }
+                
+                if (timeUntilNavRepath < 0)
+                {
+                    agent.SetDestination(currentTarget.transform.position);
+                    timeUntilNavRepath = TimerNavRepathCombat;
+                }
+            }            
+        }
+        else
+        {
+            var isCloseToSpawn = Vector3.Distance(transform.position, spawnPosition) < 0.1f;
+
+            DetectPlayer();
+
+            // Update navigation paths
+            if (timeUntilNavRepath < 0)
+            {
+                if (navBehavior == NavigationBehavior.Patrolling)
+                {
+                    if (Vector3.Distance(transform.position, spawnPosition) > MaxDistanceToSpawn)
+                    {
+                        agent.SetDestination(spawnPosition);
+                    }
+                    else
+                    {
+                        Vector3 sampleDir = new(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+                        agent.SetDestination(transform.position + sampleDir.normalized * 5f);
+                    }
+                }
+
+                if (navBehavior == NavigationBehavior.Guarding && !isCloseToSpawn)
+                {
+                    agent.SetDestination(spawnPosition);
+                }
+
+                timeUntilNavRepath = TimerNavRepathWalking;
+            }
+
+            // stationary looks at original forward, guarding also looks that way, if at spawnpos
+            if (navBehavior == NavigationBehavior.Stationary || (navBehavior == NavigationBehavior.Guarding && isCloseToSpawn))
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, spawnRotation, RotationSpeed * Time.deltaTime);
+                lookIntoWalkDir = false;
+            }
         }
 
-        agent.nextPosition = transform.position;
+        Vector3 moveDir = dontMove ? Vector3.zero : EvaluateMoveDirection();
+        MoveCharacter(moveDir, lookIntoWalkDir);
+
         if (controller.isGrounded)
             characterVelocity.y = 0;
     }
 
-    private void UpdateStationary()
+    private Vector3 EvaluateMoveDirection()
     {
-        if (combatData.isInCombat)
+        if (combatData.CanMove() == false || navBehavior == NavigationBehavior.Static || navBehavior == NavigationBehavior.Stationary)
+            return Vector3.zero;
+
+        Vector3 moveDir = Vector3.zero;
+        if (agent.path != null && agent.path.corners.Length > 1)
         {
-            var currentTarget = combatData.GetCurrentTarget();
-            targetLine.enabled = currentTarget != null;
-            if (currentTarget != null)
+            moveDir = agent.path.corners[1] - transform.position;
+            moveDir.y = 0f;
+        }
+        return moveDir.normalized;
+    }
+
+    private void MoveCharacter(Vector3 moveDirection, bool lookIntoWalkDir, float speedModifier = 1f)
+    {
+        if (moveDirection.sqrMagnitude < 0.01f)
+            moveDirection = Vector3.zero;
+
+        if (moveDirection != Vector3.zero && lookIntoWalkDir)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+        }
+
+        var targetVelocity = MaxSpeedOnGround * speedModifier * moveDirection;
+        var characterVelocityXZ = new Vector3(characterVelocity.x, 0, characterVelocity.z);
+        characterVelocityXZ = Vector3.Lerp(characterVelocityXZ, targetVelocity, MovementFriction * Time.deltaTime);
+        characterVelocity.y += Gravity * Time.deltaTime;
+
+        var finalVelocity = characterVelocityXZ + (characterVelocity.y * Vector3.up);
+        characterVelocity = finalVelocity;
+        controller.Move(finalVelocity * Time.deltaTime);
+        agent.nextPosition = transform.position;
+    }
+
+    private void DrawTargetLine(CombatData target)
+    {
+        if (targetLine != null)
+        {
+            targetLine.enabled = target != null;
+            if (targetLine.enabled)
             {
-                TryArtCast();
-                TryAutoAttack();
+                var distToTarget = Vector3.Distance(transform.position, target.transform.position);
+                targetLine.SetPosition(1, new Vector3(0, 0, distToTarget));
 
-                LookAtPosition(currentTarget.transform.position);
-
-                if (targetLine != null) 
-                {
-                    var distToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
-                    targetLine.SetPosition(1, new Vector3(0, 0, distToTarget));
-                }
-
-                /*if (Vector3.Distance(currentTarget.transform.position, transform.position) > MaxDistanceInCombat)
-                {
-                    combatData.ChangeAggro(currentTarget, 0, true);
-
-                    var newTarget = CombatManager.Instance.GiveNewTarget(combatData);
-                    combatData.SetNewTarget(newTarget);
-                    if (newTarget == null)
-                    {
-                        CombatManager.Instance.CombatantLeave(combatData);
-                    }
-                }*/
+                var dirToTarget = (target.transform.position - transform.position).normalized;
+                targetLine.transform.rotation = Quaternion.LookRotation(dirToTarget);
             }
         }
     }
 
-    private void UpdatePatrolling()
+    private void DetectPlayer()
     {
-        if (combatData.isInCombat)
-        {
-            var currentTarget = combatData.GetCurrentTarget();
-            targetLine.enabled = currentTarget != null;
-            if (currentTarget != null)
-            {
-                TryArtCast();
-                TryAutoAttack();
+        if (!Aggressive || inCombat) return;
 
-                LookAtPosition(currentTarget.transform.position);
+        var playerChar = GameManager.Instance.PlayerCharacter;
+        if (playerChar == null || Vector3.Distance(playerChar.transform.position, transform.position) > MaxViewDistance) return;
 
-                if (targetLine != null)
-                {
-                    var distToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
-                    targetLine.SetPosition(1, new Vector3(0, 0, distToTarget));
-                }
-            }
-        }
-        else
-        {
-            Vector3 moveDir = Vector3.zero;
+        var dirToPlayer = (playerChar.transform.position - transform.position).normalized;
+        if (Vector3.Angle(transform.forward, dirToPlayer) > MaxViewAngle) return;
 
-            timeUntilNavRepath -= Time.deltaTime;
-            if (timeUntilNavRepath < 0 || agent.remainingDistance < 0.5f)
-            {
-                FetchNewPatrolPath();
-                timeUntilNavRepath = TimerNavRepath;
-            }
-
-            if (agent.path != null && agent.path.corners.Length > 1)
-            {
-                moveDir = agent.path.corners[1] - transform.position;
-                moveDir.y = 0f;
-            }
-
-            if (combatData.CanMove() == false)
-                moveDir = Vector3.zero;
-
-            MoveCharacter(moveDir);
-        }
+        CombatManager.Instance.EnemyInitiateCombat(combatData);
+        combatData.SetNewTarget(playerChar.GetCombatData());
     }
 
-    private void UpdateGuarding()
+
+    private void TryArtCast()
     {
-        if (combatData.isInCombat)
+        timeNextArt -= Time.deltaTime;
+        if (timeNextArt <= 0 && combatData.CanPerformArtCast())
         {
-            var currentTarget = combatData.GetCurrentTarget();
-            targetLine.enabled = currentTarget != null;
-            if (currentTarget != null)
+            var randomIndex = combatData.GetRandomArtIndex();
+            if (randomIndex >= 0)
             {
-                TryArtCast();
-                TryAutoAttack();
-
-                LookAtPosition(currentTarget.transform.position);
-
-                if (targetLine != null)
+                var success = combatData.CastArt(randomIndex);
+                if (success)
                 {
-                    var distToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
-                    targetLine.SetPosition(1, new Vector3(0, 0, distToTarget));
+                    timeNextArt = combatData.GetCurrentArt().artCooldown[0] * combatData.timeModifierArtUse;
+                    animator.SetTrigger("TrArt");
                 }
             }
-        }
-        else
-        {
-            Vector3 moveDir = Vector3.zero;
-            var skipRotation = false;
-            targetedHeroChar = CheckPlayer();
-
-            timeUntilNavRepath -= Time.deltaTime;
-            if (timeUntilNavRepath < 0)
-            {
-                var destCondition = targetedHeroChar != null && Vector3.Distance(transform.position, spawnPosition) < MaxDistanceToSpawn;
-                var destination = destCondition ? targetedHeroChar.transform.position : spawnPosition;
-                agent.SetDestination(destination);
-                timeUntilNavRepath = TimerNavRepath;
-            }
-
-            // return to original rotation of spawn
-            if (targetedHeroChar == null && Vector3.Distance(transform.position, spawnPosition) < 0.1)
-            {
-                skipRotation = true;
-                transform.rotation = Quaternion.Slerp(transform.rotation, spawnRotation, RotationSpeed * Time.deltaTime);
-            }
-
-            // attack/start battle when close to player
-            if (targetedHeroChar != null && Vector3.Distance(targetedHeroChar.transform.position, transform.position) < MaxInitAttackRange)
-            {
-                // join combat...;
-            }
-
-            // copy pasted from patrol, maybe make own func?
-            if (agent.path != null && agent.path.corners.Length > 1)
-            {
-                moveDir = agent.path.corners[1] - transform.position;
-                moveDir.y = 0f;
-            }
-            if (combatData.CanMove() == false)
-                moveDir = Vector3.zero;
-
-            MoveCharacter(moveDir, skipRotation:skipRotation);
         }
     }
 
@@ -260,104 +267,15 @@ public class EnemyCharacterController : MonoBehaviour
     }
 
 
-    private void LookAtPosition(Vector3 pos)
-    {
-        var direction = pos - transform.position;
-        direction.y = 0;
-        direction.Normalize();
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), RotationSpeed * Time.deltaTime);
-    }
-
-    private void FetchNewPatrolPath()
-    {
-        if (agent.isOnNavMesh)
-        {
-            if (Spawner != null && Vector3.Distance(transform.position, Spawner.transform.position) > MaxDistanceToSpawn)
-            {
-                agent.SetDestination(Spawner.GetPointNearSpawner()); // instead of spawner just use spawnPosition?
-            }
-            else
-            {
-                Vector3 sampleDir = new(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-                agent.SetDestination(transform.position + sampleDir.normalized * 5f);
-            }
-        }
-        else
-        {
-            agent.ResetPath();
-        }
-    }
-
-    private HeroCharacterController CheckPlayer()
-    {
-        var playerChar = GameManager.Instance.PlayerCharacter;
-
-        if (playerChar == null || Vector3.Distance(playerChar.transform.position, transform.position) > MaxViewDistance) return null;
-
-        var dirToPlayer = (playerChar.transform.position - transform.position).normalized;
-        if (Vector3.Angle(transform.forward, dirToPlayer) > MaxViewAngle) return null;
-
-        return playerChar;
-    }
-
-
-    private void TryArtCast()
-    {
-        if (timeNextArt <= 0 && combatData.CanPerformArtCast())
-        {
-            var randomIndex = combatData.GetRandomArtIndex();
-            if (randomIndex >= 0)
-            {
-                var success = combatData.CastArt(randomIndex);
-                if (success)
-                {
-                    timeNextArt = combatData.GetCurrentArt().artCooldown[0] * combatData.timeModifierArtUse;
-                    animator.SetTrigger("TrArt");
-                }
-            }
-        }
-    }
-
-    private void TryAutoAttack()
-    {
-        if (combatData.CanPerformAutoAttack())
-        {
-            combatData.PerformAutoAttack();
-            animator.SetTrigger("TrBasicAttack");
-        }
-    }
-
-    private void MoveCharacter(Vector3 moveDirection, float speedModifier = 1f, bool skipRotation = false)
-    {
-        if (moveDirection.sqrMagnitude < 0.01f)
-            moveDirection = Vector3.zero;
-        else
-            moveDirection.Normalize();
-
-        if (moveDirection != Vector3.zero && !skipRotation)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
-        }
-
-        var targetVelocity = MaxSpeedOnGround * speedModifier * moveDirection;
-        var characterVelocityXZ = new Vector3(characterVelocity.x, 0, characterVelocity.z);
-        characterVelocityXZ = Vector3.Lerp(characterVelocityXZ, targetVelocity, MovementFriction * Time.deltaTime);
-        characterVelocity.y += Gravity * Time.deltaTime;
-
-        var finalVelocity = characterVelocityXZ + (characterVelocity.y * Vector3.up);
-        characterVelocity = finalVelocity;
-        controller.Move(finalVelocity * Time.deltaTime);
-    }
-
-
     public void OnCombatJoin()
     {
+        inCombat = true;
         animator.SetBool("isInCombat", true);
     }
 
     public void OnCombatEnd()
     {
+        inCombat = false;
         animator.SetBool("isInCombat", false);
         targetLine.enabled = false;
     }

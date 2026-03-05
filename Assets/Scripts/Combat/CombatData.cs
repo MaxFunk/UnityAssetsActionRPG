@@ -456,6 +456,7 @@ public class CombatData : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.MissionManager.EnemyWasDefeated(characterId);
             foreach (var dropData in itemDrops)
                 GameManager.Instance.SpawnItemDrop(dropData, gameObject.transform.position);
 
@@ -553,6 +554,10 @@ public class CombatData : MonoBehaviour
     {
         if (actionState == ActionState.ArtCast || actionState == ActionState.Defeated)
             return false;
+
+        if (!isHero && actionState == ActionState.AutoAttack)
+            return false;
+
         return true;
     }
 
@@ -560,7 +565,7 @@ public class CombatData : MonoBehaviour
     {
         if (actionState != ActionState.Idle || curTarget == null || timerActionsBlocked > 0f) return false;
 
-        bool isInDistance = Vector3.Distance(gameObject.transform.position, curTarget.gameObject.transform.position) <= autoAttackRange;
+        bool isInDistance = Vector3.Distance(transform.position, curTarget.transform.position) <= autoAttackRange;
         return isInDistance && remainingAutoAttackCD <= 0f;
     }
 

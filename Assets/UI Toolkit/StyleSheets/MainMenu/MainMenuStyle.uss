@@ -1,0 +1,41 @@
+:root {
+}
+
+.view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+.active {
+    display: flex;
+}
+
+.label-text {
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+}
+
+.label-button {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+}
+
+.label-button:focus {
+    color: rgb(0, 255, 170);
+    -unity-font-style: bold;
+}
+
+.label-tab {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    width: 20%;
+    -unity-text-align: upper-center;
+}
+
+.label-tab:hover {
+    color: rgb(0, 255, 170);
+}

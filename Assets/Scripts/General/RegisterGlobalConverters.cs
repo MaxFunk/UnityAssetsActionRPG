@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,12 +17,26 @@ static class RegisterGlobalConverters
     static void Register()
     {
         var group = new ConverterGroup("Float To Percent");
-
         group.AddConverter((ref float value) =>
         {
             return $"{value * 100f:0}%";
         });
+        ConverterGroups.RegisterConverterGroup(group);
 
+
+        RegisterMission("Mission to Step", m => m?.GetStepText() ?? "");
+        RegisterMission("Mission to Progress", m => m?.GetProgressText() ?? "");
+        RegisterMission("Mission to Description", m => m?.GetDescriptionText() ?? "");
+    }
+
+
+    static void RegisterMission(string name, Func<Mission, string> func)
+    {
+        var group = new ConverterGroup(name);
+        group.AddConverter((ref Mission mission) =>
+        {
+            return mission == null ? "" : func(mission);
+        });
         ConverterGroups.RegisterConverterGroup(group);
     }
 }

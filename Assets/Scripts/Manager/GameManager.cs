@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public SaveSystem SaveSystem { get; private set; } = new();    
     public GameDataGeneral GameDataGeneral { get; private set; } = new();    
     public ItemManager ItemManager { get; private set; } = new();
+    public MissionManager MissionManager = new(); // { get; private set; } = new();
 
     public EventFlags EventFlags { get; set; } = new();
     public HeroCharacterController PlayerCharacter { get; set; } = null;
@@ -32,14 +33,12 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this);
 
-        //BindingConverters.RegisterConverters();
-
-        if (DebugMode)
+        /*if (DebugMode)
         {
             Debug.Log("GAME MANAGER IS STARTED DEBUG MODE");
             SaveSystem.ReadFromFile(-1);
             StartGame(null);
-        }
+        }*/
     }
 
 

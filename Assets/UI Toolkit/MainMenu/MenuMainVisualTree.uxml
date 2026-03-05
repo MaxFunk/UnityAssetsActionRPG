@@ -1,13 +1,14 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=cb49ba54ba69c2347b7e0cb3f17f0546&amp;type=3#MainMenuStyle" />
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/MainMenu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=cb49ba54ba69c2347b7e0cb3f17f0546&amp;type=3#MainMenuStyle"/>
     <ui:VisualElement name="MainView" style="flex-grow: 1;">
         <ui:VisualElement name="ListLabels" style="top: 25%; width: 30%;">
-            <ui:Label text="Characters" name="ListLabel1" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button" />
-            <ui:Label text="Party" name="ListLabel2" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button" />
-            <ui:Label text="Items" name="ListLabel3" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button" />
-            <ui:Label text="Locations" name="ListLabel4" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button" />
-            <ui:Label text="Save" name="ListLabel5" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button" />
-            <ui:Label text="Quit Game" name="ListLabel6" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button" />
+            <ui:Label text="Characters" name="ListLabel1" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button"/>
+            <ui:Label text="Party" name="ListLabel2" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button"/>
+            <ui:Label text="Items" name="ListLabel3" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button"/>
+            <ui:Label text="Missions" name="ListLabelMission" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button"/>
+            <ui:Label text="Locations" name="ListLabel4" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button"/>
+            <ui:Label text="Save" name="ListLabel5" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button"/>
+            <ui:Label text="Quit Game" name="ListLabel6" data-source-type="VisualElementCallData, Assembly-CSharp" focusable="true" class="label-button"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
