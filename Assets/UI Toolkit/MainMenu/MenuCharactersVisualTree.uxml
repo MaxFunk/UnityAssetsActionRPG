@@ -355,7 +355,7 @@
                             <ui:DataBinding property="text" data-source-path="artCooldown[0]" binding-mode="ToTarget"/>
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Description&#10;Description&#10;Description" class="art-detail-text" style="width: 100%;">
+                    <ui:Label text="Description&#10;Description&#10;Description" class="art-detail-text" style="width: 100%; white-space: normal;">
                         <Bindings>
                             <ui:DataBinding property="text" data-source-path="descriptionLong" binding-mode="ToTarget"/>
                         </Bindings>

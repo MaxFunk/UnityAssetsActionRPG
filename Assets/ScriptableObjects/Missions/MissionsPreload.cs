@@ -31,4 +31,15 @@ public class MissionsPreload : ScriptableObject
 
         return null;
     }
+
+    /*public string GetMissionTypeString(int id)
+    {
+        return id switch
+        {
+            (>= 0) and (< 100) => "Main Mission",
+            (>= 100) and (< 200) => "Side Mission",
+            (>= 200) => "Task",
+            _ => "Mission",
+        };
+    }*/
 }

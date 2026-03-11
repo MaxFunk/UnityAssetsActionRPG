@@ -12,14 +12,14 @@ static class CombatCalcs
             valueType = CombatHitData.ValueType.damage,
             value = 1,
             isCrit = false,
-            isEvaded = false,
+            isMissed = false,
             fromPlayer = caster.isPlayerControlled,
             fromEnemy = !caster.isHero
         };
 
-        if (CheckIfEvaded(target))
+        if (IsMissed(caster, target, art.artData.baseAccuracy) || CheckIfEvaded(target))
         {
-            hitData.isEvaded = true;
+            hitData.isMissed = true;
             return hitData;
         }
 
@@ -43,21 +43,21 @@ static class CombatCalcs
     }
 
 
-    public static CombatHitData DamageCalculationAutoAttack(CombatData caster, CombatData target)
+    public static CombatHitData DamageCalculationAutoAttack(CombatData caster, CombatData target, float damageModifier)
     {
         var hitData = new CombatHitData
         {
             valueType = CombatHitData.ValueType.damage,
             value = 1,
             isCrit = false,
-            isEvaded = false,
+            isMissed = false,
             fromPlayer = caster.isPlayerControlled,
             fromEnemy = !caster.isHero
         };
 
-        if (CheckIfEvaded(target))
+        if (IsMissed(caster, target, 0.98f) || CheckIfEvaded(target))
         {
-            hitData.isEvaded = true;
+            hitData.isMissed = true;
             return hitData;
         }
 
@@ -70,6 +70,7 @@ static class CombatCalcs
             damage *= 1.5f;
 
         damage *= Random.Range(0.9f, 1.05f);
+        damage *= damageModifier;
 
         hitData.value = Mathf.RoundToInt(Mathf.Clamp(damage, 1, 9999999));
         hitData.isCrit = isCrit;
@@ -107,6 +108,21 @@ static class CombatCalcs
         }
         critChance = Mathf.Clamp(critChance, 0f, 1f);
         return Random.value < critChance;
+    }
+
+    public static bool IsMissed(CombatData caster, CombatData target, float baseAccuracy)
+    {
+        var accuracy = baseAccuracy * (caster.agility + 500f) / (target.agility + 500f);
+
+        foreach (var modifier in caster.CombatModifiers)
+        {
+            if (modifier.modifierData.modifierType == CombatModifierData.ModifierType.AccuracyChange)
+            {
+                accuracy += accuracy * modifier.value;
+            }
+        }
+
+        return Random.value > accuracy;
     }
 
     public static bool CheckIfEvaded(CombatData target)

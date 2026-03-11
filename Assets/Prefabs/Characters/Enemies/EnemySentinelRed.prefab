@@ -78,25 +78,17 @@ MonoBehaviour:
   luck: 15
   physicalDefense: 0.25
   etherDefense: 0.15
-  autoAttackRange: 3
-  autoAttackWaitTime: 3
-  artIds: 0000000002000000
-  itemDrops:
-  - type: 0
-    id: 1
-    recieveAmount: 1
-    recieveChance: 1
-  - type: 4
-    id: 0
-    recieveAmount: 1
-    recieveChance: 1
-  MaxDistanceToHero: 10
   MaxTargetRange: 10
   timeModifierArtUse: 2
   EventModifiersChanged:
     m_PersistentCalls:
       m_Calls: []
-  curTarget: {fileID: 0}
+  autoAttack:
+    active: 0
+    timeActive: 0
+    hitsApplied: 0
+    cancelStarted: 0
+    remainingCooldown: 0
   aggro: ffffffffffffffffffffffff
   canCancelArt: 0
   tryCastingUlt: 0
@@ -128,6 +120,29 @@ MonoBehaviour:
   navBehavior: 3
   timeNextArt: 0
   despawnScaleFactor: 0.5
+  artIds: 030000000400000005000000
+  itemDrops:
+  - type: 0
+    id: 1
+    recieveAmount: 1
+    recieveChance: 1
+  - type: 0
+    id: 1
+    recieveAmount: 1
+    recieveChance: 0.5
+  - type: 0
+    id: 5
+    recieveAmount: 1
+    recieveChance: 1
+  autoAttackData:
+    attackRange: 3
+    attackCooldown: 4
+    attackDuration: 1.5
+    hitAfter:
+    - 1
+    cancelStart: 0
+    cancelDuration: 0
+    damageModifier: 8
 --- !u!143 &7174070396082533303
 CharacterController:
   m_ObjectHideFlags: 0

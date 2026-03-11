@@ -17,6 +17,9 @@ public class Mission
         this.id = id;
         isCompleted = false;
 
+        // current assumption: this function is only called when mission is a new mission
+        UserInterfaceManager.instance.GameplayUI.QueueMissionUpdate(this);
+
         LoadStep(step);
     }
 
@@ -43,12 +46,24 @@ public class Mission
         
         if (curStep >= missionData.missionSteps.Length)
         {
-            isCompleted = true;
-            Debug.Log($"MISSION FINISHED: {missionData.missionName}"); //notify that quest is finished
+            CompleteAndGiveRewards();
             return;
         }
 
         CheckIfItemsInInventory();
+    }
+    
+    private void CompleteAndGiveRewards()
+    {
+        isCompleted = true;
+        UserInterfaceManager.instance.GameplayUI.QueueMissionUpdate(this);
+
+        GameManager.Instance.GameDataGeneral.RecieveMoney(missionData.rewardMoney);
+        var itemManager = GameManager.Instance.ItemManager;
+        foreach (var rewardItem in missionData.rewardItems)
+        {
+            itemManager.RecieveItems(rewardItem);
+        }
     }
 
     public void CheckIfItemsInInventory()
@@ -66,7 +81,25 @@ public class Mission
     }
 
 
+    public string GetMissionName()
+    {
+        if (missionData == null)
+            return "";
+        return missionData.missionName;
+    }
 
+    public string GetMissionUpdateInfo()
+    {
+        if (missionData == null)
+            return "";
+
+        var baseString = missionData.MissionTypeToString();
+
+        if (isCompleted)
+            return baseString + " Completed";
+
+        return "New " + baseString;
+    }
 
     public string GetStepText()
     {

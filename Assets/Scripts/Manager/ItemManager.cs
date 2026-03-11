@@ -66,8 +66,8 @@ public class ItemManager
         item.amount = Mathf.Clamp(item.amount + recieveData.recieveAmount, 0, 999);
         itemList[recieveData.id] = item;
 
-        GameManager.Instance.MissionManager.ItemCollected(recieveData.id, recieveData.recieveAmount);
-        // id not correct for everything thats not a collectible -> use itemrecievedata
+        GameManager.Instance.MissionManager.ItemCollected(recieveData.GetFullId(), recieveData.recieveAmount);
+        UserInterfaceManager.instance.GameplayUI.OnItemRecieve(item, recieveData.recieveAmount);
     }
 
     public void ChangeItem(ItemType itemType, int id, int changeValue)

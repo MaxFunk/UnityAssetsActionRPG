@@ -31,7 +31,7 @@ public class ArtNumberLabel
     private static readonly string classDamageEffect = "number-damage-effect";
     private static readonly string classHealing = "number-healing";
     private static readonly string classCrit = "number-crit";
-    private static readonly string classEvade = "number-evade";
+    private static readonly string classMissed = "number-evade";
     private static readonly string classDamageEnemy = "number-damage-enemy";
 
     // Returns true, if object should stay existent
@@ -75,10 +75,10 @@ public class ArtNumberLabel
         if (hitData.fromEnemy)
         {
             label.AddToClassList(classDamageEnemy);
-            if (hitData.isEvaded)
+            if (hitData.isMissed)
             {
-                label.text = "Evaded";
-                label.AddToClassList(classEvade);
+                label.text = "Missed";
+                label.AddToClassList(classMissed);
             }
             return;
         }
@@ -99,10 +99,10 @@ public class ArtNumberLabel
                 break;
         }
 
-        if (hitData.isEvaded)
+        if (hitData.isMissed)
         {
-            label.text = "Evaded";
-            label.AddToClassList(classEvade);
+            label.text = "Missed";
+            label.AddToClassList(classMissed);
             return;
         }
 

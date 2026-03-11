@@ -18,16 +18,24 @@ MonoBehaviour:
   descriptionLong: 
   descriptionShort: Phys Dmg / 2 Hits
   isUlt: 0
+  isSelfCast: 0
   ultCost: 0
+  maxCastDistance: 5
   castDuration: 1.5
   cancelAfter: 1
   cancelWindow: 0.2
-  basePower: 140000001400000019000000190000001e000000
+  baseAccuracy: 0.98
+  basePower:
+  - 10
+  - 12
+  - 15
+  - 17
+  - 20
   artCooldown:
   - 6
+  - 5.5
   - 5
-  - 5
-  - 4
+  - 4.5
   - 4
   hits:
   - 0.5

@@ -18,11 +18,19 @@ MonoBehaviour:
   descriptionLong: 
   descriptionShort: Phys Dmg / Aggro Up
   isUlt: 0
+  isSelfCast: 0
   ultCost: 0
+  maxCastDistance: 5
   castDuration: 1.5
   cancelAfter: 1
   cancelWindow: 0.2
-  basePower: 280000002d00000032000000370000003c000000
+  baseAccuracy: 0.98
+  basePower:
+  - 50
+  - 55
+  - 60
+  - 65
+  - 70
   artCooldown:
   - 9
   - 8

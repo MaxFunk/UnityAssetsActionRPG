@@ -13,6 +13,7 @@ public class SceneLoader : MonoBehaviour
 
         float delay = UserInterfaceManager.instance.CreateLoadingScreen();
         StartCoroutine(DelayedCall(delay));
+        SoundtrackManager.Instance.StopSoundtrack();
     }
 
     IEnumerator LoadAsyncScene()

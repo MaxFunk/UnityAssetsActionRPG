@@ -13,7 +13,7 @@ public class CombatHitData
     public ValueType valueType = ValueType.damage;
     public int value = 0;
     public bool isCrit = false;
-    public bool isEvaded = false;
+    public bool isMissed = false;
     public bool fromPlayer = false;
     public bool fromEnemy = false;
 }

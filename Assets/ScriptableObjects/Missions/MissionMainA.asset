@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9262e75f2c2740a3ef040b8075bf6, type: 3}
   m_Name: MissionMainA
   m_EditorClassIdentifier: Assembly-CSharp::MissionData
+  missionType: 0
   missionName: Main Mission A
   descriptionCompleted: Main Mission A was completed
   missionSteps:
@@ -24,4 +25,12 @@ MonoBehaviour:
     objectiveId: 1
     objectiveCount: 2
   rewardMoney: 1000
-  rewardItem: 0
+  rewardItems:
+  - type: 0
+    id: 0
+    recieveAmount: 1
+    recieveChance: 1
+  - type: 0
+    id: 1
+    recieveAmount: 2
+    recieveChance: 1

@@ -24,7 +24,13 @@ MonoBehaviour:
   castDuration: 1.5
   cancelAfter: 1
   cancelWindow: 0.5
-  basePower: 0a000000140000001e0000002800000032000000
+  baseAccuracy: 0.98
+  basePower:
+  - 10
+  - 12
+  - 15
+  - 17
+  - 20
   artCooldown:
   - 10
   - 10

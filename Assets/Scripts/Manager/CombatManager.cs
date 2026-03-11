@@ -5,6 +5,7 @@ public class CombatManager : MonoBehaviour
 {
     [Header("Prefabs")]
     public ReviveCirle PrefabReviveCirle;
+    public SoundtrackFile SoundtrackFile;
 
     public static CombatManager Instance { get; private set; }
     public float TimeInCombat { get; private set; } = 0f;
@@ -60,10 +61,8 @@ public class CombatManager : MonoBehaviour
         foreach (var cast in artCasts)
             cast.disableHits = true;
 
-        var autoattackCasts = FindObjectsByType<AutoAttackCast>(FindObjectsSortMode.None);
-        foreach (var cast in autoattackCasts)
-            cast.disableHits = true;
-
+        SoundtrackManager.Instance.ResumeAreaSoundtrack();
+        UserInterfaceManager.instance.GameplayUI.OnCombatEnd();
         Reset();
     }
 
@@ -73,7 +72,12 @@ public class CombatManager : MonoBehaviour
         if (newCombatant == null || combatants.Contains(newCombatant))
             return;
 
-        CombatActive = true;
+        if (!CombatActive)
+        {
+            CombatActive = true;
+            SoundtrackManager.Instance.PlaySoundtrack(SoundtrackFile);
+            UserInterfaceManager.instance.GameplayUI.OnCombatStart();
+        }
 
         combatants.Add(newCombatant);
         if (newCombatant.isHero)
@@ -179,9 +183,9 @@ public class CombatManager : MonoBehaviour
         return closestTarget;
     }
 
-    public int[] GiveInitialAggroForEnemies()
+    public float[] GiveInitialAggroForEnemies()
     {
-        int[] aggro = new int[maxHeroCharacters];
+        float[] aggro = new float[maxHeroCharacters];
 
         for (int i = 0; i < aggro.Length; i++)
         {
@@ -270,7 +274,20 @@ public class CombatManager : MonoBehaviour
         return null;
     }
 
-    
+    public void FocusAlliesOnCurrentTarget(CombatData playerTarget)
+    {
+        if (playerTarget == null || playerTarget.IsDefeated()) return;
+
+        foreach (var hero in heroCombatants)
+        {
+            if (hero != null && !hero.IsDefeated() && !hero.isPlayerControlled)
+            {
+                hero.SetNewTarget(playerTarget);
+            }
+        }
+    }
+
+
     public void Reset()
     {
         CombatActive = false;

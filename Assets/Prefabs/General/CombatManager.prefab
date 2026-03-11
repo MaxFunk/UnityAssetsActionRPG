@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   PrefabReviveCirle: {fileID: 5406002348782152802, guid: a7e9590df4a8d164eba9175aba8b4235, type: 3}
+  SoundtrackFile: {fileID: 11400000, guid: fbda354c84898a04d8d4e3f293bef65e, type: 2}
   combatants: []
   heroCombatants: []
   enemyCombatants: []
+  debugTimeInCombat: 0
+  debugCombatActive: 0

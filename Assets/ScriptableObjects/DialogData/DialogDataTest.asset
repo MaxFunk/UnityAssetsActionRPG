@@ -18,18 +18,21 @@ MonoBehaviour:
     speakerIcon: {fileID: 2800000, guid: 7997a86a8254c7642aacc873a6eef57f, type: 3}
     hasPrompt: 0
     isEnd: 0
+    unconditionalEventIndex: -1
     promptData: []
   - speakerName: NPC
     dialogText: More Text. Like, I dont know what else to write but more Text.
     speakerIcon: {fileID: 2800000, guid: 7997a86a8254c7642aacc873a6eef57f, type: 3}
     hasPrompt: 0
     isEnd: 0
+    unconditionalEventIndex: -1
     promptData: []
   - speakerName: E
     dialogText: This is a Question.
     speakerIcon: {fileID: 2800000, guid: 2d3ea451ac0f737499f65105aebe2af2, type: 3}
     hasPrompt: 1
     isEnd: 0
+    unconditionalEventIndex: -1
     promptData:
     - Text: Yes
       Action: 0
@@ -42,6 +45,7 @@ MonoBehaviour:
     speakerIcon: {fileID: 2800000, guid: 7997a86a8254c7642aacc873a6eef57f, type: 3}
     hasPrompt: 1
     isEnd: 0
+    unconditionalEventIndex: -1
     promptData:
     - Text: Red
       Action: 0
@@ -57,10 +61,12 @@ MonoBehaviour:
     speakerIcon: {fileID: 2800000, guid: 7997a86a8254c7642aacc873a6eef57f, type: 3}
     hasPrompt: 0
     isEnd: 1
+    unconditionalEventIndex: -1
     promptData: []
   - speakerName: NPC
     dialogText: Red is great. You just dont understand...
     speakerIcon: {fileID: 2800000, guid: 7997a86a8254c7642aacc873a6eef57f, type: 3}
     hasPrompt: 0
     isEnd: 1
+    unconditionalEventIndex: -1
     promptData: []

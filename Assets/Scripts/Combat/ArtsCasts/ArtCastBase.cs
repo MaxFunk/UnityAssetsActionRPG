@@ -51,19 +51,17 @@ public abstract class ArtCastBase : MonoBehaviour
             if (target.IsOppositeFaction(caster))
             {
                 var hitData = CombatCalcs.DamageCalculationArt(caster, target, art);
-                if (hitData.isEvaded == false)
+                if (!hitData.isMissed)
                 {
                     target.RecieveDamage(hitData.value, caster);
 
                     foreach (var effect in artData.ArtEffects)
-                    {
                         effect?.ApplyEffect(caster, target, hitData.value);
-                    }
-                }
-                else
-                {
-                    if (!caster.isHero)
-                        caster.ChangeAggro(target, 3);
+
+                    if (caster.isHero)
+                        target.ChangeAggro(caster.characterId, art.GetBasePower() * 0.1f);
+                    else
+                        caster.ChangeAggro(target.characterId, art.GetBasePower() * -0.1f);
                 }
 
                 var damageType = ArtNumberLabel.NumberType.DamagePhysical;

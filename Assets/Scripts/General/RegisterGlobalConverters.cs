@@ -16,14 +16,22 @@ static class RegisterGlobalConverters
 #endif
     static void Register()
     {
-        var group = new ConverterGroup("Float To Percent");
-        group.AddConverter((ref float value) =>
+        var groupFloat = new ConverterGroup("Float To Percent");
+        groupFloat.AddConverter((ref float value) =>
         {
             return $"{value * 100f:0}%";
         });
-        ConverterGroups.RegisterConverterGroup(group);
+        ConverterGroups.RegisterConverterGroup(groupFloat);
 
+        var groupInt = new ConverterGroup("Int to Amount");
+        groupInt.AddConverter((ref int value) =>
+        {
+            return $"x{value}";
+        });
+        ConverterGroups.RegisterConverterGroup(groupInt);
 
+        RegisterMission("Mission to Name", m => m?.GetMissionName() ?? "");
+        RegisterMission("Mission to UpdateInfo", m => m?.GetMissionUpdateInfo() ?? "");
         RegisterMission("Mission to Step", m => m?.GetStepText() ?? "");
         RegisterMission("Mission to Progress", m => m?.GetProgressText() ?? "");
         RegisterMission("Mission to Description", m => m?.GetDescriptionText() ?? "");

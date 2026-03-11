@@ -26,5 +26,6 @@ public class DialogStepData
     public Texture2D speakerIcon = null;
     public bool hasPrompt = false;
     public bool isEnd = false;
+    public int unconditionalEventIndex = -1;
     public PromptData[] promptData = new PromptData[0];
 }

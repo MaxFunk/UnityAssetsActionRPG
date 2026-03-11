@@ -44,4 +44,13 @@ MonoBehaviour:
   - {x: 3, y: 18}
   - {x: 4, y: 19}
   - {x: 5, y: 20}
+  autoAttackData:
+    attackRange: 3
+    attackCooldown: 2
+    attackDuration: 1.5
+    hitAfter:
+    - 1
+    cancelStart: 1.1
+    cancelDuration: 0.35
+    damageModifier: 1
   iconMenuFull: {fileID: 2800000, guid: 2d3ea451ac0f737499f65105aebe2af2, type: 3}

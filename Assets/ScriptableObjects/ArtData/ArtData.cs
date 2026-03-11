@@ -37,7 +37,8 @@ public class ArtData : ScriptableObject
     public float castDuration = 1.5f;
     public float cancelAfter = 1.0f;
     public float cancelWindow = 0.5f;
-    public int[] basePower = new int[5] { 20, 25, 30, 35, 40 };
+    public float baseAccuracy = 0.98f;
+    public float[] basePower = new float[5] { 20f, 25f, 30f, 35f, 40f };
     public float[] artCooldown = new float[5] { 10f, 9f, 8f, 7f, 6f };
     public float[] hits = new float[1] { 0.5f };
 

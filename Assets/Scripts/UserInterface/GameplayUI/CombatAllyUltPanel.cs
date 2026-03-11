@@ -19,7 +19,7 @@ public class CombatAllyUltPanel
             if (ultArt.artData.isUlt && ultArt.ultPoints >= ultArt.artData.ultCost)
             {
                 visibility = Visibility.Visible;
-                visibilitySelection = combatData.tryCastingUlt ? Visibility.Visible : Visibility.Hidden;
+                visibilitySelection = combatData.TryCastingUlt ? Visibility.Visible : Visibility.Hidden;
             }
             else
             {

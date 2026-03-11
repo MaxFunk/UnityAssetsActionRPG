@@ -1,8 +1,6 @@
-using UnityEditor.Rendering.LookDev;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
-using UnityEngine.Profiling;
 
 [RequireComponent(typeof(CharacterController), typeof(CombatData), typeof(NavMeshAgent))]
 public class EnemyCharacterController : MonoBehaviour
@@ -39,6 +37,9 @@ public class EnemyCharacterController : MonoBehaviour
     public NavigationBehavior navBehavior = NavigationBehavior.Static;
     public float timeNextArt = 0;
     public float despawnScaleFactor = 0.5f;
+    public List<int> artIds = new();
+    public List<ItemRecieveData> itemDrops = new();
+    public AutoAttackData autoAttackData = new();
 
     CombatData combatData;
     CharacterController controller;
@@ -95,7 +96,7 @@ public class EnemyCharacterController : MonoBehaviour
             if (currentTarget != null)
             {
                 // dont walk if in AA range
-                if (Vector3.Distance(transform.position, currentTarget.transform.position) <= combatData.autoAttackRange)
+                if (Vector3.Distance(transform.position, currentTarget.transform.position) <= combatData.GetAutoAttackRange())
                 {
                     dontMove = true;
                     lookIntoWalkDir = false;
@@ -110,7 +111,7 @@ public class EnemyCharacterController : MonoBehaviour
 
                 if (combatData.CanPerformAutoAttack())
                 {
-                    combatData.PerformAutoAttack();
+                    combatData.StartAutoAttack();
                     animator.SetTrigger("TrBasicAttack");
                 }
                 

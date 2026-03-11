@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(CharacterController), typeof(CombatData), typeof(NavMeshAgent))]
 public class HeroCharacterController : MonoBehaviour
@@ -11,8 +9,7 @@ public class HeroCharacterController : MonoBehaviour
         Stopped,
         Explore,
         CombatInactive,
-        CombatActive,
-        InDialog
+        CombatActive
     }
 
     //[Header("References and Prefabs")]
@@ -22,11 +19,14 @@ public class HeroCharacterController : MonoBehaviour
     public float RotationSpeed = 10f; // make rot speed for camera as different param
     public float JumpStrength = 5f;
     public float Gravity = -9.81f;
+    public float SlideSpeed = 3f;
     public float MaxTargetRange = 10f;
+
     [Header("Navigation Parameter")]
     public float MaxDistanceToPlayer = 3f;
     public float PathUpdateAfter = 0.5f;
     public float DistanceTeleport = 50f;
+
     [Header("Other")]
     public bool IsPlayerControlled = false;
     public int partyIndex = -1;
@@ -41,12 +41,15 @@ public class HeroCharacterController : MonoBehaviour
     CameraController playerCamera;
 
     public CharacterState characterState = CharacterState.Explore;
-    private Vector3 characterVelocity = Vector3.zero;
+    public Vector3 characterVelocity = Vector3.zero;
+    public Vector3 groundNormal = Vector3.up;
     private Vector3 lastPosition;
 
     private bool isJumping = false;
+    public bool isGrounded = false;
     private bool coyoteTimeAvailable = true;
     private bool wasLastActionArt = true;
+
     private float timerLookAtTarget = 0.0f;
     private float timerPathUpdate = 0.5f;
     private float timerCoyoteTime = 0.0f;
@@ -70,9 +73,7 @@ public class HeroCharacterController : MonoBehaviour
     void Update()
     {
         CheckFallenOutOfWorld();
-
-        if (timerCoyoteTime > 0f)
-            timerCoyoteTime -= Time.deltaTime;
+        CheckCoyoteTime();
 
         if (characterState != CharacterState.Stopped)
         {
@@ -85,21 +86,12 @@ public class HeroCharacterController : MonoBehaviour
         var moveSpeed = Vector3.Distance(lastPosition, transform.position) / Time.deltaTime;
         lastPosition = transform.position;
 
-        if (controller.isGrounded)
-        {
-            characterVelocity.y = 0f;
-            timerCoyoteTime = 0f;
-            isJumping = false;
-            coyoteTimeAvailable = true;
-        }
-        else if (!controller.isGrounded && coyoteTimeAvailable)
-        {
-            timerCoyoteTime = 0.25f;
-            coyoteTimeAvailable = false;
-        }
-
-        animator.SetBool("isGrounded", controller.isGrounded);
+        isGrounded = controller.isGrounded;
+        animator.SetBool("isGrounded", isGrounded);
         animator.SetFloat("MoveSpeed", moveSpeed);
+
+        if (isGrounded && characterVelocity.y < 0f)
+            characterVelocity.y = -1f;
 
         DebugCanMove = combatData.CanMove();
     }
@@ -132,7 +124,7 @@ public class HeroCharacterController : MonoBehaviour
             if (inputHandler.GetJumpInputDown())
                 TryJump();
 
-            if (controller.isGrounded) // maybe also check these with coyote time
+            if (isGrounded) // maybe also check these with coyote time
             {
                 if (inputHandler.GetOpenMenuInputDown())
                 {
@@ -155,7 +147,7 @@ public class HeroCharacterController : MonoBehaviour
             if (inputHandler.GetJumpInputDown())
                 TryJump();
 
-            if (controller.isGrounded)
+            if (isGrounded)
             {
                 if (inputHandler.GetSheatheWeaponInputDown())
                     SheatheWeapon();
@@ -177,13 +169,12 @@ public class HeroCharacterController : MonoBehaviour
                 CallAllyUlt(1);
             if (inputHandler.GetAlly2UltInputDown())
                 CallAllyUlt(2);
-
             if (inputHandler.GetFocusAlliesInputDown())
-                Debug.Log("Implement Ally recieve player target");
+                CombatManager.Instance.FocusAlliesOnCurrentTarget(combatData.GetCurrentTarget());
 
             if (combatData.CanPerformAutoAttack())
             {
-                combatData.PerformAutoAttack();
+                combatData.StartAutoAttack();
                 animator.SetTrigger("TrBasicAttack");
             }
 
@@ -289,18 +280,18 @@ public class HeroCharacterController : MonoBehaviour
             LookAtTarget();
 
             // Check if in range of target, else run towards
-            if (distanceToTarget < combatData.autoAttackRange)
+            if (distanceToTarget < combatData.GetAutoAttackRange())
             {
                 if (combatData.CanPerformAutoAttack())
                 {
-                    combatData.PerformAutoAttack();
+                    combatData.StartAutoAttack();
                     wasLastActionArt = false;
                     animator.SetTrigger("TrBasicAttack");
                 }
 
                 if (combatData.CanPerformArtCastNPC() && wasLastActionArt == false)
                 {
-                    int artIndex = combatData.tryCastingUlt ? 5 : Random.Range(0, 4);
+                    int artIndex = combatData.TryCastingUlt ? 5 : Random.Range(0, 4);
                     bool artSuccess = combatData.CastArt(artIndex);
 
                     if (artSuccess)
@@ -308,8 +299,8 @@ public class HeroCharacterController : MonoBehaviour
                         animator.SetTrigger("TrArt");
                         wasLastActionArt = true;
 
-                        if (combatData.tryCastingUlt)
-                            combatData.tryCastingUlt = false;
+                        if (combatData.TryCastingUlt)
+                            combatData.TryCastingUlt = false;
                     }
                 }
             }
@@ -355,7 +346,25 @@ public class HeroCharacterController : MonoBehaviour
                 transform.position = playerChar.transform.position + Vector3.one; // Not failsafe!
         }
     }
-    
+
+    private void CheckCoyoteTime()
+    {
+        if (timerCoyoteTime > 0f)
+            timerCoyoteTime -= Time.deltaTime;
+
+        if (isGrounded)
+        {
+            timerCoyoteTime = 0f;
+            isJumping = false;
+            coyoteTimeAvailable = true;
+        }
+        else if (!isGrounded && coyoteTimeAvailable)
+        {
+            timerCoyoteTime = 0.25f;
+            coyoteTimeAvailable = false;
+        }
+    }
+
     private bool CheckForInteractables()
     {
         bool hasInteracted = false;
@@ -395,17 +404,43 @@ public class HeroCharacterController : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
-        }
+        }        
 
-        var targetVelocity = MaxSpeedOnGround * speedModifier * moveDirection;
+        var targetVelocity = MaxSpeedOnGround * speedModifier * combatData.GetMoveSpeedFactor() * moveDirection;
         var characterVelocityXZ = new Vector3(characterVelocity.x, 0, characterVelocity.z);
         characterVelocityXZ = Vector3.Lerp(characterVelocityXZ, targetVelocity, MovementFriction * Time.deltaTime);
         characterVelocity.y += Gravity * Time.deltaTime;
+        var slideVelocity = Time.deltaTime * SlideSpeed * GetSlideDir();
 
-        var finalVelocity = characterVelocityXZ + (characterVelocity.y * Vector3.up);
-        characterVelocity = finalVelocity;
-        controller.Move(finalVelocity * Time.deltaTime);
+        characterVelocity = characterVelocityXZ + (characterVelocity.y * Vector3.up) + slideVelocity;
+        controller.Move(characterVelocity * Time.deltaTime);
     }
+
+    private Vector3 GetSlideDir()
+    {
+        if (!isGrounded) return Vector3.zero;
+
+        Vector3 slideDir = Vector3.zero;
+        var res = Physics.SphereCast(transform.position + new Vector3(0f, 0.4f, 0f), controller.radius * 0.9f, Vector3.down, out var hit, 0.5f);
+        //Debug.DrawRay(transform.position + new Vector3(0f, 0.4f, 0f), Vector3.down * 0.5f, res ? Color.white : Color.darkRed);
+        if (res)
+        {
+            var slopeAngle = Vector3.Angle(Vector3.up, groundNormal);
+            groundNormal = hit.normal;
+
+            if (slopeAngle > controller.slopeLimit)
+            {
+                slideDir = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
+                //Debug.DrawRay(transform.position + new Vector3(0f, 0.4f, 0f), slideDir, Color.darkRed);
+            }
+        }
+        else
+        {
+            groundNormal = Vector3.up;
+        }
+        return slideDir;
+    }
+
 
     private void TryJump()
     {
@@ -595,15 +630,15 @@ public class HeroCharacterController : MonoBehaviour
 
     public void OnPlayerCallsUltUse()
     {
-        if (combatData.CanCastUlt() && !combatData.tryCastingUlt)
+        if (combatData.CanCastUlt() && !combatData.TryCastingUlt)
         {
-            combatData.tryCastingUlt = true;
+            combatData.TryCastingUlt = true;
         }
     }
 
     public void OnDialogStart()
     {
-        characterState = CharacterState.InDialog;
+        characterState = CharacterState.Stopped;
     }
 
     public void OnDialogEnd()

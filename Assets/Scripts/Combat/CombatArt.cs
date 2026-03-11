@@ -9,16 +9,16 @@ public class CombatArt
 
     public int artLevel = 0; // 0 - 4
     public float curArtCooldown = 0f;
-    public int curBasePower = 0;
+    public float curBasePower = 0;
     public float inRangeOpacity = 1f;
 
     private CombatData owner;
     private bool inRange = false;
 
-    public void Update()
+    public void ExternalUpdate()
     {
         // check in range -> get target, check with owner range, set in range (for ui and check)
-        inRange = artData.IsInCastRange(owner, owner.curTarget);
+        inRange = artData.IsInCastRange(owner, owner.GetCurrentTarget());
         inRangeOpacity = inRange ? 1f : 0.66f;
 
         if (onCooldown)
@@ -96,5 +96,12 @@ public class CombatArt
         ultPoints = Mathf.Clamp(ultPoints + amount, 0, artData.ultCost);
         timerCooldown = ultPoints;
         curArtCooldown = artData.ultCost;
+    }
+
+    public float GetBasePower()
+    {
+        if (artData == null)
+            return 0f;
+        return artData.basePower[artLevel];
     }
 }

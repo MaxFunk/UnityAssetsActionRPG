@@ -4,6 +4,4 @@ using UnityEngine;
 public class ArtsPreload : ScriptableObject
 {
     public ArtData[] artDatas = new ArtData[] { };
-
-    public AutoAttackCast PrefabAutoAttackCast;
 }

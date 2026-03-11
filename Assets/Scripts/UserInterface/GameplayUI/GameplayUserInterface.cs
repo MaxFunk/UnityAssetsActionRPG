@@ -5,8 +5,19 @@ using UnityEngine.UIElements;
 
 public class GameplayUserInterface : MonoBehaviour
 {
+    public struct MissionDisplayData
+    {
+        public string Name;
+        public string UpdateText;
+    }
+
+    public VisualTreeAsset VTAItemCollectElement;
+
     private UIDocument document;
     private VisualElement root;
+
+    private VisualElement containerExplore;
+    private VisualElement containerCombat;
 
     private CombatHeroPanel[] heroPanels;
     private CombatTargetPanel targetPanel;
@@ -17,17 +28,29 @@ public class GameplayUserInterface : MonoBehaviour
     private InteractionPanel interactionPanel;
     private CombatAllyUltPanel allyUltPanel1;
     private CombatAllyUltPanel allyUltPanel2;
+    private VisualElement missionUpdatePanel;
+    private PanelItemCollectList panelItemCollect = new();
 
     private Camera currentCamera;
     private List<ArtNumberLabel> artNumberLabels = new();
+    private readonly List<MissionDisplayData> queuedMissionUpdates = new();
 
+    private bool checkMissionUpdate = true;
     private bool cancelRingActive = false;
+    private float timerRemainingMissionDisplay = 0f;
+    private float timerBetweenMissionDisplay = 0f;
 
 
     void Awake()
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement.Q<VisualElement>("RootContainer");
+        root.dataSource = this;
+
+        containerExplore = document.rootVisualElement.Q<VisualElement>("ContainerExplore");
+        containerCombat = document.rootVisualElement.Q<VisualElement>("ContainerCombat");
+        containerCombat.RemoveFromClassList("active");
+        containerExplore.AddToClassList("active");
 
         heroPanels = new CombatHeroPanel[3];
         for (int i = 0; i < heroPanels.Length; i++)
@@ -64,6 +87,11 @@ public class GameplayUserInterface : MonoBehaviour
         allyUltPanel1.BindToContainer(allyUltPanelVEs[0]); // unsafe access
         allyUltPanel2 = new CombatAllyUltPanel();
         allyUltPanel2.BindToContainer(allyUltPanelVEs[1]); // unsafe access
+
+        missionUpdatePanel = root.Q<VisualElement>("MissionUpdatePanel");
+        missionUpdatePanel.style.visibility = Visibility.Hidden;
+
+        panelItemCollect.LinkToUI(root.Q<VisualElement>("PanelItemCollect"), VTAItemCollectElement);
     }
 
     private void Update()
@@ -96,8 +124,48 @@ public class GameplayUserInterface : MonoBehaviour
 
         allyUltPanel1.ExternalUpdate();
         allyUltPanel2.ExternalUpdate();
+        panelItemCollect.ExternalUpdate();
+        UpdateMissionPanel();
     }
 
+    private void UpdateMissionPanel()
+    {
+        if (!checkMissionUpdate) return;
+
+        if (timerRemainingMissionDisplay > 0f)
+        {
+            timerRemainingMissionDisplay -= Time.deltaTime;
+
+            if (timerRemainingMissionDisplay <= 0f)
+                HideMissionPanel();
+
+            return;
+        }
+
+        if (timerBetweenMissionDisplay > 0f)
+        {
+            timerBetweenMissionDisplay -= Time.deltaTime;
+            return;
+        }
+
+        if (queuedMissionUpdates.Count > 0)
+            ShowNextMission();
+    }
+
+    private void ShowNextMission()
+    {
+        missionUpdatePanel.dataSource = queuedMissionUpdates[0];
+        queuedMissionUpdates.RemoveAt(0);
+        missionUpdatePanel.style.visibility = Visibility.Visible;
+        timerRemainingMissionDisplay = 3f;
+    }
+
+    private void HideMissionPanel()
+    {
+        missionUpdatePanel.dataSource = null;
+        missionUpdatePanel.style.visibility = Visibility.Hidden;
+        timerBetweenMissionDisplay = 0.33f;
+    }
 
 
     public void OnHeroLoad(CombatData heroData, int partyIndex)
@@ -155,5 +223,38 @@ public class GameplayUserInterface : MonoBehaviour
     public void UpdateInteractionPanel(Interactable interactable)
     {
         interactionPanel.UpdateVisualElements(interactable);
+    }
+
+
+    public void OnCombatStart()
+    {
+        containerExplore.RemoveFromClassList("active");
+        containerCombat.AddToClassList("active");
+        //checkMissionUpdate = false;
+    }
+
+    public void OnCombatEnd()
+    {
+        containerCombat.RemoveFromClassList("active");
+        containerExplore.AddToClassList("active");
+        //checkMissionUpdate = true;
+    }
+
+
+    public void QueueMissionUpdate(Mission mission)
+    {
+        if (mission == null) return;
+
+        var newUpdate = new MissionDisplayData
+        {
+            Name = mission.GetMissionName(),
+            UpdateText = mission.GetMissionUpdateInfo()
+        };
+        queuedMissionUpdates.Add(newUpdate);
+    }
+
+    public void OnItemRecieve(ItemManager.Item item, int amountRecieved)
+    {
+        panelItemCollect.QueueNewItem(item, amountRecieved);
     }
 }

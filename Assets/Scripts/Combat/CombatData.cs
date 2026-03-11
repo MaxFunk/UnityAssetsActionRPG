@@ -35,44 +35,32 @@ public class CombatData : MonoBehaviour
     public float physicalDefense = 0f;
     public float etherDefense = 0f;
 
-    [Header("Auto Attack Parameter")]
-    public float autoAttackRange = 3f;
-    public float autoAttackWaitTime = 2f;
-
-    [Header("Enemy Data")]
-    public List<int> artIds = new();
-    public List<ItemRecieveData> itemDrops = new(); // id, amount, chance percentage 0-100 // TODO: replace with actual data object?
-    public float MaxDistanceToHero = 10f;
-
     [Header("Other Data")]
     public float MaxTargetRange = 10f;
     public float timeModifierArtUse = 2.0f; // e.g. 2.0 times art cooldown
+    public bool TryCastingUlt = false;
     public UnityEvent EventModifiersChanged;
-
 
     CharacterData refCharacterData = null;
     EnemyCharacterController enemyCharacterController = null;
     HeroCharacterController heroCharacterController = null;
-    AutoAttackCast PrefabAutoAttackCast = null;
-
     CombatManager combatManager = null;
-    public CombatData curTarget = null;
+    CombatData curTarget = null;
 
-    ArtCastBase curArtCast = null;
-    ActionState actionState = ActionState.Idle;
+    private readonly CombatAutoAttack autoAttack = new();
+    private readonly List<CombatArt> arts = new();
+    public List<CombatModifier> combatModifiers = new();
+    private ArtCastBase curArtCast = null;
+    private ActionState actionState = ActionState.Idle;
 
-    private List<CombatArt> arts = new();
-    private List<CombatModifier> combatModifiers = new();
     private int artCancelStacks = 0;
-    public int[] aggro = new int[0];
+    public float[] aggro = new float[0];
 
     private bool isDefeated = false;
     private bool queryForDeletion = false;
-    public bool canCancelArt = false;
-    public bool tryCastingUlt = false;
+    private bool canCancelArt = false;
 
     private float remainingCancelTime = 0f;
-    private float remainingAutoAttackCD = 0f;
     private float aggroUpdateTime = 0f;
     private float timerActionsBlocked = 0f;
 
@@ -83,18 +71,9 @@ public class CombatData : MonoBehaviour
     void Awake()
     {
         EventModifiersChanged = new UnityEvent();
+        combatManager = CombatManager.Instance;
 
-        if (isHero == false)
-        {
-            enemyCharacterController = GetComponent<EnemyCharacterController>();
-            foreach (var artId in artIds)
-            {
-                var newArt = new CombatArt();
-                newArt.LoadData(this, artId, 0);
-                arts.Add(newArt);
-            }
-        }
-        else
+        if (isHero)
         {
             heroCharacterController = GetComponent<HeroCharacterController>();
 
@@ -102,11 +81,17 @@ public class CombatData : MonoBehaviour
             for (int i = 0; i < 6; i++)
                 arts.Add(new CombatArt());
         }
-
-        PrefabAutoAttackCast = ScriptableManager.instance.artsPreload.PrefabAutoAttackCast;
-        // if still null, do failsafe creation of cast with component?
-
-        combatManager = CombatManager.Instance;
+        else
+        {
+            enemyCharacterController = GetComponent<EnemyCharacterController>();
+            autoAttack.InitializeData(this, enemyCharacterController.autoAttackData);
+            foreach (var artId in enemyCharacterController.artIds)
+            {
+                var newArt = new CombatArt();
+                newArt.LoadData(this, artId, 0);
+                arts.Add(newArt);
+            }
+        }
     }
 
 
@@ -125,9 +110,6 @@ public class CombatData : MonoBehaviour
 
         if (timerActionsBlocked > 0f)
             timerActionsBlocked -= Time.deltaTime;
-
-        if (remainingAutoAttackCD > 0f)
-            remainingAutoAttackCD -= Time.deltaTime;
 
         if (remainingCancelTime > 0f)
         {
@@ -160,9 +142,11 @@ public class CombatData : MonoBehaviour
 
         if (actionState != ActionState.Defeated) // no updates of Arts, etc. when defeated!
         {
+            autoAttack?.ExternalUpdate();
+
             foreach (var art in arts)
             {
-                art?.Update();
+                art?.ExternalUpdate();
             }
         }
     }
@@ -178,6 +162,7 @@ public class CombatData : MonoBehaviour
         charName = chd.staticData.characterName;
         level = chd.level;
         exp = chd.totalExp;
+        autoAttack.InitializeData(this, chd.staticData.autoAttackData);
 
         var accumStats = chd.statsAccumulated;
         maxHealth = accumStats.health;
@@ -256,14 +241,12 @@ public class CombatData : MonoBehaviour
     }
 
 
-    public void PerformAutoAttack()
+    public void StartAutoAttack()
     {
         if (isInCombat == false)
             combatManager.CombatantJoin(this);
 
-        AutoAttackCast newAutoAttack = Instantiate(PrefabAutoAttackCast, transform.position, transform.rotation);
-        newAutoAttack.OnCast(this, curTarget);
-
+        autoAttack.BeginAutoAttack(curTarget);
         artCancelStacks = 0;
         canCancelArt = false;
         remainingCancelTime = 0;
@@ -313,13 +296,7 @@ public class CombatData : MonoBehaviour
 
         curHealth = Math.Max(curHealth - value, 0);
         if (curHealth <= 0)
-        {
             OnDefeat();
-            return;
-        }
-
-        int aggroIncrease = damageFromAutoAttack ? 1 : 3;
-        ChangeAggro(attacker, aggroIncrease);
     }
 
     public void RecieveHealing(int value)
@@ -336,40 +313,35 @@ public class CombatData : MonoBehaviour
     public CombatData EvaluateAggroToHeros()
     {
         CombatData highestAggroHero = null;
-
         foreach (var hero in combatManager.heroCombatants)
         {
-            if (hero != null && hero.isDefeated == false && hero.isActiveAndEnabled) 
+            if (hero != null && !hero.IsDefeated() && hero.isActiveAndEnabled) 
             {
                 int charId = hero.characterId;
-
                 if (charId < 0 || charId >= aggro.Length) continue;
 
-                if (Vector3.Distance(hero.transform.position, transform.position) > MaxDistanceToHero)
-                {
+                if (Vector3.Distance(hero.transform.position, transform.position) > MaxTargetRange)
                     aggro[charId] = -1;
-                }
 
                 if (aggro[charId] >= 0 && (highestAggroHero == null || aggro[charId] >= aggro[highestAggroHero.characterId]))
                     highestAggroHero = hero;
             }
         }
-
         return highestAggroHero;
     }
 
-    public void ChangeAggro(CombatData aggressor, int value, bool forceOverwrite = false)
+    public void ChangeAggro(int characterId, float value, bool forceOverwrite = false)
     {
-        if (aggressor.characterId < 0 || aggressor.characterId >= aggro.Length || isHero)
+        if (characterId < 0 || characterId >= aggro.Length || isHero)
             return;
 
         if (forceOverwrite)
         {
-            aggro[aggressor.characterId] = value;
+            aggro[characterId] = value;
             return;
         }           
 
-        aggro[aggressor.characterId] = Mathf.Clamp(aggro[aggressor.characterId] + value, 0, 9999);
+        aggro[characterId] = Mathf.Clamp(aggro[characterId] + value, 0f, 99999f);
     }
 
     public void RecieveUltPoints(int value)
@@ -457,7 +429,7 @@ public class CombatData : MonoBehaviour
         else
         {
             GameManager.Instance.MissionManager.EnemyWasDefeated(characterId);
-            foreach (var dropData in itemDrops)
+            foreach (var dropData in enemyCharacterController.itemDrops)
                 GameManager.Instance.SpawnItemDrop(dropData, gameObject.transform.position);
 
             queryForDeletion = !isHero;
@@ -472,8 +444,8 @@ public class CombatData : MonoBehaviour
 
         if (isHero)
             RecieveExp(combatant.exp);
-        else
-            ChangeAggro(combatant, 0, true);
+        else if (combatant.isHero)
+            ChangeAggro(combatant.characterId, 0, true);
 
         var newTarget = combatManager.GiveNewTarget(this);
         SetNewTarget(newTarget);
@@ -487,11 +459,12 @@ public class CombatData : MonoBehaviour
     public void OnCombatJoin()
     {
         isInCombat = true;
+        autoAttack.Disabled = false;
 
         if (isHero) 
         {
             heroCharacterController.OnCombatJoin();
-            aggro = new int[0];
+            aggro = new float[0];
 
             // load gear effects, e.g. Modifier
             var itemPreload = ScriptableManager.instance.itemPreload;
@@ -515,6 +488,7 @@ public class CombatData : MonoBehaviour
         Debug.Log($"Combat End for {charName}");
         
         isInCombat = false;
+        autoAttack.Disabled = true;
         SetNewTarget(null);
         actionState = ActionState.Idle;
         artCancelStacks = 0;
@@ -565,8 +539,7 @@ public class CombatData : MonoBehaviour
     {
         if (actionState != ActionState.Idle || curTarget == null || timerActionsBlocked > 0f) return false;
 
-        bool isInDistance = Vector3.Distance(transform.position, curTarget.transform.position) <= autoAttackRange;
-        return isInDistance && remainingAutoAttackCD <= 0f;
+        return autoAttack.CanAutoAttack(Vector3.Distance(transform.position, curTarget.transform.position));
     }
 
     public bool CanPerformArtCast()
@@ -613,6 +586,17 @@ public class CombatData : MonoBehaviour
         return null;
     }
 
+    public float GetMoveSpeedFactor()
+    {
+        float moveFactor = 1f;
+        foreach (var modifier in combatModifiers)
+        {
+            if (modifier.modifierData.modifierType == CombatModifierData.ModifierType.MoveSpeedChange)
+                moveFactor += modifier.value;
+        }
+        return moveFactor;
+    }
+
 
     public void RecieveExp(int expAmount)
     {
@@ -647,17 +631,20 @@ public class CombatData : MonoBehaviour
         return curArtCast.artData;
     }    
 
-    public void OnAutoAttackCastEnd()
+    public float GetAutoAttackRange()
     {
-        remainingAutoAttackCD = autoAttackWaitTime;
+        return autoAttack?.GetAutoAttackRange() ?? 0f;
+    }
 
+    public void OnAutoAttackEnd()
+    {
         if (curArtCast == null)
             actionState = ActionState.Idle;
     }
 
     public void OnArtCastDurationEnd(ArtCastBase artCast)
     {
-        remainingAutoAttackCD = Mathf.Max(remainingAutoAttackCD, 0.25f);
+        autoAttack.AddCooldown(0.5f);
 
         if (curArtCast == artCast)
         {

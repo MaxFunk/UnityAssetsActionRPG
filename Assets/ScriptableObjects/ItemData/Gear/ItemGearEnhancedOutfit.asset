@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6135634459973ba4695a2f9f78c9db50, type: 3}
   m_Name: ItemGearEnhancedOutfit
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: Enhanced Outfit
+  description: +100 Health
+  shortDescription: Boost Health by 100
   sellValue: 0
   buyValue: 0
-  itemName: Enhanced Outfit
-  description: 
-  shortDescription: Boost Health by 100
   type: 3
   rarity: 0
   icon: {fileID: 2800000, guid: 6962ffb59bbbe3e4cbb37ecac0b74df2, type: 3}

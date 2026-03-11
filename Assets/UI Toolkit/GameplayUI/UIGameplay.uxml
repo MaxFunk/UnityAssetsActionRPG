@@ -1,0 +1,43 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ArtNumberContainerVisualTree" src="project://database/Assets/UI%20Toolkit/GameplayUI/ArtNumberContainerVisualTree.uxml?fileID=9197481963319205126&amp;guid=83b2392aeebbdf3458a347ba9af631a9&amp;type=3#ArtNumberContainerVisualTree"/>
+    <ui:Template name="ArtPanelVisualTree" src="project://database/Assets/UI%20Toolkit/GameplayUI/ArtPanelVisualTree.uxml?fileID=9197481963319205126&amp;guid=47536799ced9c4044b675c4398d50534&amp;type=3#ArtPanelVisualTree"/>
+    <ui:Template name="HeroPanelVisualTree" src="project://database/Assets/UI%20Toolkit/GameplayUI/HeroPanelVisualTree.uxml?fileID=9197481963319205126&amp;guid=053aa1a8f643e21408d6e9a2370a6206&amp;type=3#HeroPanelVisualTree"/>
+    <ui:Template name="InteractionPanelVisualTree" src="project://database/Assets/UI%20Toolkit/GameplayUI/InteractionPanelVisualTree.uxml?fileID=9197481963319205126&amp;guid=14c78cd71e94dd645bd97f2648209922&amp;type=3#InteractionPanelVisualTree"/>
+    <ui:Template name="TargetPanelVisualTree" src="project://database/Assets/UI%20Toolkit/GameplayUI/TargetPanelVisualTree.uxml?fileID=9197481963319205126&amp;guid=df8a1d9aede3cac42a15f3b71518b77b&amp;type=3#TargetPanelVisualTree"/>
+    <ui:Template name="UIItemCollectList" src="project://database/Assets/UI%20Toolkit/GameplayUI/UIItemCollectList.uxml?fileID=9197481963319205126&amp;guid=5c7a0b0b4de294249a36dfad77b5a8de&amp;type=3#UIItemCollectList"/>
+    <ui:Template name="VtAllyUltPanel" src="project://database/Assets/UI%20Toolkit/GameplayUI/VtAllyUltPanel.uxml?fileID=9197481963319205126&amp;guid=be8334006c83e534480f19f8e51046b7&amp;type=3#VtAllyUltPanel"/>
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/CombatUIStyle.uss?fileID=7433441132597879392&amp;guid=4bfa582d5cc299c429b1153efde69985&amp;type=3#CombatUIStyle"/>
+    <ui:VisualElement name="RootContainer" data-source-type="GameplayUserInterface, Assembly-CSharp" style="flex-grow: 1;">
+        <ui:VisualElement name="ContainerAlways" class="top-level-container active">
+            <ui:Instance template="ArtPanelVisualTree" name="ArtsPanel" style="position: absolute; width: 600px; height: 200px; bottom: 10px; right: 10px;"/>
+            <ui:Instance template="HeroPanelVisualTree" name="HeroPanel1" style="position: absolute; top: 0; left: 0%; width: 500px; height: 100px;"/>
+            <ui:Instance template="HeroPanelVisualTree" name="HeroPanel2" style="position: absolute; top: 100px; left: 0%; width: 500px; height: 100px;"/>
+            <ui:Instance template="HeroPanelVisualTree" name="HeroPanel3" style="position: absolute; top: 200px; left: 0%; width: 500px; height: 100px;"/>
+            <ui:Instance template="TargetPanelVisualTree" name="EnemyPanel" style="position: absolute; width: 800px; height: 180px; left: 610px; top: 20px;"/>
+            <ui:Instance template="UIItemCollectList" name="PanelItemCollect" style="position: absolute; top: 60%;"/>
+            <ui:VisualElement name="MissionUpdatePanel" data-source-type="GameplayUserInterface+MissionDisplayData, Assembly-CSharp" style="position: absolute; width: 800px; height: 100px; background-color: rgba(0, 0, 0, 0.5); top: 250px; left: 610px;">
+                <ui:Label text="New Mission" name="LabelMissionUpdate" style="height: 40%; color: rgb(255, 255, 255); -unity-text-align: middle-center; -unity-font-style: italic; font-size: 28px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="UpdateText" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="Mission Name" name="LabelMissionName" style="height: 50%; -unity-text-align: upper-center; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 30px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="Name" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="ContainerExplore" class="top-level-container active" style="flex-grow: 1;">
+            <ui:Instance template="InteractionPanelVisualTree" name="InteractionUI" style="position: absolute; left: 910px; top: 600px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="ContainerCombat" class="top-level-container active" style="flex-grow: 1;">
+            <ui:Instance template="VtAllyUltPanel" name="AllyUltPanel" style="width: 400px; height: 75px; position: absolute; bottom: 20px; left: 20px;"/>
+            <ui:Instance template="VtAllyUltPanel" name="AllyUltPanel" style="width: 400px; height: 75px; position: absolute; bottom: 20px; left: 440px;"/>
+            <ui:VisualElement name="CancelRingContainer" style="position: absolute; width: 10%; height: 10%; left: 45%; top: 55%; align-items: center;">
+                <ui:VisualElement style="flex-grow: 1; border-left-color: rgb(0, 156, 255); border-right-color: rgb(0, 156, 255); border-top-color: rgb(0, 156, 255); border-bottom-color: rgb(0, 156, 255); border-top-width: 16px; border-right-width: 16px; border-bottom-width: 16px; border-left-width: 16px; border-top-left-radius: 200px; border-top-right-radius: 200px; border-bottom-right-radius: 200px; border-bottom-left-radius: 200px; width: 56.25%; background-color: rgba(0, 156, 255, 0.35);"/>
+            </ui:VisualElement>
+            <ui:Instance template="ArtNumberContainerVisualTree" name="ArtNumberContainer" style="position: absolute; width: 100%; height: 100%;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

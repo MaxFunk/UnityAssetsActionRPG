@@ -15,7 +15,8 @@ MonoBehaviour:
   artName: Body Charge
   castType: 0
   category: 2
-  descriptionLong: Gain 30% additional Crit Chance for all Attacks and Arts
+  descriptionLong: Gain 30% additional Crit Chance for all Attacks and Arts for 10
+    seconds.
   descriptionShort: Crit Change Up
   isUlt: 0
   isSelfCast: 1
@@ -24,7 +25,13 @@ MonoBehaviour:
   castDuration: 1
   cancelAfter: 0.5
   cancelWindow: 0.5
-  basePower: 0000000000000000000000000000000000000000
+  baseAccuracy: 0.98
+  basePower:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   artCooldown:
   - 15
   - 14

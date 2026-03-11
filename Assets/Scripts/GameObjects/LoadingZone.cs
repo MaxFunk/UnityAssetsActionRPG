@@ -1,22 +1,19 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SceneLoader), typeof(PlayerChecker))]
+[RequireComponent(typeof(SceneLoader))]
 public class LoadingZone : MonoBehaviour
 {
     private SceneLoader loader;
-    private PlayerChecker checker;
-
 
     void Awake()
     {
         loader = GetComponent<SceneLoader>();
-        checker = GetComponent<PlayerChecker>();
     }
 
-    
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (checker.checkActive && checker.CheckForPlayerCharacer())
+        var colliderPlayer = other.GetComponent<HeroCharacterController>();
+        if (colliderPlayer != null && colliderPlayer.IsPlayerControlled)
         {
             loader.LoadScene();
         }

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20d72d2f9bb55b4ba300f2ec3e0f054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatUserInterface
+  VTAItemCollectElement: {fileID: 9197481963319205126, guid: 523ec3b6cb4840849b7e8507d7fb6c6c, type: 3}
 --- !u!114 &9160253616537698468
 MonoBehaviour:
   m_ObjectHideFlags: 0

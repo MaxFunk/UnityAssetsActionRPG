@@ -56,7 +56,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.4
-  m_SlopeLimit: 45
+  m_SlopeLimit: 35
   m_StepOffset: 0.1
   m_SkinWidth: 0.001
   m_MinMoveDistance: 0.001
@@ -89,20 +89,13 @@ MonoBehaviour:
   luck: 1
   physicalDefense: 0
   etherDefense: 0
-  autoAttackRange: 3
-  autoAttackWaitTime: 2
-  artIds: 
-  itemDrops: []
-  MaxDistanceToHero: 10
   MaxTargetRange: 10
   timeModifierArtUse: 2
+  TryCastingUlt: 0
   EventModifiersChanged:
     m_PersistentCalls:
       m_Calls: []
-  curTarget: {fileID: 0}
-  aggro: 
-  canCancelArt: 0
-  tryCastingUlt: 0
+  aggro: []
 --- !u!114 &7982521906652891034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,16 +125,18 @@ MonoBehaviour:
   RotationSpeed: 10
   JumpStrength: 4.2
   Gravity: -9.81
+  SlideSpeed: 50
   MaxTargetRange: 10
   MaxDistanceToPlayer: 2
-  MaxDistanceToTarget: 3
   PathUpdateAfter: 0.25
   DistanceTeleport: 50
   IsPlayerControlled: 0
   partyIndex: -1
   characterState: 1
-  isJumping: 1
-  DebugIsOnOffMeshLink: 0
+  characterVelocity: {x: 0, y: 0, z: 0}
+  groundNormal: {x: 0, y: 1, z: 0}
+  isGrounded: 0
+  DebugCanMove: 0
 --- !u!195 &3089854359872365977
 NavMeshAgent:
   m_ObjectHideFlags: 0

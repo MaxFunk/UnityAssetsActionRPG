@@ -40,7 +40,7 @@ public class ArtEffect
     {
         foreach (var enemy in combatManager.enemyCombatants)
         {
-            enemy.ChangeAggro(caster, Mathf.RoundToInt(value));
+            enemy.ChangeAggro(caster.characterId, value);
         }
     }
 

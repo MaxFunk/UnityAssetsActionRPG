@@ -18,11 +18,19 @@ MonoBehaviour:
   descriptionLong: 
   descriptionShort: 
   isUlt: 0
+  isSelfCast: 0
   ultCost: 0
+  maxCastDistance: 5
   castDuration: 1
   cancelAfter: 0.5
   cancelWindow: 0.4
-  basePower: 1e0000001e0000001e0000001e0000001e000000
+  baseAccuracy: 0.98
+  basePower:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
   artCooldown:
   - 7
   - 7
@@ -31,5 +39,6 @@ MonoBehaviour:
   - 7
   hits:
   - 0.5
-  ArtCastPrefab: {fileID: 779837255045824658, guid: 927a39868849b57429c716a296fa3872, type: 3}
   ArtEffects: []
+  ArtCastPrefab: {fileID: 779837255045824658, guid: 927a39868849b57429c716a296fa3872, type: 3}
+  icon: {fileID: 0}

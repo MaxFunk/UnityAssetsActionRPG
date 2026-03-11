@@ -1,6 +1,7 @@
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class DialogUserInterface : MonoBehaviour
@@ -10,6 +11,7 @@ public class DialogUserInterface : MonoBehaviour
     InputHandler inputHandler;
     DialogData dialogData;
     VisualElement promptContainer;
+    NPCController npc;
 
     [Header("Params")]
     public float BlockInputTime = 0.25f;
@@ -29,6 +31,8 @@ public class DialogUserInterface : MonoBehaviour
     private float timerBlockInput = 0f;
     private bool isWritingText = false;
     private float lettersVisible = 0f;
+
+    public UnityEvent[] DialogEvents = new UnityEvent[0];
 
 
     private void Update()
@@ -55,6 +59,7 @@ public class DialogUserInterface : MonoBehaviour
                     OnFinishedWriting();
                 else
                 {
+                    CheckUnconditionalEvent();
                     if (stepData.hasPrompt)
                         EvalPromptAction();
                     else
@@ -74,7 +79,7 @@ public class DialogUserInterface : MonoBehaviour
     }
 
 
-    public void DialogBegin(TalkableNPC npc)
+    public void DialogBegin(NPCController npc)
     {
         if (npc.DialogData == null || npc.DialogData.dialogSteps.Length < 1)
         {
@@ -86,7 +91,9 @@ public class DialogUserInterface : MonoBehaviour
         document.rootVisualElement.Q<VisualElement>("ContainerMain").dataSource = this;
         PreparePromptElements();
 
+        this.npc = npc;
         dialogData = npc.DialogData;
+        DialogEvents = npc.DialogEvents;
         inputHandler = InputHandler.instance;
         UserInterfaceManager.instance.GameplayUI.SetVisibility(false);
 
@@ -109,7 +116,8 @@ public class DialogUserInterface : MonoBehaviour
 
     public void DialogEnd() 
     {
-        UserInterfaceManager.instance.GameplayUI.SetVisibility(true);
+        if (npc != null)
+            npc.OnEndTalking();
 
         var heroChars = FindObjectsByType<HeroCharacterController>(FindObjectsSortMode.None);
         foreach (var character in heroChars)
@@ -118,6 +126,7 @@ public class DialogUserInterface : MonoBehaviour
                 character.OnDialogEnd();
         }
 
+        UserInterfaceManager.instance.GameplayUI.SetVisibility(true);
         UserInterfaceManager.instance.DestroyDialogUI();
     }
 
@@ -213,7 +222,8 @@ public class DialogUserInterface : MonoBehaviour
                 DialogEnd();
                 break;
             case DialogStepData.PromptAction.Event:
-                Debug.Log("TODO: WRITE EVENT LOGIC?"); // move out of here and instead check a object if its not null and excute it?
+                CheckPromptEvent(promptData.valueInt);
+                LoadStep(step + 1);
                 break;
             default:
                 DialogEnd();
@@ -226,6 +236,23 @@ public class DialogUserInterface : MonoBehaviour
         isWritingText = false;
         dialogText = stepData.dialogText;
         displayPromptContainer = stepData.hasPrompt ? DisplayStyle.Flex : DisplayStyle.None;
-        displayIconContinue = step == dialogData.dialogSteps.Length - 1 ? DisplayStyle.None : DisplayStyle.Flex;
+
+        var continueCondition = step < dialogData.dialogSteps.Length - 1 && !stepData.isEnd;
+        displayIconContinue = continueCondition ? DisplayStyle.Flex : DisplayStyle.None;
+    }
+
+    private void CheckUnconditionalEvent()
+    {
+        var eventIndex = stepData.unconditionalEventIndex;
+        if (eventIndex < 0 || eventIndex >= DialogEvents.Length) return;
+
+        DialogEvents[eventIndex]?.Invoke();
+    }
+
+    private void CheckPromptEvent(int eventIndex)
+    {
+        if (eventIndex < 0 || eventIndex >= DialogEvents.Length) return;
+
+        DialogEvents[eventIndex]?.Invoke();
     }
 }

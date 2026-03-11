@@ -6,16 +6,7 @@ public class PlayerChecker : MonoBehaviour
     public Vector3 CenterOffset = Vector3.zero;
     public bool checkActive = true;
     public bool disableAfterSuccess = true;
-
-    void Awake()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public bool allowInCombat = false;
 
     public bool CheckForPlayerCharacer()
     {
@@ -25,8 +16,12 @@ public class PlayerChecker : MonoBehaviour
             var colliderPlayer = collider.GetComponent<HeroCharacterController>();
             if (colliderPlayer != null && colliderPlayer.IsPlayerControlled)
             {
-                checkActive = !disableAfterSuccess;
-                return true;
+                var comData = colliderPlayer.GetCombatData();
+                if ((comData.isInCombat && allowInCombat) || (!comData.isInCombat && !allowInCombat))
+                {
+                    checkActive = !disableAfterSuccess;
+                    return true;
+                }
             }
         }
 
