@@ -73,8 +73,8 @@ MonoBehaviour:
   exp: 10
   maxHealth: 2500
   curHealth: 2500
-  attack: 4
-  ether: 3
+  attack: 2
+  ether: 2
   agility: 3
   luck: 1
   physicalDefense: 0.1
