@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: ItemGearEnhancedAugment
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Enhanced Augment
-  description: Shortens Interval between Auto Attack by 50%
-  shortDescription: Increased Auto Attack Speed
-  sellValue: 0
-  buyValue: 0
+  description: Increases the Movement Speed by 25% when worn
+  shortDescription: +25% MoveSpeed
+  sellValue: 250
+  buyValue: 500
   type: 3
-  rarity: 0
+  rarity: 1
   icon: {fileID: 2800000, guid: 6962ffb59bbbe3e4cbb37ecac0b74df2, type: 3}
   consumeEffect: {fileID: 0}
   gearData:
     type: 3
     effect: 3
     effectIndex: 0
-    effectValue: -0.5
-    combatModifier: {fileID: 11400000, guid: 40dc677e2bb573d47851f6d00201e795, type: 2}
+    effectValue: 0.25
+    combatModifier: {fileID: 11400000, guid: c1bb72a8083d19549869feba7c305504, type: 2}

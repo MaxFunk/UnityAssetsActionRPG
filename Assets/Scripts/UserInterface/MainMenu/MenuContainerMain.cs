@@ -1,27 +1,28 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 public class MenuContainerMain : MenuContainer
 {
-    string containerName = "MainView";
     int index = 0;
+    List<Label> listLabels = new();
 
     public override void PrepareView(VisualElement rootElement)
     {
-        containerObj = rootElement != null ? rootElement.Q<VisualElement>(containerName) : containerObj;
+        containerObj = rootElement != null ? rootElement.Q<VisualElement>("MainView") : containerObj;
         if (containerObj == null) { return; }
-        var listLabels = containerObj.Query<Label>().ToList();
+        listLabels = containerObj.Query<Label>().ToList();
 
         for (int i = 0; i < listLabels.Count; i++)
         {
-            VisualElementCallData callData = new();
-            callData.value = i;
-            listLabels[i].dataSource = callData;
-            listLabels[i].RegisterCallback<ClickEvent>(OnMainViewLabelClick);
-            listLabels[i].RegisterCallback<MouseOverEvent>(OnMainViewLabelMouseOver);
+            listLabels[i].RegisterCallback<ClickEvent, int>(OnMainViewLabelClick, i);
+            listLabels[i].RegisterCallback<MouseOverEvent, int>(OnMainViewLabelMouseOver, i);
         }
 
-        listLabels[index].Focus();
+        foreach (var label in listLabels)
+            label.RemoveFromClassList("label-button-hovered");
+        index = 0;
+        listLabels[index].AddToClassList("label-button-hovered");
     }
 
     public override void ConfirmEvent()
@@ -32,22 +33,19 @@ public class MenuContainerMain : MenuContainer
                 mainMenuEvents.ChangeMenuState(MainMenuEvents.MenuState.Characters);
                 break;
             case 1:
-                Debug.Log("TODO PARTY");
-                break;
-            case 2:
                 mainMenuEvents.ChangeMenuState(MainMenuEvents.MenuState.Items);
                 break;
-            case 3:
+            case 2:
                 mainMenuEvents.ChangeMenuState(MainMenuEvents.MenuState.Missions);
                 break;
-            case 4:
-                Debug.Log("TODO MAP");
-                break;
-            case 5:
+            case 3:
                 GameManager.Instance.SaveSystem.WriteToFile();
                 break;
-            case 6:
+            case 4:
                 mainMenuEvents.ReturnToStartscreen();
+                break;
+            case 5:
+                mainMenuEvents.CloseMenu();
                 break;
             default:
                 return;
@@ -66,22 +64,24 @@ public class MenuContainerMain : MenuContainer
 
     public override void DirectionalEvent(Vector2 navInput)
     {
-
+        index = Mathf.Clamp(index - Mathf.RoundToInt(navInput.y), 0, listLabels.Count - 1);
+        foreach (var label in listLabels)
+            label.RemoveFromClassList("label-button-hovered");
+        listLabels[index].AddToClassList("label-button-hovered");
     }
 
 
-    private void OnMainViewLabelClick(ClickEvent evt)
+    private void OnMainViewLabelClick(ClickEvent evt, int index)
     {
-        var dataSource = (evt.currentTarget as VisualElement).dataSource as VisualElementCallData;
-        index = dataSource.value;
+        this.index = index;
         ConfirmEvent();
     }
 
-    private void OnMainViewLabelMouseOver(MouseOverEvent evt)
+    private void OnMainViewLabelMouseOver(MouseOverEvent evt, int index)
     {
-        var dataSource = (evt.currentTarget as VisualElement).dataSource as VisualElementCallData;
-        var listLabels = containerObj.Query<Label>().ToList();
-        index = dataSource.value;
-        listLabels[index].Focus();
+        this.index = index;
+        foreach (var label in listLabels)
+            label.RemoveFromClassList("label-button-hovered");
+        listLabels[index].AddToClassList("label-button-hovered");
     }
 }

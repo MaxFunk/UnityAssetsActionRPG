@@ -13,7 +13,9 @@ public class InputHandler : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction lookAction;
+    private InputAction lookControllerAction;
     private InputAction jumpAction;
+    private InputAction sprintToggleAction;
     private InputAction drawWeaponAction;
     private InputAction sheatheWeaponAction;
     private InputAction interactAction;
@@ -49,7 +51,9 @@ public class InputHandler : MonoBehaviour
 
         FindAndEnableAction(ref moveAction, "Gameplay/Move");
         FindAndEnableAction(ref lookAction, "Gameplay/Look");
+        FindAndEnableAction(ref lookControllerAction, "Gameplay/LookController");
         FindAndEnableAction(ref jumpAction, "Gameplay/Jump");
+        FindAndEnableAction(ref sprintToggleAction, "Gameplay/SprintToggle");
         FindAndEnableAction(ref drawWeaponAction, "Gameplay/DrawWeapon");
         FindAndEnableAction(ref sheatheWeaponAction, "Gameplay/SheatheWeapon");
         FindAndEnableAction(ref interactAction, "Gameplay/Interact");
@@ -95,10 +99,8 @@ public class InputHandler : MonoBehaviour
         if (inputBlocked || inputMenuOnly) return 0f;
 
         float input = lookAction.ReadValue<Vector2>().x;
-        //if (InvertXAxis)
-        //    input *= -1;
-        //input *= LookSensitivity;
-        return input;
+        float inputController = lookControllerAction.ReadValue<Vector2>().x;
+        return input + inputController * 12.5f;
     }
 
     public float GetLookInputsVertical()
@@ -106,16 +108,20 @@ public class InputHandler : MonoBehaviour
         if (inputBlocked || inputMenuOnly) return 0f;
 
         float input = lookAction.ReadValue<Vector2>().y;
-        //if (InvertYAxis)
-        //    input *= -1;
-        //input *= LookSensitivity;
-        return input;
+        float inputController = lookControllerAction.ReadValue<Vector2>().y;
+        return input + inputController * 12.5f;
     }
 
     public bool GetJumpInputDown()
     {
         if (inputBlocked || inputMenuOnly) return false;
         return jumpAction.WasPressedThisFrame();
+    }
+
+    public bool GetSprintToggleInputDown()
+    {
+        if (inputBlocked || inputMenuOnly) return false;
+        return sprintToggleAction.WasPressedThisFrame();
     }
 
     public bool GetDrawWeaponInputDown()

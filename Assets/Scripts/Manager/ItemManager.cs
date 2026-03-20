@@ -46,11 +46,11 @@ public class ItemManager
     public void LoadItems(ItemSaveData itemSaveData)
     {
         itemPreload = ScriptableManager.instance.itemPreload;
-        itemsMaterial = CreateItemList(ref itemPreload.itemsMaterial, ref itemSaveData.itemsMaterial);
-        itemsConsumable = CreateItemList(ref itemPreload.itemsConsumable, ref itemSaveData.itemsConsumable);
-        itemsIngredient = CreateItemList(ref itemPreload.itemsIngredient, ref itemSaveData.itemsIngredient);
-        itemsGear = CreateItemList(ref itemPreload.itemsGear, ref itemSaveData.itemsGear);
-        itemsKeyitem = CreateItemList(ref itemPreload.itemsKeyitem, ref itemSaveData.itemsKeyitem);
+        itemsMaterial = CreateItemList(ref itemPreload.itemsMaterial, itemSaveData.itemsMaterial);
+        itemsConsumable = CreateItemList(ref itemPreload.itemsConsumable, itemSaveData.itemsConsumable);
+        itemsIngredient = CreateItemList(ref itemPreload.itemsIngredient, itemSaveData.itemsIngredient);
+        itemsGear = CreateItemList(ref itemPreload.itemsGear, itemSaveData.itemsGear);
+        itemsKeyitem = CreateItemList(ref itemPreload.itemsKeyitem, itemSaveData.itemsKeyitem);
     }
 
     public void RecieveItems(ItemRecieveData recieveData)
@@ -70,21 +70,64 @@ public class ItemManager
         UserInterfaceManager.instance.GameplayUI.OnItemRecieve(item, recieveData.recieveAmount);
     }
 
-    public void ChangeItem(ItemType itemType, int id, int changeValue)
+    public int ChangeItem(ItemType itemType, int id, int changeValue)
     {
         if (id < 0)
-            return;
+            return -1;
 
         var itemList = GetItemList(itemType);
         if (itemList == itemsFallback || id >= itemList.Count)
-            return;
+            return -1;
 
         var item = itemList[id];
         item.amount = Mathf.Clamp(item.amount + changeValue, 0, 999);
         itemList[id] = item;
+        return item.amount;
     }
 
-    public int GetItemAmount(int itemId)
+    public int FindAndChangeItem(ItemData itemData, int changeValue)
+    {
+        var id = ScriptableManager.instance.itemPreload.FindItemId(itemData);
+        var res = ChangeItem(itemData.type, id, changeValue);
+
+        // very bad, but works right now (..)
+        var recieveData = new ItemRecieveData()
+        {
+            id = id,
+            type = itemData.type
+        };
+        GameManager.Instance.MissionManager.ItemCollected(recieveData.GetFullId(), changeValue);
+
+        return res;
+    }
+
+    public int GetItemAmount(ItemType itemType, int itemId)
+    {
+        if (itemId < 0)
+            return 0;
+
+        var itemList = GetItemList(itemType);
+        if (itemList == itemsFallback || itemId >= itemList.Count)
+            return 0;
+
+        return itemList[itemId].amount;
+    }
+
+    public int FindAndGetItemAmount(ItemData itemData)
+    {
+        var id = ScriptableManager.instance.itemPreload.FindItemId(itemData);
+
+        if (id < 0)
+            return 0;
+
+        var itemList = GetItemList(itemData.type);
+        if (itemList == itemsFallback || id >= itemList.Count)
+            return 0;
+
+        return itemList[id].amount;
+    }
+
+    public int GetItemAmountFullId(int itemId)
     {
         return itemId switch
         {
@@ -128,12 +171,12 @@ public class ItemManager
         return itemAmountArray;
     }
 
-    private List<Item> CreateItemList(ref ItemData[] itemDataList, ref int[] itemAmountList)
+    private List<Item> CreateItemList(ref ItemData[] itemDataList, int[] itemAmountList)
     {
         var items = new List<Item>();
         for (int i = 0; i < itemDataList.Length; i++)
         {
-            int amount = i < itemAmountList.Length ? itemAmountList[i] : 0;
+            int amount = (i < itemAmountList.Length) ? itemAmountList[i] : 0;
             items.Add(new Item(i, amount, itemDataList[i]));
         }
         return items;

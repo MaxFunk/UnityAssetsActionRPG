@@ -17,7 +17,7 @@ public class PlayerChecker : MonoBehaviour
             if (colliderPlayer != null && colliderPlayer.IsPlayerControlled)
             {
                 var comData = colliderPlayer.GetCombatData();
-                if ((comData.isInCombat && allowInCombat) || (!comData.isInCombat && !allowInCombat))
+                if ((comData.isInCombat && allowInCombat) || !comData.isInCombat)
                 {
                     checkActive = !disableAfterSuccess;
                     return true;

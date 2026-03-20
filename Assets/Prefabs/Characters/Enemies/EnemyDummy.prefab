@@ -78,16 +78,15 @@ MonoBehaviour:
   luck: 10
   physicalDefense: 0.1
   etherDefense: 0.1
-  autoAttackRange: 0.1
-  autoAttackWaitTime: 3
   MaxTargetRange: 10
   timeModifierArtUse: 100
+  musicId: 0
+  TryCastingUlt: 0
   EventModifiersChanged:
     m_PersistentCalls:
       m_Calls: []
-  aggro: 
-  canCancelArt: 0
-  tryCastingUlt: 0
+  combatModifiers: []
+  aggro: []
 --- !u!114 &1183246050752228969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +125,7 @@ MonoBehaviour:
     - 0.5
     cancelStart: 2
     cancelDuration: 0
+    damageModifier: 1
 --- !u!143 &7174070396082533303
 CharacterController:
   m_ObjectHideFlags: 0

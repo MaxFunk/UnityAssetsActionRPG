@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1183246050752228969}
   - component: {fileID: 7174070396082533303}
   - component: {fileID: 8689529303958999311}
+  - component: {fileID: -3987594299306645162}
   m_Layer: 10
   m_Name: EnemySentinelRed
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5800757795384759655}
@@ -62,14 +63,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1bbf473b3c1154f943935222b7d6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatData
-  characterId: 3
+  characterId: 5
   partyIndex: -1
   charName: Red Sentinel
   isInCombat: 0
   isHero: 0
   isPlayerControlled: 0
   level: 10
-  exp: 15
+  exp: 10
   maxHealth: 25000
   curHealth: 25000
   attack: 10
@@ -80,18 +81,13 @@ MonoBehaviour:
   etherDefense: 0.15
   MaxTargetRange: 10
   timeModifierArtUse: 2
+  musicId: 1
+  TryCastingUlt: 0
   EventModifiersChanged:
     m_PersistentCalls:
       m_Calls: []
-  autoAttack:
-    active: 0
-    timeActive: 0
-    hitsApplied: 0
-    cancelStarted: 0
-    remainingCooldown: 0
-  aggro: ffffffffffffffffffffffff
-  canCancelArt: 0
-  tryCastingUlt: 0
+  combatModifiers: []
+  aggro: []
 --- !u!114 &1183246050752228969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +186,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-3987594299306645162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602167225827227042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ab9da409f5844489e63ff668be834b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventFlagChecker
+  flagToCheck: 1
+  checkMode: 1
+  readValue: 0
+  writeValue: 1
+  checkOnAwake: 0
+  Event:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8723130735749533559
 GameObject:
   m_ObjectHideFlags: 0

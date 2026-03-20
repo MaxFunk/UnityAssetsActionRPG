@@ -14,7 +14,7 @@
     transition-duration: 0s;
 }
 
-.label:hover {
+.label-selected {
     color: rgb(0, 255, 170);
 }
 
@@ -40,4 +40,19 @@
 
 .button:hover {
     background-color: rgb(255, 0, 0);
+}
+
+.label-back {
+    position: absolute;
+    bottom: 1%;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    transition-property: color;
+    transition-duration: 0.2s;
+    font-size: 40px;
+    left: 1%;
+}
+
+.label-back:hover {
+    color: rgb(0, 255, 170);
 }

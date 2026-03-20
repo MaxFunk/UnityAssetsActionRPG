@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Aggressive Strike
   castType: 0
   category: 0
-  descriptionLong: 
+  descriptionLong: Strong Physical Attack which increase Aggro towards caster
   descriptionShort: Phys Dmg / Aggro Up
   isUlt: 0
   isSelfCast: 0

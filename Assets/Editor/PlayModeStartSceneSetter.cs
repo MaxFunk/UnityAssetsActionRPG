@@ -6,7 +6,7 @@ public static class PlayModeStartSceneSetter
 {
     static PlayModeStartSceneSetter()
     {
-        var scene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/StartScene.unity");
+        var scene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/SceneStartScreen.unity");
         EditorSceneManager.playModeStartScene = scene;
     }
 }

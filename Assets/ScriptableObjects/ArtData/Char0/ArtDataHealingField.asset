@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Healing Field
   castType: 3
   category: 4
-  descriptionLong: 
+  descriptionLong: Creates a Field that continously heals all allies
   descriptionShort: HP Regen Field
   isUlt: 0
   isSelfCast: 1

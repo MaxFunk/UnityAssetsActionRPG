@@ -14,26 +14,29 @@ public class CameraController : MonoBehaviour
     public float ArmLength = 5f;
 
     private Vector3 desiredPos = Vector3.zero;
-    
+    float currentPitch = 0f;
+    float currentArmLength = 5f;
+
 
     private void Awake()
     {
         desiredPos = transform.position;
-        UpdateArmLength();
+        currentArmLength = ArmLength;
+        UpdateCameraArm();
     }
 
     private void Update()
     {
         transform.position = Vector3.Lerp(transform.position, desiredPos, MoveSpeed * Time.deltaTime);
-
-        UpdateArmLength(); // only do if called outside (when armlength is modified)
+        UpdateArmLength();
     }
 
 
     public void RotateVertical(float verticalInput)
     {
-        float verticalRotation = -verticalInput * RotationSpeedVertical * Time.deltaTime;
-        CameraArm.Rotate(new Vector3(verticalRotation, 0f, 0f), Space.Self);
+        float delta = -verticalInput * RotationSpeedVertical * Time.deltaTime;
+        currentPitch = Mathf.Clamp(currentPitch + delta, -30f, 60f);
+        CameraArm.localRotation = Quaternion.Euler(currentPitch, 0f, 0f);
     }
 
     public void RotateHorizontal(float horizontalInput)
@@ -53,7 +56,8 @@ public class CameraController : MonoBehaviour
     {
         lookDirection.y = 0f;
         transform.rotation = Quaternion.LookRotation(lookDirection.normalized);
-        CameraArm.transform.localRotation = Quaternion.Euler(angleFromFloor, 0f, 0f);
+        CameraArm.localRotation = Quaternion.Euler(angleFromFloor, 0f, 0f);
+        currentPitch = angleFromFloor;
     }
 
     public void SetDesiredPosition(Vector3 position)
@@ -66,15 +70,29 @@ public class CameraController : MonoBehaviour
     {
         transform.position = playerChar.transform.position;
         desiredPos = transform.position;
+        transform.rotation = playerChar.transform.rotation;
     }
 
 
-    private void UpdateArmLength()
+    private void UpdateCameraArm()
     {
         if (Camera == null) return;
 
         var localCamPos = Camera.transform.localPosition;
-        localCamPos.z = -ArmLength;
+        localCamPos.z = -currentArmLength;
         Camera.transform.localPosition = localCamPos;
+    }
+
+    private void UpdateArmLength()
+    {
+        int mask = LayerMask.GetMask("Default", "Navigateable");
+        var rayDir = (Camera.transform.position - CameraArm.position).normalized;
+
+        if (Physics.Raycast(CameraArm.position, rayDir, out RaycastHit hit, ArmLength, mask))
+            currentArmLength = Mathf.Clamp(hit.distance - 0.15f, 0, ArmLength);
+        else
+            currentArmLength = ArmLength;
+
+        UpdateCameraArm();
     }
 }

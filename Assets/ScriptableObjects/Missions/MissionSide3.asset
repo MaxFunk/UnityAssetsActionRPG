@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd9262e75f2c2740a3ef040b8075bf6, type: 3}
+  m_Name: MissionSide3
+  m_EditorClassIdentifier: Assembly-CSharp::MissionData
+  missionType: 1
+  missionName: In need of sugar
+  descriptionCompleted: Through defeating Sentinels, the Lakeside became calmer.
+  missionSteps:
+  - stepDescription: Buy 3 Sugar Cane
+    objectiveType: 2
+    objectiveId: 205
+    objectiveCount: 3
+  - stepDescription: Return to the Pharmacist
+    objectiveType: 3
+    objectiveId: 2003
+    objectiveCount: 1
+  rewardMoney: 1200
+  rewardItems:
+  - type: 3
+    id: 3
+    recieveAmount: 3
+    recieveChance: 1

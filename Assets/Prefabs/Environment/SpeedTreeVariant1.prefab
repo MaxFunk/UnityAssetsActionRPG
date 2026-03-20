@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3641584897941034155
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9391a1b4f8de38f45bea900a42b02768, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ade55b1fcbf62cc4abe2137d90d01f08, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f0a01e092984db41ba4810f2b10b7a1, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 454ca3ad1d51211419a8ef8284bb5c30, type: 2}
+    - target: {fileID: 919132149155446097, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      propertyPath: m_Name
+      value: SpeedTreeVariant1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4885961046327560003}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2771255748405476386}
+  m_SourcePrefab: {fileID: 100100000, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+--- !u!23 &2686423060937001007 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+  m_PrefabInstance: {fileID: 3641584897941034155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4488096489012128250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 41eb2d98a22f1974380d8090872cfaa5, type: 3}
+  m_PrefabInstance: {fileID: 3641584897941034155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &4885961046327560003
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4488096489012128250}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!205 &2771255748405476386
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4488096489012128250}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.11294341, y: 1.6845275, z: 0.15156603}
+  m_Size: 3.389581
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.15
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2686423060937001007}
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2686423060937001007}
+  - screenRelativeHeight: 0.02
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2686423060937001007}
+  m_Enabled: 1

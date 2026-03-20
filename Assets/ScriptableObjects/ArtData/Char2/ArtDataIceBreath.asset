@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Ice Breath
   castType: 1
   category: 1
-  descriptionLong: 
+  descriptionLong: Ether Attack which does 3 times damage in an area
   descriptionShort: Ether Dmg / AOE / 3 Hits
   isUlt: 0
   isSelfCast: 0

@@ -41,9 +41,9 @@ MonoBehaviour:
   levelUpArts:
   - {x: 1, y: 11}
   - {x: 2, y: 12}
-  - {x: 3, y: 13}
-  - {x: 4, y: 14}
-  - {x: 5, y: 15}
+  - {x: 4, y: 13}
+  - {x: 7, y: 14}
+  - {x: 9, y: 15}
   autoAttackData:
     attackRange: 3
     attackCooldown: 2
@@ -54,4 +54,5 @@ MonoBehaviour:
     cancelStart: 1.1
     cancelDuration: 0.35
     damageModifier: 0.5
-  iconMenuFull: {fileID: 2800000, guid: 0c4e32b607c046d46b1f8bd1f5751bb8, type: 3}
+  iconMenuQuad: {fileID: 2800000, guid: 0c4e32b607c046d46b1f8bd1f5751bb8, type: 3}
+  iconMenuFull: {fileID: 2800000, guid: ea420e6e7f800984f87fd5f43a82e9e8, type: 3}

@@ -38,6 +38,7 @@ public class CombatData : MonoBehaviour
     [Header("Other Data")]
     public float MaxTargetRange = 10f;
     public float timeModifierArtUse = 2.0f; // e.g. 2.0 times art cooldown
+    public int musicId = -1;
     public bool TryCastingUlt = false;
     public UnityEvent EventModifiersChanged;
 
@@ -433,6 +434,7 @@ public class CombatData : MonoBehaviour
                 GameManager.Instance.SpawnItemDrop(dropData, gameObject.transform.position);
 
             queryForDeletion = !isHero;
+            enemyCharacterController.OnDefeat();
         }
 
         combatManager.OnCombatantDefeated(this);

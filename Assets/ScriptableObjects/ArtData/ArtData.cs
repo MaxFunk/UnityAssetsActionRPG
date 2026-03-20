@@ -65,4 +65,9 @@ public class ArtData : ScriptableObject
 
         return Vector3.Distance(caster.transform.position, target.transform.position) <= maxCastDistance;
     }
+
+    public bool IsPhysicalArt()
+    {
+        return category == Category.Physical;
+    }
 }

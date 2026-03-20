@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Wide Slash
   castType: 1
   category: 0
-  descriptionLong: 
+  descriptionLong: AOE Attack which has a higher chance to Crit
   descriptionShort: Phys Dmg / AOE / High Crit
   isUlt: 0
   isSelfCast: 0

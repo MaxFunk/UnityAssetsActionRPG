@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3205a20aceba9846a64c12b2d1cc2c4, type: 3}
+  m_Name: DialogTownNPCSideQuestWoman
+  m_EditorClassIdentifier: Assembly-CSharp::DialogData
+  dialogSteps:
+  - speakerName: Pharmacist
+    dialogText: Can you help me out? I require 3 Sugar Canes from the City. Could
+      you buy them for me?
+    speakerIcon: {fileID: 0}
+    hasPrompt: 1
+    isEnd: 1
+    unconditionalEventIndex: -1
+    promptData:
+    - Text: Okay
+      Action: 4
+      valueInt: 0
+    - Text: Not now
+      Action: 0
+      valueInt: 0
+  - speakerName: Pharmacist
+    dialogText: I need 3 Sugar Canes. Please buy them.
+    speakerIcon: {fileID: 0}
+    hasPrompt: 0
+    isEnd: 1
+    unconditionalEventIndex: -1
+    promptData: []
+  - speakerName: Pharmacist
+    dialogText: Thank you for buying what I asked. Here is you reward.
+    speakerIcon: {fileID: 0}
+    hasPrompt: 0
+    isEnd: 1
+    unconditionalEventIndex: 4
+    promptData: []
+  - speakerName: Pharmacist
+    dialogText: Thank you for helping.
+    speakerIcon: {fileID: 0}
+    hasPrompt: 0
+    isEnd: 1
+    unconditionalEventIndex: -1
+    promptData: []
+  initialEventIndices: 010000000200000003000000

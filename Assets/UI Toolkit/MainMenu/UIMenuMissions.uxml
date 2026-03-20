@@ -26,7 +26,7 @@
                         <ui:DataBinding property="text" data-source-path="detailMission" binding-mode="ToTarget" source-to-ui-converters="Mission to Progress"/>
                     </Bindings>
                 </ui:Label>
-                <ui:Label text="Description" name="MissionDescription" class="item-description-text detail-label-descrip" style="white-space: normal;">
+                <ui:Label text="Description" name="MissionDescription" class="item-description-text detail-label-descrip" style="white-space: normal; flex-wrap: wrap;">
                     <Bindings>
                         <ui:DataBinding property="text" data-source-path="detailMission" binding-mode="ToTarget" source-to-ui-converters="Mission to Description"/>
                     </Bindings>
@@ -36,5 +36,6 @@
                 </Bindings>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Label text="&lt; Back" name="LabelBack" class="label-back"/>
     </ui:VisualElement>
 </ui:UXML>

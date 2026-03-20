@@ -37,6 +37,8 @@ public class HeroCharacterController : MonoBehaviour
 
     InputHandler inputHandler;
     Animator animator;
+    Animator animatorWeapon;
+    SkinnedMeshRenderer meshWeapon;
     HeroCharacterController playerChar;
     CameraController playerCamera;
 
@@ -46,7 +48,8 @@ public class HeroCharacterController : MonoBehaviour
     private Vector3 lastPosition;
 
     private bool isJumping = false;
-    public bool isGrounded = false;
+    private bool isSprinting = false;
+    private bool isGrounded = false;
     private bool coyoteTimeAvailable = true;
     private bool wasLastActionArt = true;
 
@@ -100,6 +103,9 @@ public class HeroCharacterController : MonoBehaviour
     {
         if (!IsPlayerControlled)
         {
+            if (playerChar)
+                isSprinting = playerChar.isSprinting;
+
             if (characterState == CharacterState.Explore || characterState == CharacterState.CombatInactive)
             {
                 float distanceToPlayer = Vector3.Distance(playerChar.transform.position, transform.position);
@@ -124,6 +130,9 @@ public class HeroCharacterController : MonoBehaviour
             if (inputHandler.GetJumpInputDown())
                 TryJump();
 
+            if (inputHandler.GetSprintToggleInputDown())
+                isSprinting = !isSprinting;
+
             if (isGrounded) // maybe also check these with coyote time
             {
                 if (inputHandler.GetOpenMenuInputDown())
@@ -146,6 +155,9 @@ public class HeroCharacterController : MonoBehaviour
         {
             if (inputHandler.GetJumpInputDown())
                 TryJump();
+
+            if (inputHandler.GetSprintToggleInputDown())
+                isSprinting = !isSprinting;
 
             if (isGrounded)
             {
@@ -176,6 +188,7 @@ public class HeroCharacterController : MonoBehaviour
             {
                 combatData.StartAutoAttack();
                 animator.SetTrigger("TrBasicAttack");
+                animatorWeapon.SetTrigger("TrBasicAttack");
             }
 
             if (combatData.CanPerformArtCast())
@@ -195,7 +208,11 @@ public class HeroCharacterController : MonoBehaviour
                     artSuccess = combatData.CastArt(5);
 
                 if (artSuccess)
-                    animator.SetTrigger("TrArt");
+                {
+                    var triggerString = combatData.GetCurrentArt().IsPhysicalArt() ? "TrArtPhysical" : "TrArtEther";
+                    animator.SetTrigger(triggerString);
+                    animatorWeapon.SetTrigger(triggerString);
+                }
             }
 
             if (inputHandler.GetSheatheWeaponInputDown() && combatData.CanMove())
@@ -287,6 +304,7 @@ public class HeroCharacterController : MonoBehaviour
                     combatData.StartAutoAttack();
                     wasLastActionArt = false;
                     animator.SetTrigger("TrBasicAttack");
+                    animatorWeapon.SetTrigger("TrBasicAttack");
                 }
 
                 if (combatData.CanPerformArtCastNPC() && wasLastActionArt == false)
@@ -296,7 +314,9 @@ public class HeroCharacterController : MonoBehaviour
 
                     if (artSuccess)
                     {
-                        animator.SetTrigger("TrArt");
+                        var triggerString = combatData.GetCurrentArt().IsPhysicalArt() ? "TrArtPhysical" : "TrArtEther";
+                        animator.SetTrigger(triggerString);
+                        animatorWeapon.SetTrigger(triggerString);
                         wasLastActionArt = true;
 
                         if (combatData.TryCastingUlt)
@@ -404,8 +424,10 @@ public class HeroCharacterController : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
-        }        
+        }
 
+        if (isSprinting)
+            speedModifier *= 1.4f;
         var targetVelocity = MaxSpeedOnGround * speedModifier * combatData.GetMoveSpeedFactor() * moveDirection;
         var characterVelocityXZ = new Vector3(characterVelocity.x, 0, characterVelocity.z);
         characterVelocityXZ = Vector3.Lerp(characterVelocityXZ, targetVelocity, MovementFriction * Time.deltaTime);
@@ -525,7 +547,10 @@ public class HeroCharacterController : MonoBehaviour
     public void DrawWeapon()
     {
         characterState = CharacterState.CombatActive;
+        isSprinting = false;
+        meshWeapon.enabled = true;
         animator.SetBool("isInCombat", true);
+        animatorWeapon.SetBool("isInCombat", true);
 
         if (IsPlayerControlled)
         {
@@ -546,6 +571,8 @@ public class HeroCharacterController : MonoBehaviour
     {
         characterState = CombatManager.Instance.CombatActive ? CharacterState.CombatInactive : CharacterState.Explore;
         animator.SetBool("isInCombat", false);
+        animatorWeapon.SetBool("isInCombat", false);
+        meshWeapon.enabled = false;
 
         if (IsPlayerControlled)
         {
@@ -569,6 +596,7 @@ public class HeroCharacterController : MonoBehaviour
     {
         characterState = hardForce ? CharacterState.CombatActive : CharacterState.CombatInactive;
         animator.SetBool("isInCombat", hardForce);
+        animatorWeapon.SetBool("isInCombat", hardForce);
 
         if (hardForce || IsPlayerControlled)
         {
@@ -596,8 +624,14 @@ public class HeroCharacterController : MonoBehaviour
         combatData.LoadFromCharacterData(GameManager.Instance.characterDatas[heroId]);
         UserInterfaceManager.instance.GameplayUI.OnHeroLoad(combatData, partyIndex);
 
-        animator = GetComponentInChildren<Animator>();
+        var animators = GetComponentsInChildren<Animator>();
+        animator = animators[0];
+        animatorWeapon = animators[1];
         animator.SetBool("isInCombat", false);
+        animatorWeapon.SetBool("isInCombat", false);
+
+        meshWeapon = animatorWeapon.GetComponentInChildren<SkinnedMeshRenderer>();
+        meshWeapon.enabled = false;
     }
 
     public void OnCombatJoin()
@@ -616,16 +650,20 @@ public class HeroCharacterController : MonoBehaviour
     {
         characterState = CharacterState.Explore;
         animator.SetBool("isInCombat", false);
+        animatorWeapon.SetBool("isInCombat", false);
+        meshWeapon.enabled = false;
     }
 
     public void OnDefeat()
     {
         animator.SetTrigger("TrDefeat");
+        animatorWeapon.SetTrigger("TrDefeat");
     }
 
     public void OnRevive()
     {
         animator.SetTrigger("TrRevive");
+        animatorWeapon.SetTrigger("TrRevive");
     }
 
     public void OnPlayerCallsUltUse()

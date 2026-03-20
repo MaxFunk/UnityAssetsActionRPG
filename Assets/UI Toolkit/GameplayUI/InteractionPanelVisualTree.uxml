@@ -1,8 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="InteractionContainer" style="flex-grow: 1; flex-direction: row;">
-        <ui:VisualElement style="height: 100%; width: 100px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 8px; border-right-width: 8px; border-bottom-width: 8px; border-left-width: 8px; border-top-left-radius: 100px; border-top-right-radius: 100px; border-bottom-right-radius: 100px; border-bottom-left-radius: 100px; align-items: center; align-content: center;">
-            <ui:Label text="R" style="width: auto; height: auto; color: rgb(255, 255, 255); font-size: 56px; -unity-font-style: bold;" />
-        </ui:VisualElement>
-        <ui:Label text="Interact with" name="LabelInteraction" style="color: rgb(255, 255, 255); font-size: 40px; -unity-font-style: bold; height: 100%; -unity-text-align: middle-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 20px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 650px; white-space: nowrap;" />
+        <ui:Label text="Interact with" name="LabelInteraction" style="color: rgb(255, 255, 255); font-size: 40px; -unity-font-style: bold; height: 100%; -unity-text-align: middle-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 20px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 650px; white-space: nowrap;"/>
     </ui:VisualElement>
 </ui:UXML>

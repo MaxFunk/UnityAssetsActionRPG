@@ -1,0 +1,151 @@
+:root {
+}
+
+.base {
+    background-color: rgb(0, 0, 0);
+}
+
+.front-page {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+.label-shop-name {
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+}
+
+.label-front {
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    -unity-text-align: upper-center;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    margin-left: 25%;
+    margin-right: 25%;
+    transition-property: border-color;
+    transition-duration: 0.3s;
+}
+
+.label-front-selected {
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.label-back {
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    bottom: 0%;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    transition-property: -unity-font-style;
+    transition-duration: 0.2s;
+}
+
+.label-back:hover {
+    -unity-font-style: bold;
+}
+
+.main-page-subcontainer {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.label-mode-name {
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    height: 15%;
+}
+
+.list-header-text {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.list-elem-container {
+    flex-direction: row;
+    height: 80px;
+    min-height: 60px;
+    max-height: 100px;
+    transition-property: border-color;
+    transition-duration: 0.2s;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+}
+
+.list-elem-container-selected {
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.list-elem-itemname {
+    width: 45%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    height: 100%;
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    -unity-font-style: normal;
+    -unity-text-align: middle-left;
+}
+
+.list-elem-label {
+    width: 20%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    height: 100%;
+    color: rgb(255, 255, 255);
+    font-size: 48px;
+    -unity-font-style: normal;
+    -unity-text-align: middle-right;
+}
+
+.list-elem-icon {
+    width: 10%;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.list-scroll-view {
+    flex-grow: 1;
+}

@@ -28,9 +28,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private bool deleteGameObject = false;
     private float navigateInputCooldown = 0;
-
     private MenuState menuState = MenuState.Main;
-    private int indexMainView = 0;
 
 
     void Awake()
@@ -64,7 +62,7 @@ public class MainMenuEvents : MonoBehaviour
         var navigateInput = inputHandler.GetNavigateInput();
         if (navigateInput.magnitude > 0.2 && navigateInputCooldown <= 0)
         {
-            NavigateFocus(navigateInput);
+            currentContainer?.DirectionalEvent(navigateInput);
             navigateInputCooldown = 0.2f;
         }
         if (navigateInputCooldown > 0 && navigateInput.magnitude < 0.01)
@@ -136,26 +134,6 @@ public class MainMenuEvents : MonoBehaviour
         }
 
         root.Q<VisualElement>(viewName).AddToClassList("active");
-    }
-
-    private void NavigateFocus(Vector2 navInput)
-    {
-        switch (menuState)
-        {
-            case MenuState.Main: // move to containerMain
-                var mainViewContainer = document.rootVisualElement.Q<VisualElement>("MainView");
-                var listLabels = mainViewContainer.Query<Label>().ToList();
-                indexMainView = (int)Mathf.Clamp(indexMainView - Mathf.Round(navInput.y), 0, listLabels.Count - 1);
-                listLabels[indexMainView].Focus();
-                break;
-            case MenuState.Characters:
-                break;
-            case MenuState.Items:
-                containerItems.DirectionalEvent(navInput);
-                break;
-            default:
-                return;
-        }
     }
 
     public void ReturnToStartscreen()

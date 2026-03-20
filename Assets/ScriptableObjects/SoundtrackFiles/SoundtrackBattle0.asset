@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59150a269cefbf14e94048e770f9db82, type: 3}
+  m_Name: SoundtrackBattle0
+  m_EditorClassIdentifier: Assembly-CSharp::SoundtrackFile
+  trackName: Battle 1
+  intro: {fileID: 8300000, guid: 84736f23c92b2764c9ddfdd9fe1b0e64, type: 3}
+  main: {fileID: 8300000, guid: 03062657a2639094ab865233ba4a79d4, type: 3}
+  withoutIntro: 0
+  loopMain: 1
+  layer: 2

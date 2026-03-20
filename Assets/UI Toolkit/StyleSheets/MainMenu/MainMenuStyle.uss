@@ -24,10 +24,7 @@
     font-size: 48px;
 }
 
-.label-button:focus {
-    color: rgb(0, 255, 170);
-    -unity-font-style: bold;
-}
+
 
 .label-tab {
     color: rgb(255, 255, 255);
@@ -38,4 +35,9 @@
 
 .label-tab:hover {
     color: rgb(0, 255, 170);
+}
+
+.label-button-hovered {
+    color: rgb(0, 255, 170);
+    -unity-font-style: bold;
 }

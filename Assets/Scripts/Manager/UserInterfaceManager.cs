@@ -9,6 +9,7 @@ public class UserInterfaceManager : MonoBehaviour
     public MainMenuEvents PrefabMainMenu;
     public LoadingScreen PrefabLoadingScreen;
     public DialogUserInterface PrefabDialogUI;
+    public ShopUserInterface PrefabShopUI;
 
     [Header("References")]
     public MainMenuEvents mainMenu = null;
@@ -16,6 +17,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     public GameplayUserInterface GameplayUI { get; private set; } = null;
     public DialogUserInterface DialogUI { get; private set; } = null;
+    public ShopUserInterface ShopUI { get; private set; } = null;
 
 
     void Awake()
@@ -75,5 +77,22 @@ public class UserInterfaceManager : MonoBehaviour
         if (DialogUI != null)
             Destroy(DialogUI.gameObject);
         DialogUI = null;
+    }
+
+
+    public ShopUserInterface CreateShopUI()
+    {
+        if (ShopUI == null)
+        {
+            ShopUI = Instantiate(PrefabShopUI);
+        }
+        return ShopUI;
+    }
+
+    public void DestroyShopUI()
+    {
+        if (ShopUI != null)
+            Destroy(ShopUI.gameObject);
+        ShopUI = null;
     }
 }

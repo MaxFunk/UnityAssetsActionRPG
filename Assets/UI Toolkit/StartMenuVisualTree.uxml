@@ -1,22 +1,25 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="SaveFileVisualTree" src="project://database/Assets/UI%20Toolkit/SaveFileVisualTree.uxml?fileID=9197481963319205126&amp;guid=c72b18f5d5a416f4bac7b6911fc51ef8&amp;type=3#SaveFileVisualTree" />
-    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/StartMenuStyle.uss?fileID=7433441132597879392&amp;guid=dc90c81064d52bc4f994a4f24cfbae40&amp;type=3#StartMenuStyle" />
-    <ui:VisualElement name="ContainerFrontPage" style="flex-grow: 1; display: flex;">
+    <ui:Template name="SaveFileVisualTree" src="project://database/Assets/UI%20Toolkit/SaveFileVisualTree.uxml?fileID=9197481963319205126&amp;guid=c72b18f5d5a416f4bac7b6911fc51ef8&amp;type=3#SaveFileVisualTree"/>
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/StartMenuStyle.uss?fileID=7433441132597879392&amp;guid=dc90c81064d52bc4f994a4f24cfbae40&amp;type=3#StartMenuStyle"/>
+    <ui:VisualElement name="ContainerFrontPage" style="flex-grow: 1; display: none;">
         <ui:VisualElement name="ContainerHeader" style="flex-grow: 1;">
-            <ui:Label text="Project Souls" name="Label" class="header" />
+            <ui:Label text="Project Souls" name="Label" class="header"/>
         </ui:VisualElement>
         <ui:VisualElement name="ContainerContent" style="flex-grow: 1; width: 25%;">
-            <ui:Label text="Load Game" name="LabelLoadGame" class="label" />
-            <ui:Label text="Settings" name="LabelSettings" class="label" />
-            <ui:Label text="Credits" name="LabelCredits" class="label" />
-            <ui:Label text="Quit Game" name="LabelQuitGame" class="label" />
+            <ui:Label text="Load Game" name="LabelLoadGame" class="label"/>
+            <ui:Label text="Controls&#10;" name="LabelControls" class="label"/>
+            <ui:Label text="Quit Game" name="LabelQuitGame" class="label"/>
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="ContainerFileSelect" style="flex-grow: 1; display: none; justify-content: flex-start; visibility: visible;">
         <ui:VisualElement style="flex-grow: 1; width: 800px; align-self: center; height: 500px; align-items: stretch; justify-content: space-around; -unity-text-align: upper-left; margin-top: 250px; margin-bottom: 250px;">
-            <ui:Instance template="SaveFileVisualTree" name="SaveFileView1" />
-            <ui:Instance template="SaveFileVisualTree" name="SaveFileView2" />
-            <ui:Instance template="SaveFileVisualTree" name="SaveFileView3" />
+            <ui:Instance template="SaveFileVisualTree" name="SaveFileView1"/>
+            <ui:Instance template="SaveFileVisualTree" name="SaveFileView2"/>
+            <ui:Instance template="SaveFileVisualTree" name="SaveFileView3"/>
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="ContainerControls" style="flex-grow: 1; display: flex; justify-content: flex-start; visibility: visible;">
+        <ui:VisualElement style="flex-grow: 1; margin-left: 200px; margin-right: 200px; margin-top: 100px; margin-bottom: 100px; background-image: resource(&quot;Icons/Controls&quot;); -unity-background-scale-mode: scale-to-fit; background-position-y: center; background-color: rgba(0, 0, 0, 0.5);"/>
+    </ui:VisualElement>
+    <ui:Label text="&lt; Back" name="LabelBack" class="label-back" style="display: none;"/>
 </ui:UXML>

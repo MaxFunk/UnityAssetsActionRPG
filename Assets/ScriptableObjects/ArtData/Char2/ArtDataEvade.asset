@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Evade
   castType: 0
   category: 2
-  descriptionLong: 
+  descriptionLong: Gives caster a evade buff, which lets caster dodge next attacks
   descriptionShort: Evade Buff
   isUlt: 0
   isSelfCast: 1

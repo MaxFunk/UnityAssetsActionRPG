@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.XR;
 public class ItemDrop : MonoBehaviour
 {
     public ItemRecieveData dropData = null;
+    public bool autoCollect = false;
     public bool doDespawn = true;
     public float despawnAfter = 10f;
     public Vector3 initialVelocity = Vector3.zero;
@@ -50,7 +51,12 @@ public class ItemDrop : MonoBehaviour
             }
 
             timeAlive += Time.deltaTime;
-            if (timeAlive > despawnAfter) { Despawn(); }
+            if (timeAlive > despawnAfter)
+            {
+                if (autoCollect)
+                    GameManager.Instance.ItemManager.RecieveItems(dropData);
+                Despawn();
+            }
         }
         else
         {

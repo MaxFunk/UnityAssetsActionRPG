@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Blazing Gun
   castType: 0
   category: 1
-  descriptionLong: 
+  descriptionLong: An ether art that does high damage to the target
   descriptionShort: High Ether Dmg
   isUlt: 1
   isSelfCast: 0

@@ -118,4 +118,9 @@ public class NPCController : MonoBehaviour
             playerTarget = null;
         }
     }
+
+    public void DestroyNPC()
+    {
+        Destroy(gameObject);
+    }
 }

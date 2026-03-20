@@ -1,7 +1,9 @@
-using NUnit.Framework.Interfaces;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Windows;
+using static UnityEngine.Rendering.DebugUI.MessageBox;
 
 public class MenuContainerCharacters : MenuContainer
 {
@@ -25,12 +27,26 @@ public class MenuContainerCharacters : MenuContainer
     private ViewMode viewMode = ViewMode.CharSelect;
     private GearEquipMode equipMode = GearEquipMode.None;
     private int characterIndex = -1;
+    private bool isEquippingArt = false;
     private int artequippedIndex = 0;
+
+    private int indexCharSelect = 0;
+    private int indexOverview = 0;
+    private int indexGearEquip = 0;
+    private int indexGearList = 0;
+    private int indexArtEquip = 0;
+    private int indexArtList = 0;
 
     private VisualElement[] containers = null;
     private Button buttonBack = null;
     private CharacterDataUI charDataUI = null;
-    private ArtData selectedNewArt = null;
+
+    private List<VisualElement> charPanels = new();
+    private List<VisualElement> overviewClickables = new();
+    private List<VisualElement> gearClickables = new();
+    private List<VisualElement> gearList = new();
+    private List<VisualElement> artPanels = new();
+    private List<VisualElement> artListPanels = new();
 
     private readonly string containerNameCharSelect = "ContainerCharSelect";
     private readonly string containerNameOverview = "ContainerOverview";
@@ -67,9 +83,55 @@ public class MenuContainerCharacters : MenuContainer
 
     public override void ConfirmEvent()
     {
-        if (viewMode == ViewMode.ArtSelect && selectedNewArt != null)
+        if (viewMode == ViewMode.CharSelect)
         {
-            ChangeWithEquipedArt(selectedNewArt);
+            LoadCharacterOverview(indexCharSelect);
+            return;
+        }
+
+        if (viewMode == ViewMode.Overview)
+        {
+            ClickEvent evt = ClickEvent.GetPooled();
+            evt.target = overviewClickables[indexOverview];
+            overviewClickables[indexOverview].SendEvent(evt);
+            return;                
+        }
+
+        if (viewMode == ViewMode.GearSelect)
+        {
+            if (equipMode == GearEquipMode.None)
+            {
+                OnGearEquipPanelClickEvent(null, indexGearEquip);
+            }
+            else
+            {
+                if (gearList.Count > 0)
+                {
+                    ClickEvent evt = ClickEvent.GetPooled();
+                    evt.target = gearList[indexGearList];
+                    gearList[indexGearList].SendEvent(evt);
+                }
+            }
+            return;
+        }
+
+        if (viewMode == ViewMode.ArtSelect)
+        {
+            if (isEquippingArt)
+            {
+                if (artListPanels.Count > 0)
+                {
+                    ClickEvent evt = ClickEvent.GetPooled();
+                    evt.target = artListPanels[indexArtList];
+                    artListPanels[indexArtList].SendEvent(evt);
+                }
+            }
+            else
+            {
+                LoadArtList();
+                isEquippingArt = true;
+            }
+            return;
         }
     }
 
@@ -102,7 +164,16 @@ public class MenuContainerCharacters : MenuContainer
 
         if (viewMode == ViewMode.ArtSelect)
         {
-            LoadCharacterOverview(characterIndex);
+            if (isEquippingArt)
+            {
+                LoadArtSelection();
+                isEquippingArt = false;
+            }
+            else
+            {
+                LoadCharacterOverview(characterIndex);
+            }
+            
             return;
         }
 
@@ -123,7 +194,7 @@ public class MenuContainerCharacters : MenuContainer
             }
         }
 
-        if (viewMode == ViewMode.ArtSelect)
+        if (viewMode == ViewMode.ArtSelect && isEquippingArt)
         {
             ChangeWithEquipedArt(null);
         }
@@ -131,7 +202,48 @@ public class MenuContainerCharacters : MenuContainer
 
     public override void DirectionalEvent(Vector2 navInput)
     {
+        if (viewMode == ViewMode.CharSelect)
+        {
+            indexCharSelect = Mathf.Clamp(indexCharSelect + Mathf.RoundToInt(navInput.x), 0, 2); // hardcoded to not break demo
+            UpdateSelectionCharSelect();
+        }
 
+        if (viewMode == ViewMode.Overview)
+        {
+            indexOverview = Mathf.Clamp(indexOverview + Mathf.RoundToInt(navInput.x), 0, 2);
+            indexOverview = Mathf.Clamp(indexOverview - 2 * Mathf.RoundToInt(navInput.y), 0, 2);
+            UpdateSelectionOverview();
+        }
+
+        if (viewMode == ViewMode.GearSelect)
+        {
+            if (equipMode == GearEquipMode.None)
+            {
+                indexGearEquip = Mathf.Clamp(indexGearEquip - Mathf.RoundToInt(navInput.y), 0, gearClickables.Count - 1);
+                LoadGearItemDetail(charDataUI.GetGearItemData(indexGearEquip));
+                UpdateSelectionGearEquip();
+            }
+            else
+            {
+                indexGearList = Mathf.Clamp(indexGearList - Mathf.RoundToInt(navInput.y), 0, gearList.Count - 1);
+                UpdateSelectionGearList();
+            }
+        }
+
+        if (viewMode == ViewMode.ArtSelect)
+        {
+            if (isEquippingArt)
+            {
+                indexArtList = Mathf.Clamp(indexArtList - Mathf.RoundToInt(navInput.y), 0, artListPanels.Count - 1);
+                UpdateSelectionArtList();
+            }
+            else
+            {
+                indexArtEquip = Mathf.Clamp(indexArtEquip - Mathf.RoundToInt(navInput.y), 0, artPanels.Count - 1);
+                LoadArtDetail(charDataUI.artDatas[indexArtEquip]);
+                UpdateSelectionArtEquip();
+            }
+        }
     }
 
 
@@ -146,12 +258,13 @@ public class MenuContainerCharacters : MenuContainer
 
     private void LoadCharSelect()
     {
+        indexCharSelect = Mathf.Clamp(characterIndex, 0, 2);
         characterIndex = -1;
         charDataUI = null;
         SetContainerDisplayStyle(ViewMode.CharSelect);
 
         ref var container = ref containers[0];
-        var charPanels = container.Query<VisualElement>(panelNameCharSelect).ToList();
+        charPanels = container.Query<VisualElement>(panelNameCharSelect).ToList();
         for (int i = 0; i < charPanels.Count; i++) 
         {
             var charData = GameManager.Instance.GetCharacterData(i);
@@ -159,8 +272,13 @@ public class MenuContainerCharacters : MenuContainer
             charPanels[i].style.visibility = charData != null ? Visibility.Visible : Visibility.Hidden; // maybe use display instead
             charPanels[i].UnregisterCallback<ClickEvent, int>(OnCharSelectPanelClick);
             if (charData != null)
+            {
                 charPanels[i].RegisterCallback<ClickEvent, int>(OnCharSelectPanelClick, i);
+                charPanels[i].RegisterCallback<MouseOverEvent, int>(OnMouseOverCharSelect, i);
+            }
         }
+
+        UpdateSelectionCharSelect();
     }
 
     private void LoadCharacterOverview(int characterId)
@@ -194,6 +312,9 @@ public class MenuContainerCharacters : MenuContainer
             gearPanels[i].dataSource = gearData;
             gearPanels[i].style.visibility = gearData != null ? Visibility.Visible : Visibility.Hidden; // same as art panel above
         }
+
+        indexOverview = 0;
+        UpdateSelectionOverview();
     }
 
 
@@ -208,6 +329,9 @@ public class MenuContainerCharacters : MenuContainer
             gearPanels[i].dataSource = gearData;
             gearPanels[i].style.visibility = gearData != null ? Visibility.Visible : Visibility.Hidden;
         }
+
+        indexGearEquip = 0;
+        UpdateSelectionGearEquip();
 
         LoadGearItemList(GearEquipMode.None);
         LoadGearItemDetail(null); // Update Gear
@@ -227,16 +351,20 @@ public class MenuContainerCharacters : MenuContainer
         var itemList = GameManager.Instance.ItemManager.GetFilteredGearList((int)equipMode);
         var scrollView = containers[2].Q<ScrollView>();
         scrollView.Clear();
-        //listElements = new VisualElement[itemList.Count];
+        gearList.Clear();
         for (int i = 0; i < itemList.Count; i++)
         {
             VisualElement itemListElementTree = mainMenuEvents.ItemListElement.CloneTree();
             var itemListElement = itemListElementTree.Q<VisualElement>("ItemListElement");
             itemListElement.dataSource = itemList[i];
             itemListElement.RegisterCallback<ClickEvent, int>(OnGearListItemClickEvent, itemList[i].id);
-            //listElements[i] = itemListElement;
+            itemListElement.RegisterCallback<MouseOverEvent, int>(OnMouseOverGearList, i);
             scrollView.Add(itemListElementTree);
+            gearList.Add(itemListElement);
         }
+
+        indexGearList = 0;
+        UpdateSelectionGearList();
     }
 
     private void LoadGearItemDetail(ItemData itemData)
@@ -247,46 +375,55 @@ public class MenuContainerCharacters : MenuContainer
     }
 
 
-    private void LoadArtSelection()
+    private void LoadArtSelection(bool keepIndex = false)
     {
         SetContainerDisplayStyle(ViewMode.ArtSelect);
 
-        var artPanels = containers[3].Query<VisualElement>("ArtPanel").ToList();
+        artPanels = containers[3].Query<VisualElement>("ArtPanel").ToList();
         for (int i = 0; i < artPanels.Count; i++) 
         {
             var artData = charDataUI.artDatas[i];
             artPanels[i].Q<VisualElement>("ArtView").dataSource = artData;
-            artPanels[i].style.visibility = artData != null ? Visibility.Visible : Visibility.Hidden;
-            artPanels[i].RegisterCallback<ClickEvent, int>(OnEquipedArtClickEvent, i);
+            artPanels[i].Q<VisualElement>("ArtView").style.visibility = artData != null ? Visibility.Visible : Visibility.Hidden;
+            artPanels[i].RegisterCallback<ClickEvent, int>(OnEquipedArtClickEvent, i); 
+            artPanels[i].RegisterCallback<MouseOverEvent, int>(OnMouseOverArtEquip, i);
         }
 
         var ultPanel = containers[3].Q<VisualElement>("UltPanel");
         ultPanel.Q<VisualElement>("ArtView").dataSource = charDataUI.artDatas[5];
+        ultPanel.Q<VisualElement>("ArtView").style.visibility = charDataUI.artDatas[5] != null ? Visibility.Visible : Visibility.Hidden;
         ultPanel.RegisterCallback<ClickEvent, int>(OnEquipedArtClickEvent, 5);
+        ultPanel.RegisterCallback<MouseOverEvent, int>(OnMouseOverArtEquip, 5);
+        artPanels.Add(ultPanel);
 
-        //containers[3].Q<ScrollView>().style.visibility = Visibility.Hidden;
-        LoadArtList();
+        containers[3].Q<ScrollView>().style.visibility = Visibility.Hidden;
+        //LoadArtList();
 
-        artPanels[0].Focus();
-        artequippedIndex = 0;
+        indexArtEquip = keepIndex ? indexArtEquip : 0;
+        UpdateSelectionArtEquip();
         LoadArtDetail(charDataUI.artDatas[0]);
     }
 
     private void LoadArtList()
     {
-        selectedNewArt = null;
         containers[3].Q<ScrollView>().style.visibility = Visibility.Visible;
         var scrollView = containers[3].Q<ScrollView>();
         scrollView.Clear();
+        artListPanels.Clear();
 
-        var artList = charDataUI.characterData.GetUnequipedArts(artequippedIndex == 5);
+        var artList = charDataUI.characterData.GetUnequipedArts(indexArtEquip == 5);
         for (int i = 0; i < artList.Count; i++)
         {
             VisualElement artListElement = mainMenuEvents.ArtListElement.CloneTree();
             artListElement.Q<VisualElement>("ArtView").dataSource = artList[i];
             artListElement.RegisterCallback<ClickEvent, ArtData>(OnArtListElementClickEvent, artList[i]);
+            artListElement.RegisterCallback<MouseOverEvent, int>(OnMouseOverArtList, i);
             scrollView.Add(artListElement);
+            artListPanels.Add(artListElement);
         }
+
+        indexArtList = 0;
+        UpdateSelectionArtList();
     }
 
     private void LoadArtDetail(ArtData artData)
@@ -306,13 +443,14 @@ public class MenuContainerCharacters : MenuContainer
     {
         buttonBack.RegisterCallback<ClickEvent>(OnButtonBackClickEvent);
 
-        var overviewClickables = containers[1].Query<VisualElement>(className: classNameClickableContainer).ToList();
+        overviewClickables = containers[1].Query<VisualElement>(className: classNameClickableContainer).ToList();
         for (int i = 0; i < overviewClickables.Count; i++) 
         {
             overviewClickables[i].RegisterCallback<ClickEvent, int>(OnOverviewClickEvent, i);
+            overviewClickables[i].RegisterCallback<MouseOverEvent, int>(OnMouseOverOverview, i);
         }
 
-        var gearClickables = containers[2].Query<VisualElement>(className: classNameClickableContainer).ToList();
+        gearClickables = containers[2].Query<VisualElement>(className: classNameClickableContainer).ToList();
         for (int i = 0; i < gearClickables.Count; i++)
         {
             gearClickables[i].RegisterCallback<ClickEvent, int>(OnGearEquipPanelClickEvent, i);
@@ -322,9 +460,10 @@ public class MenuContainerCharacters : MenuContainer
 
     private void ChangeWithEquipedArt(ArtData artData)
     {
-        charDataUI.characterData.SwapArtIds(artequippedIndex, artData);
+        charDataUI.characterData.SwapArtIds(indexArtEquip, artData);
         charDataUI.ReloadData();
-        LoadArtSelection();
+        isEquippingArt = false;
+        LoadArtSelection(true);
     }
 
 
@@ -372,6 +511,10 @@ public class MenuContainerCharacters : MenuContainer
 
     private void OnGearEquipPanelMouseOverEvent(MouseOverEvent evt, int index)
     {
+        if (equipMode != GearEquipMode.None) return;
+
+        indexGearEquip = index;
+        UpdateSelectionGearEquip();
         LoadGearItemDetail(charDataUI.GetGearItemData(index));
     }
 
@@ -396,18 +539,97 @@ public class MenuContainerCharacters : MenuContainer
 
     private void OnArtListElementClickEvent(ClickEvent evt, ArtData artData)
     {
-        if (artData == selectedNewArt)
-        {
-            ChangeWithEquipedArt(artData);
-            return;
-        }
-
-        selectedNewArt = artData;
-        LoadArtDetail(artData);
+        ChangeWithEquipedArt(artData);
     }
 
     private void OnButtonBackClickEvent(ClickEvent evt)
     {
         CancelEvent();
+    }
+
+
+    private void UpdateSelectionCharSelect()
+    {
+        foreach (var panel in charPanels)
+            panel.RemoveFromClassList("clickable-container-selected");
+
+        charPanels[indexCharSelect].AddToClassList("clickable-container-selected");
+    }
+
+    private void OnMouseOverCharSelect(MouseOverEvent evt, int index)
+    {
+        indexCharSelect = index;
+        UpdateSelectionCharSelect();
+    }
+
+
+    private void UpdateSelectionOverview()
+    {
+        foreach (var panel in overviewClickables)
+            panel.RemoveFromClassList("clickable-container-selected");
+
+        overviewClickables[indexOverview].AddToClassList("clickable-container-selected");
+    }
+
+    private void OnMouseOverOverview(MouseOverEvent evt, int index)
+    {
+        indexOverview = index;
+        UpdateSelectionOverview();
+    }
+
+    private void UpdateSelectionGearEquip()
+    {
+        foreach (var panel in gearClickables)
+            panel.RemoveFromClassList("clickable-container-selected");
+
+        gearClickables[indexGearEquip].AddToClassList("clickable-container-selected");
+    }
+
+    private void UpdateSelectionGearList()
+    {
+        foreach (var panel in gearList)
+            panel.RemoveFromClassList("selected");
+
+        if (gearList.Count > 0)
+            gearList[indexGearList].AddToClassList("selected");
+    }
+
+    private void OnMouseOverGearList(MouseOverEvent evt, int index)
+    {
+        indexGearList = index;
+        UpdateSelectionGearList();
+    }
+
+
+    private void UpdateSelectionArtEquip()
+    {
+        foreach (var panel in artPanels)
+            panel.RemoveFromClassList("arts-equip-panel-selected");
+
+        artPanels[indexArtEquip].AddToClassList("arts-equip-panel-selected");
+    }
+
+    private void OnMouseOverArtEquip(MouseOverEvent evt, int index)
+    {
+        indexArtEquip = index;
+        LoadArtDetail(charDataUI.artDatas[index]);
+        UpdateSelectionArtEquip();
+    }
+
+
+    private void UpdateSelectionArtList()
+    {
+        foreach (var panel in artListPanels)
+            panel.RemoveFromClassList("arts-equip-panel-selected");
+
+        if (artListPanels.Count > 0)
+            artListPanels[indexArtList].AddToClassList("arts-equip-panel-selected");
+    }
+
+    private void OnMouseOverArtList(MouseOverEvent evt, int index)
+    {
+        indexArtList = index;
+        //LoadArtDetail(charDataUI.artDatas[index]);
+        UpdateSelectionArtList();
     }
 }

@@ -88,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8131858715689478717
 GameObject:
@@ -149,8 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62117600755363b48b17600a0af2ddbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemDrop
-  itemId: -1
-  itemAmount: 0
+  dropData:
+    type: 0
+    id: -1
+    recieveAmount: 0
+    recieveChance: 1
+  autoCollect: 0
   doDespawn: 1
   despawnAfter: 10
   initialVelocity: {x: 0, y: 0, z: 0}
@@ -195,3 +200,4 @@ MonoBehaviour:
   CenterOffset: {x: 0, y: 0.5, z: 0}
   checkActive: 1
   disableAfterSuccess: 1
+  allowInCombat: 1

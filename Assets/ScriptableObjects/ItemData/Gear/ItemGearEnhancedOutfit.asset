@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ItemGearEnhancedOutfit
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Enhanced Outfit
-  description: +100 Health
-  shortDescription: Boost Health by 100
-  sellValue: 0
-  buyValue: 0
+  description: Boost Health by 100 when worn
+  shortDescription: +100 Health
+  sellValue: 250
+  buyValue: 500
   type: 3
-  rarity: 0
+  rarity: 1
   icon: {fileID: 2800000, guid: 6962ffb59bbbe3e4cbb37ecac0b74df2, type: 3}
   consumeEffect: {fileID: 0}
   gearData:

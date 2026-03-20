@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Electric Snap
   castType: 0
   category: 1
-  descriptionLong: 
+  descriptionLong: Ether Attack which does moderate damage
   descriptionShort: Ether Dmg
   isUlt: 0
   isSelfCast: 0

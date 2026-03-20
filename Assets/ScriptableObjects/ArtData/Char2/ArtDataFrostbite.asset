@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Frostbite
   castType: 0
   category: 3
-  descriptionLong: 
+  descriptionLong: Gives target a Frost damage effect
   descriptionShort: Frost DoT
   isUlt: 0
   isSelfCast: 0

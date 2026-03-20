@@ -37,12 +37,13 @@
                     <ui:DataBinding property="text" data-source-path="data.rarity" binding-mode="ToTarget"/>
                 </Bindings>
             </ui:Label>
-            <ui:Label text="Label" name="ItemDescription" class="item-description-text" style="position: absolute; top: 500px; width: 800px; height: 300px;">
+            <ui:Label text="Label" name="ItemDescription" class="item-description-text" style="position: absolute; top: 500px; width: 800px; height: 300px; white-space: normal;">
                 <Bindings>
                     <ui:DataBinding property="text" data-source-path="data.description" binding-mode="ToTarget"/>
                 </Bindings>
             </ui:Label>
             <ui:Button text="Use Item" name="ButtonUseItem" double-click-selects-word="false" triple-click-selects-line="false" class="button-use" style="position: absolute; top: 810px; left: 100px; width: 600px; height: 80px; font-size: 40px; -unity-font-style: bold; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px;"/>
         </ui:VisualElement>
+        <ui:Label text="&lt; Back" name="LabelBack" class="label-back"/>
     </ui:VisualElement>
 </ui:UXML>

@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: MissionsPreload
   m_EditorClassIdentifier: Assembly-CSharp::MissionsPreload
   missionsMain:
+  - {fileID: 11400000, guid: 4f4030a29aec18b439442252a28e3b9c, type: 2}
   - {fileID: 11400000, guid: 67a1b1fd01377bc449f653947108c6e2, type: 2}
   - {fileID: 11400000, guid: 3df51fe4e1cf8cd47beaecf7e6477ee7, type: 2}
   - {fileID: 11400000, guid: d74f845bacb01b643ae2a305919f43e7, type: 2}
-  missionsSide: []
+  missionsSide:
+  - {fileID: 11400000, guid: 9e9eb6fa671f98146af46d7c2c7d80cf, type: 2}
+  - {fileID: 11400000, guid: ae35a93d6d3056f48b31983e31be0a80, type: 2}
+  - {fileID: 11400000, guid: 20fb7d0f6ea88814385167767b3f055b, type: 2}
   missionsTasks: []

@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class AreaTrigger : MonoBehaviour
 {
     public int areaId = -1;
     public bool deactivateAfterEnter = false;
+    public UnityEvent EventOnTrigger;
 
     private Collider areaCollider;
 
@@ -24,6 +26,9 @@ public class AreaTrigger : MonoBehaviour
             GameManager.Instance.MissionManager.AreaWasReached(areaId);
             if (deactivateAfterEnter)
                 areaCollider.enabled = false;
+
+            if (EventOnTrigger != null)
+                EventOnTrigger.Invoke();
         }
     }
 }

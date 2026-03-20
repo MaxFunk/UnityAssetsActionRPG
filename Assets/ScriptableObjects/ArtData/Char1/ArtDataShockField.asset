@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: ShockField
   castType: 3
   category: 1
-  descriptionLong: 
+  descriptionLong: Creates a field on the target which does continous damage
   descriptionShort: Ether Dmg Field
   isUlt: 0
   isSelfCast: 0

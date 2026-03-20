@@ -9,11 +9,7 @@ public class MissionManager
 
     public void RecieveNewMission(int missionId)
     {
-        foreach (var mission in missions)
-        {
-            if (mission.id == missionId)
-                return; // already recieved this mission
-        }
+        if (HasRecievedMission(missionId)) return;
 
         var missionData = ScriptableManager.instance.missionsPreload.GetMissionData(missionId);
         if (missionData == null) return;
@@ -69,5 +65,39 @@ public class MissionManager
             mission.missionData = missionData;
             missions.Add(mission);
         }
+    }
+
+
+    public bool HasRecievedMission(int missionId)
+    {
+        foreach (var mission in missions)
+        {
+            if (mission.id == missionId)
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool HasProgressedMission(int missionId, int missionStep)
+    {
+        foreach (var mission in missions)
+        {
+            if (mission.id == missionId && mission.curStep >= missionStep)
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool HasCompletedMission(int missionId)
+    {
+        foreach (var mission in missions)
+        {
+            if (mission.id == missionId && mission.isCompleted)
+                return true;
+        }
+
+        return false;
     }
 }

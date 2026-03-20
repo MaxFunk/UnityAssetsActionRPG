@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7982521906652891034}
   - component: {fileID: 6864973939656862138}
   - component: {fileID: 3089854359872365977}
+  - component: {fileID: 2738743992421294061}
   m_Layer: 10
   m_Name: HeroCharacter
   m_TagString: Untagged
@@ -91,10 +92,12 @@ MonoBehaviour:
   etherDefense: 0
   MaxTargetRange: 10
   timeModifierArtUse: 2
+  musicId: -1
   TryCastingUlt: 0
   EventModifiersChanged:
     m_PersistentCalls:
       m_Calls: []
+  combatModifiers: []
   aggro: []
 --- !u!114 &7982521906652891034
 MonoBehaviour:
@@ -135,7 +138,6 @@ MonoBehaviour:
   characterState: 1
   characterVelocity: {x: 0, y: 0, z: 0}
   groundNormal: {x: 0, y: 1, z: 0}
-  isGrounded: 0
   DebugCanMove: 0
 --- !u!195 &3089854359872365977
 NavMeshAgent:
@@ -159,3 +161,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2738743992421294061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635969829772177503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 0
+  m_AffectedAgents: ffffffff

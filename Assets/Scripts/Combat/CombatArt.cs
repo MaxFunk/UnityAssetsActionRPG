@@ -14,9 +14,12 @@ public class CombatArt
 
     private CombatData owner;
     private bool inRange = false;
+    private bool valid = false;
 
     public void ExternalUpdate()
     {
+        if (!valid) return;
+
         // check in range -> get target, check with owner range, set in range (for ui and check)
         inRange = artData.IsInCastRange(owner, owner.GetCurrentTarget());
         inRangeOpacity = inRange ? 1f : 0.66f;
@@ -45,6 +48,7 @@ public class CombatArt
         curArtCooldown = artData.artCooldown[artLevel];
 
         onCooldown = false;
+        valid = true;
         timerCooldown = curArtCooldown;
     }
 
@@ -60,7 +64,7 @@ public class CombatArt
 
     public bool CanCastArt()
     {
-        if (artData == null || artData.ArtCastPrefab == null || onCooldown || !inRange)
+        if (artData == null || artData.ArtCastPrefab == null || onCooldown || !inRange || !valid)
             return false;
 
         if (artData.isUlt)

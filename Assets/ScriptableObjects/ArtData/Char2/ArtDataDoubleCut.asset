@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Double Cut
   castType: 0
   category: 0
-  descriptionLong: 
+  descriptionLong: Moderate Physical Attack which hits 2 times
   descriptionShort: Phys Dmg / 2 Hits
   isUlt: 0
   isSelfCast: 0

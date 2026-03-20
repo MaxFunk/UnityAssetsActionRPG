@@ -62,14 +62,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1bbf473b3c1154f943935222b7d6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatData
-  characterId: 1
+  characterId: 2
   partyIndex: -1
   charName: Sentinel
   isInCombat: 0
   isHero: 0
   isPlayerControlled: 0
-  level: 1
-  exp: 5
+  level: 2
+  exp: 4
   maxHealth: 2500
   curHealth: 2500
   attack: 4
@@ -80,18 +80,13 @@ MonoBehaviour:
   etherDefense: 0.1
   MaxTargetRange: 10
   timeModifierArtUse: 2
+  musicId: 0
+  TryCastingUlt: 0
   EventModifiersChanged:
     m_PersistentCalls:
       m_Calls: []
-  autoAttack:
-    active: 0
-    timeActive: 0
-    hitsApplied: 0
-    cancelStarted: 0
-    remainingCooldown: 0
-  aggro: 
-  canCancelArt: 0
-  tryCastingUlt: 0
+  combatModifiers: []
+  aggro: []
 --- !u!114 &1183246050752228969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +112,7 @@ MonoBehaviour:
   Aggressive: 0
   MaxViewDistance: 8
   MaxViewAngle: 60
-  navBehavior: 1
+  navBehavior: 2
   timeNextArt: 0
   despawnScaleFactor: 0.5
   artIds: 00000000

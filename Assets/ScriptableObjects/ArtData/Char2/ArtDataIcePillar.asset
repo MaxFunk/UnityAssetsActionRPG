@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Ice Pillar
   castType: 1
   category: 1
-  descriptionLong: 
+  descriptionLong: Powerful ether attack which does damage in an area
   descriptionShort: High Ether Dmg / AOE
   isUlt: 1
   isSelfCast: 0

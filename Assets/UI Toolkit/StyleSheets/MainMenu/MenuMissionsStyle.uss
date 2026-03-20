@@ -40,3 +40,25 @@
     font-size: 48px;
     white-space: nowrap;
 }
+
+.label-back {
+    transition-property: color;
+    transition-duration: 0.2s;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    font-size: 40px;
+}
+
+.label-back:hover {
+    color: rgb(0, 255, 170);
+}
+
+.header-selected {
+    color: rgb(0, 255, 170);
+}
+
+.list-label-selected {
+    color: rgb(0, 255, 170);
+}

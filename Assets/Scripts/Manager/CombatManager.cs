@@ -75,7 +75,6 @@ public class CombatManager : MonoBehaviour
         if (!CombatActive)
         {
             CombatActive = true;
-            SoundtrackManager.Instance.PlaySoundtrack(SoundtrackFile);
             UserInterfaceManager.instance.GameplayUI.OnCombatStart();
         }
 
@@ -88,6 +87,7 @@ public class CombatManager : MonoBehaviour
         {
             enemyCombatants.Add(newCombatant);
             ApplyAggressionWave(4f, newCombatant.transform.position);
+            SoundtrackManager.Instance.LoadBattleSoundtrack(newCombatant.musicId);
         }
 
         newCombatant.OnCombatJoin();

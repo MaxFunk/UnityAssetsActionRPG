@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd9262e75f2c2740a3ef040b8075bf6, type: 3}
+  m_Name: MissionMainDemo
+  m_EditorClassIdentifier: Assembly-CSharp::MissionData
+  missionType: 0
+  missionName: Demo Main Mission
+  descriptionCompleted: The Demo Main Mission was completed. Thank you for playing.
+  missionSteps:
+  - stepDescription: Go to the Rural Town
+    objectiveType: 4
+    objectiveId: 9020
+    objectiveCount: 1
+  - stepDescription: Talk to and win againts the Instructor
+    objectiveType: 0
+    objectiveId: 1
+    objectiveCount: 1
+  - stepDescription: Talk to the female Agent at the Lakeside House
+    objectiveType: 3
+    objectiveId: 801
+    objectiveCount: 1
+  - stepDescription: Defeat 2 Blue Sentinels
+    objectiveType: 0
+    objectiveId: 3
+    objectiveCount: 2
+  - stepDescription: Return to the female Agent
+    objectiveType: 3
+    objectiveId: 801
+    objectiveCount: 1
+  - stepDescription: Prepare and defeat the powerful Red Sentinel
+    objectiveType: 0
+    objectiveId: 5
+    objectiveCount: 1
+  - stepDescription: Return to the Instructor in the Rural Town
+    objectiveType: 3
+    objectiveId: 802
+    objectiveCount: 1
+  rewardMoney: 5000
+  rewardItems:
+  - type: 3
+    id: 6
+    recieveAmount: 1
+    recieveChance: 1

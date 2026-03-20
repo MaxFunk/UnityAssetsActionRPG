@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Fire Slash
   castType: 0
   category: 0
-  descriptionLong: 
+  descriptionLong: Physical Attack which applies a Burn Damage over Time effect
   descriptionShort: Phys Dmg / Burn DoT
   isUlt: 0
   isSelfCast: 0

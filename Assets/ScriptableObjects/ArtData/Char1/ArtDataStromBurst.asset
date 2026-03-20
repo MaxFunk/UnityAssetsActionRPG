@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Storm Burst
   castType: 2
   category: 1
-  descriptionLong: 
+  descriptionLong: Powerful ether art that hits 6 times
   descriptionShort: Ether Dmg / AOE / 6 Hits
   isUlt: 1
   isSelfCast: 0

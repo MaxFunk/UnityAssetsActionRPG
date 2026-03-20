@@ -64,3 +64,28 @@
     border-bottom-color: rgb(255, 255, 255);
     border-bottom-width: 5px;
 }
+
+.header-selected {
+    color: rgb(0, 255, 170);
+}
+
+.label-back {
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    transition-property: color;
+    transition-duration: 0.2s;
+}
+
+.label-back:hover {
+    color: rgb(0, 255, 170);
+}
+
+.selected {
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}

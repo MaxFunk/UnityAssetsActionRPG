@@ -1,9 +1,14 @@
-using UnityEngine;
 using System.Collections;
+using Unity.Burst.Intrinsics;
+using UnityEngine;
 
 public class SoundtrackManager : MonoBehaviour
 {
     public static SoundtrackManager Instance { get; private set; }
+
+    [Header("Soundtrack Lists")]
+    public SoundtrackList soundtrackListArea;
+    public SoundtrackList soundtrackListBattle;
 
     [Header("Audio Sources")]
     public AudioSource sourceA;
@@ -14,6 +19,8 @@ public class SoundtrackManager : MonoBehaviour
     private Coroutine musicRoutine;
 
     private SoundtrackFile areaSoundtrack = null;
+    private SoundtrackFile battleSoundtrack = null;
+
     private bool areaTrackPlaying = false;
     private float areaTrackTime = 0f;
     private readonly float fadeTime = 1f;
@@ -30,12 +37,33 @@ public class SoundtrackManager : MonoBehaviour
 
         activeSource = sourceA;
         idleSource = sourceB;
+
+        LoadAreaSoundtrack(0);
+    }
+
+    public void LoadAreaSoundtrack(int index)
+    {
+        areaSoundtrack = soundtrackListArea.GetSoundtrackFile(index);
+        PlaySoundtrack(areaSoundtrack);
+    }
+
+    public void LoadBattleSoundtrack(int index)
+    {
+        var newBattleSoundtrack = soundtrackListBattle.GetSoundtrackFile(index);
+        if (newBattleSoundtrack != battleSoundtrack)
+        {
+            battleSoundtrack = newBattleSoundtrack;
+            PlaySoundtrack(battleSoundtrack);
+        }
     }
 
     public void PlaySoundtrack(SoundtrackFile soundtrackFile)
     {
         if (soundtrackFile == null)
+        {
+            StopSoundtrack();
             return;
+        }
 
         if (soundtrackFile.layer == SoundtrackFile.SoundtrackLayer.Area)
         {
@@ -51,8 +79,13 @@ public class SoundtrackManager : MonoBehaviour
 
     public void ResumeAreaSoundtrack()
     {
+        battleSoundtrack = null;
+
         if (areaSoundtrack == null)
+        {
+            StopSoundtrack();
             return;
+        }
 
         if (musicRoutine != null)
             StopCoroutine(musicRoutine);

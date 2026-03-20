@@ -6,7 +6,7 @@
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuQuad" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
@@ -18,7 +18,7 @@
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuQuad" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
@@ -30,7 +30,7 @@
             <ui:VisualElement name="CharSelectPanel" data-source-type="CharacterDataStatic, Assembly-CSharp" class="clickable-container" style="width: 400px; height: 400px;">
                 <ui:VisualElement name="CharIcon" class="char-select-icon" style="flex-grow: 1;">
                     <Bindings>
-                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuFull" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="iconMenuQuad" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:VisualElement>
                 <ui:Label text="Character" name="CharName" class="char-select-label">
@@ -104,7 +104,7 @@
     <ui:VisualElement name="ContainerOverview" data-source-type="CharacterDataUI, Assembly-CSharp" class="container" style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement name="OverviewGeneral" style="width: 35%; height: 100%;">
             <ui:VisualElement style="height: 70%;">
-                <ui:VisualElement name="CharacterIcon" style="width: 60%; height: 80%; top: 10%; left: 20%; background-color: rgb(255, 255, 255);">
+                <ui:VisualElement name="CharacterIcon" style="width: 60%; height: 80%; top: 10%; left: 20%; -unity-background-scale-mode: scale-to-fit;">
                     <Bindings>
                         <ui:DataBinding property="style.backgroundImage" data-source-path="staticData.iconMenuFull" binding-mode="ToTarget"/>
                     </Bindings>
@@ -296,7 +296,7 @@
                         <ui:DataBinding property="text" data-source-path="gearData.type" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
-                <ui:Label text="Label" name="DetailItemDescr" class="gear-detail-text" style="flex-grow: 1;">
+                <ui:Label text="Label" name="DetailItemDescr" class="gear-detail-text" style="flex-grow: 1; white-space: normal;">
                     <Bindings>
                         <ui:DataBinding property="text" data-source-path="description" binding-mode="ToTarget"/>
                     </Bindings>
@@ -309,16 +309,16 @@
             <ui:VisualElement name="VisualElement">
                 <ui:Label text="Arts" style="color: rgb(255, 255, 255); font-size: 64px; -unity-font-style: bold;"/>
             </ui:VisualElement>
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
-            <ui:Instance template="ArtListElement" name="ArtPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="ArtPanel" class="arts-equip-panel"/>
             <ui:VisualElement/>
             <ui:VisualElement>
                 <ui:Label text="Ult" name="Label" style="color: rgb(255, 255, 255); font-size: 64px; -unity-font-style: bold;"/>
             </ui:VisualElement>
-            <ui:Instance template="ArtListElement" name="UltPanel" focusable="true" class="arts-equip-panel"/>
+            <ui:Instance template="ArtListElement" name="UltPanel" class="arts-equip-panel"/>
             <ui:VisualElement/>
         </ui:VisualElement>
         <ui:VisualElement style="width: 50%;">

@@ -74,7 +74,7 @@ public class Mission
 
         if (curStepData.objectiveType == MissionStep.ObjectiveType.ItemHave)
         {
-            stepValue = GameManager.Instance.ItemManager.GetItemAmount(curStepData.objectiveId);
+            stepValue = GameManager.Instance.ItemManager.GetItemAmountFullId(curStepData.objectiveId);
             if (stepValue >= curStepData.objectiveCount)
                 LoadStep(curStep + 1);
         }

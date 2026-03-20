@@ -12,6 +12,7 @@ public class CharacterDataStatic : ScriptableObject
     public List<ArtSaveData> initArtSaveDatas = new();
     public List<Vector2Int> levelUpArts = new();
     public AutoAttackData autoAttackData = new();
+    public Texture2D iconMenuQuad = null;
     public Texture2D iconMenuFull = null;
 
     public int GetArtOnLevelUp(int level)

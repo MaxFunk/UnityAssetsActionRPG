@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -20,18 +19,37 @@ public class EnemySpawner : MonoBehaviour
     [Header("References")]
     public EnemyCharacterController[] EnemyCharacterPrefab;
     [Header("Data")]
+    public bool SpawnOnLoad = true;
+    public bool SpawnViaFlag = false;
     public float RadiusNearSpawner = 2f;
     [Header("Debug")]
     public bool DebugDoRespawn = false;
     public bool DebugRespawnExisting = false;
 
-    SpawnedData[] spawnedDatas;
+    private List<SpawnedData> spawnedDatas = new();
+    private EventFlagChecker eventFlagChecker;
 
 
     private void Awake()
     {
-        spawnedDatas = new SpawnedData[EnemyCharacterPrefab.Length];
-        SpawnEnemies(true);
+        eventFlagChecker = GetComponent<EventFlagChecker>();
+
+        spawnedDatas = new();
+        for (int i = 0; i < EnemyCharacterPrefab.Length; i++)
+        {
+            spawnedDatas.Add(new SpawnedData(false, null));
+        }
+
+        if (SpawnOnLoad)
+        {
+            SpawnEnemies(true);
+            return;
+        }
+
+        if (SpawnViaFlag && eventFlagChecker != null && eventFlagChecker.IsFlagValueCorrect())
+        {
+            SpawnEnemies(true);
+        }
     }
 
     private void Update()

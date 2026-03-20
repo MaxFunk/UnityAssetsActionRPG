@@ -122,6 +122,8 @@ public class GameplayUserInterface : MonoBehaviour
             }
         }
 
+        if (root.style.display == DisplayStyle.None) return;
+
         allyUltPanel1.ExternalUpdate();
         allyUltPanel2.ExternalUpdate();
         panelItemCollect.ExternalUpdate();

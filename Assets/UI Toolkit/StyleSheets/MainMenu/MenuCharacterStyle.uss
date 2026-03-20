@@ -113,7 +113,7 @@
     padding-left: 10px;
 }
 
-.clickable-container:hover {
+.clickable-container-selected {
     transition-property: all;
     transition-duration: 0.5s;
     border-left-color: rgb(255, 255, 255);
@@ -180,33 +180,41 @@
 }
 
 .gear-list-container {
-    background-color: rgb(34, 29, 29);
+    background-color: rgb(64, 64, 64);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
 }
 
 .button-back {
     color: rgb(255, 255, 255);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     background-color: rgb(64, 64, 64);
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
 }
 
 .button-back:hover {
     -unity-font-style: bold;
-    border-top-width: 5px;
-    border-right-width: 5px;
-    border-bottom-width: 5px;
-    border-left-width: 5px;
     transition-duration: 0.5s;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
 }
 
 .arts-list-element {
@@ -215,7 +223,7 @@
 .arts-equip-panel {
 }
 
-.arts-equip-panel:focus {
+.arts-equip-panel-selected {
     background-color: rgb(84, 84, 84);
 }
 

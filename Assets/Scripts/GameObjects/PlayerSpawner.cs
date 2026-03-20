@@ -3,10 +3,16 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
+    [Header("Modify Per Prefabs")]
+    public int InSceneIndex = -1;
+
+    [Header("Preset for all Prefabs")]
     public HeroCharacterController HeroPrefab;
     public CameraController CameraPrefab;
     public RuntimeAnimatorController[] Controller;
     public Animator[] HeroModels;
+    public RuntimeAnimatorController[] ControllerWeapons;
+    public Animator[] WeaponModels;
 
     private CameraController currentPlayerCamera;
     public bool DebugRespawn = false;
@@ -14,7 +20,8 @@ public class PlayerSpawner : MonoBehaviour
     
     void Awake()
     {
-        SpawnCharacters();
+        if (GameManager.Instance.CurSpawnerIndex == InSceneIndex)
+            SpawnCharacters();
     }
 
     void Update()
@@ -37,6 +44,9 @@ public class PlayerSpawner : MonoBehaviour
         var newHeroCharacter = Instantiate(HeroPrefab, gameObject.transform.position + spawnOffset, gameObject.transform.rotation);
         var modelCopy = Instantiate(HeroModels[heroId], newHeroCharacter.gameObject.transform);
         modelCopy.runtimeAnimatorController = Controller[heroId];
+        var weaponCopy = Instantiate(WeaponModels[heroId], newHeroCharacter.gameObject.transform);
+        weaponCopy.runtimeAnimatorController = ControllerWeapons[heroId];
+
         newHeroCharacter.OnModelLoad(heroId, partyIndex);
         return newHeroCharacter;
     }

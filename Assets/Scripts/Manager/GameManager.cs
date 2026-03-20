@@ -6,12 +6,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public SaveSystem SaveSystem { get; private set; } = new();    
-    public GameDataGeneral GameDataGeneral { get; private set; } = new();    
     public ItemManager ItemManager { get; private set; } = new();
     public MissionManager MissionManager = new(); // { get; private set; } = new();
 
+    public GameDataGeneral GameDataGeneral { get; set; } = new();
     public EventFlags EventFlags { get; set; } = new();
     public HeroCharacterController PlayerCharacter { get; set; } = null;
+    public int CurSpawnerIndex { get; set; } = -1;
 
     public List<CharacterData> characterDatas = new(); // > character manager / GameDataParty    
     public int[] partyData = new int[] { -1, -1, -1 }; // > character manager
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     public bool DebugMode = false;
 
     private bool hasSwitchedThisFrame = false; // > character manager
+    public bool[] flags = new bool[0];
 
 
     void Awake()
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
 
         if (hasSwitchedThisFrame)
             hasSwitchedThisFrame = false;
+
+        flags = EventFlags.flags;
     }
 
 
@@ -72,7 +76,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SpawnItemDrop(ItemRecieveData dropData, Vector3 position)
+    public void SpawnItemDrop(ItemRecieveData dropData, Vector3 position, bool autoCollect = false)
     {
         if (ItemDropPrefab == null) return;
 
@@ -80,6 +84,7 @@ public class GameManager : MonoBehaviour
         {
             ItemDrop newItemDrop = Instantiate(ItemDropPrefab, position + (Vector3.up * 0.1f), Quaternion.identity);
             newItemDrop.dropData = dropData;
+            newItemDrop.autoCollect = autoCollect;
             newItemDrop.SetInitialVelocity(new Vector3((Random.value - 0.5f), 1.5f, (Random.value - 0.5f)));
         }
     }

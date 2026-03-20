@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public int sceneIndex = -1;
+    public int spawnerIndex = -1;
 
     public void LoadScene()
     {
@@ -13,14 +14,19 @@ public class SceneLoader : MonoBehaviour
 
         float delay = UserInterfaceManager.instance.CreateLoadingScreen();
         StartCoroutine(DelayedCall(delay));
+
+        GameManager.Instance.GameDataGeneral.sceneIndex = sceneIndex;
+        GameManager.Instance.GameDataGeneral.sceneSpawner = spawnerIndex;
+
         SoundtrackManager.Instance.StopSoundtrack();
+        SoundtrackManager.Instance.LoadAreaSoundtrack(-1); // clears area soundtrack
     }
 
     IEnumerator LoadAsyncScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
+        GameManager.Instance.CurSpawnerIndex = spawnerIndex;
 
-        // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
             yield return null;

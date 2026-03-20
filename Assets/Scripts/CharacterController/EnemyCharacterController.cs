@@ -45,6 +45,7 @@ public class EnemyCharacterController : MonoBehaviour
     CharacterController controller;
     Animator animator = null;
     NavMeshAgent agent = null;
+    EventFlagChecker flagChecker = null;
 
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation = Quaternion.identity;
@@ -61,6 +62,7 @@ public class EnemyCharacterController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        flagChecker = GetComponentInChildren<EventFlagChecker>();
 
         timeNextArt = combatData.timeModifierArtUse;
         if (targetLine != null) targetLine.enabled = false;
@@ -246,7 +248,7 @@ public class EnemyCharacterController : MonoBehaviour
                 if (success)
                 {
                     timeNextArt = combatData.GetCurrentArt().artCooldown[0] * combatData.timeModifierArtUse;
-                    animator.SetTrigger("TrArt");
+                    animator.SetTrigger("TrArtEther");
                 }
             }
         }
@@ -279,6 +281,14 @@ public class EnemyCharacterController : MonoBehaviour
         inCombat = false;
         animator.SetBool("isInCombat", false);
         targetLine.enabled = false;
+    }
+
+    public void OnDefeat()
+    {
+        if (flagChecker != null)
+        {
+            flagChecker.WriteFlags();
+        }
     }
 
     public CombatData GetCombatData()

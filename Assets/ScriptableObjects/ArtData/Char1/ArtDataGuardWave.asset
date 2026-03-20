@@ -15,7 +15,7 @@ MonoBehaviour:
   artName: Guard Wave
   castType: 1
   category: 2
-  descriptionLong: 
+  descriptionLong: Gives a defense buff to all allies nearby
   descriptionShort: Phys Def Up / AOE
   isUlt: 0
   isSelfCast: 1

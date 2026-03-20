@@ -48,6 +48,6 @@ MonoBehaviour:
   PrefabMainMenu: {fileID: 997486046442622723, guid: 37d657ec900830841ba3be0017758d13, type: 3}
   PrefabLoadingScreen: {fileID: 3072511597152876081, guid: d2069d46580517542806e69d13c14194, type: 3}
   PrefabDialogUI: {fileID: 5602822074326006182, guid: b7139a363fcc5dd4f891d8a8d6bbc7f7, type: 3}
-  gameplayUI: {fileID: 0}
+  PrefabShopUI: {fileID: -6053141543096891435, guid: d7cd286495f458e40b176fd497a3c9ea, type: 3}
   mainMenu: {fileID: 0}
   loadingScreen: {fileID: 0}

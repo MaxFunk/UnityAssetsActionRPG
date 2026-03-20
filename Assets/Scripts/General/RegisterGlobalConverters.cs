@@ -23,6 +23,13 @@ static class RegisterGlobalConverters
         });
         ConverterGroups.RegisterConverterGroup(groupFloat);
 
+        var groupFloat2 = new ConverterGroup("Float Ceiled");
+        groupFloat2.AddConverter((ref float value) =>
+        {
+            return $"{Mathf.Ceil(value)}";
+        });
+        ConverterGroups.RegisterConverterGroup(groupFloat2);
+
         var groupInt = new ConverterGroup("Int to Amount");
         groupInt.AddConverter((ref int value) =>
         {

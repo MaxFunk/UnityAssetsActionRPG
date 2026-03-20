@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa48ba5d9780d1b4f87706300a25f898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner
-  PlayerPrefab: {fileID: 3573256397902566109, guid: fde04674b914a3a4782c3785179c5e48, type: 3}
+  InSceneIndex: -1
   HeroPrefab: {fileID: 6864973939656862138, guid: 6026d0ce9ef6ff64e9bd2e37002be866, type: 3}
   CameraPrefab: {fileID: 3018909971000013271, guid: 3cf8a6e831c27194b94bbfdb0f8aac5a, type: 3}
   Controller:
@@ -55,4 +55,12 @@ MonoBehaviour:
   - {fileID: 5866666021909216657, guid: d592e79e0ade64f47b3a3005288af7ee, type: 3}
   - {fileID: 5866666021909216657, guid: de256f4bb9b26d0499b8ff28d4180720, type: 3}
   - {fileID: 5866666021909216657, guid: 10b394640c2038b408cad1a1fb94eda8, type: 3}
+  ControllerWeapons:
+  - {fileID: 22100000, guid: ba385776452bab343b49377b9fd4f91c, type: 2}
+  - {fileID: 22100000, guid: 05391e5b80da67f4fb2361809232f43a, type: 2}
+  - {fileID: 22100000, guid: 60565a9bf7156e246abfae83a322117d, type: 2}
+  WeaponModels:
+  - {fileID: 5866666021909216657, guid: c6f7ccc7e863955499190223b3392572, type: 3}
+  - {fileID: 5866666021909216657, guid: f800c272ec011da4bb49436bca4f6b21, type: 3}
+  - {fileID: 5866666021909216657, guid: 17f943c242f96c34eb6e054c09701db9, type: 3}
   DebugRespawn: 0

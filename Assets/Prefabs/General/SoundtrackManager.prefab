@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30683a7511752904c86768f19266bce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundtrackManager
+  soundtrackListArea: {fileID: 11400000, guid: 2e761d81f9e34584e9cd49764c80d763, type: 2}
+  soundtrackListBattle: {fileID: 11400000, guid: 342d6ffee98e8ca45b61f477e5ff80de, type: 2}
   sourceA: {fileID: -4869319820471602492}
   sourceB: {fileID: 8203239555504437410}
 --- !u!82 &-4869319820471602492
@@ -57,7 +59,7 @@ AudioSource:
   m_GameObject: {fileID: 5815362044249168094}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: a62d1b8d6631213489bdeefd727f1f8c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -154,7 +156,7 @@ AudioSource:
   m_GameObject: {fileID: 5815362044249168094}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: a62d1b8d6631213489bdeefd727f1f8c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0

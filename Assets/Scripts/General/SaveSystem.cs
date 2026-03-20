@@ -57,6 +57,7 @@ public class SaveSystem
             saveData = JsonUtility.FromJson<SaveData>(saveContent);
 
             currentFileIndex = index;
+            gameManager.GameDataGeneral = saveData.generalData;
             gameManager.EventFlags = saveData.eventFlags;
             gameManager.ItemManager.LoadItems(saveData.itemData);
             gameManager.characterDatas = saveData.characterDatas;            
@@ -85,7 +86,20 @@ public class SaveSystem
 
             currentFileIndex = index;
             gameManager.characterDatas = characterDatas;
-            gameManager.ItemManager.LoadItems(new ItemManager.ItemSaveData());
+
+            // bad solution, but i dont care, i am tired right now.
+            var saveData = new ItemManager.ItemSaveData
+            {
+                itemsMaterial = new int[0],
+                itemsConsumable = new int[0],
+                itemsIngredient = new int[0],
+                itemsGear = new int[0],
+                itemsKeyitem = new int[0]
+            };
+
+            gameManager.GameDataGeneral.sceneIndex = 1;
+            gameManager.GameDataGeneral.sceneSpawner = 1;
+            gameManager.ItemManager.LoadItems(saveData);
             gameManager.partyData = new int[] { 0, 1, 2 };
             gameManager.StartGame(null);
         }

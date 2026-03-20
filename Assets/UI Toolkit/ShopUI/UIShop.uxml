@@ -1,0 +1,57 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheets/StyleShopUI.uss?fileID=7433441132597879392&amp;guid=f4cccaff7dac3e145884e6a8c1268cd5&amp;type=3#StyleShopUI"/>
+    <ui:VisualElement name="ContainerRoot" data-source-type="ShopUserInterface, Assembly-CSharp" class="base" style="flex-grow: 1;">
+        <ui:VisualElement name="FrontPage" class="front-page label-front-selected" style="flex-grow: 1; display: flex;">
+            <ui:VisualElement style="height: 40%;">
+                <ui:Label text="Shop Name" name="LabelShopName" class="label-shop-name">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="shopData.ShopName" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement style="height: 60%; justify-content: space-around;">
+                <ui:Label text="Buy" name="LabelBuy" class="label-front"/>
+                <ui:Label text="Sell" name="LabelSell" class="label-front"/>
+                <ui:Label text="Close" name="LabelClose" class="label-front"/>
+            </ui:VisualElement>
+            <Bindings>
+                <ui:DataBinding property="style.display" data-source-path="visibilityFront" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:VisualElement>
+        <ui:VisualElement name="MainPage" style="flex-grow: 1; display: none;">
+            <Bindings>
+                <ui:DataBinding property="style.display" data-source-path="visibilityMain" binding-mode="ToTarget"/>
+            </Bindings>
+            <ui:VisualElement name="VisualElement" class="main-page-subcontainer" style="flex-grow: 1;">
+                <ui:Label text="Buy Items" name="LabelModeName" class="label-mode-name" style="height: 15%;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="headerTextMode" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:VisualElement style="height: 8%; flex-direction: row; justify-content: space-around;">
+                    <ui:Label text="Money Owned:" name="LabelMoney" class="list-header-text"/>
+                    <ui:Label text="9000 G" name="LabelMoney" class="list-header-text">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="textMoney" binding-mode="ToTarget"/>
+                        </Bindings>
+                    </ui:Label>
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="height: 7%; flex-direction: row; justify-content: flex-start;">
+                    <ui:Label text="" name="LabelMoney" class="list-header-text" style="width: 10%;"/>
+                    <ui:Label text="Name" name="LabelMoney" class="list-header-text" style="width: 45%;"/>
+                    <ui:Label text="Price" name="LabelMoney" class="list-header-text" style="width: 20%; -unity-text-align: upper-right;"/>
+                    <ui:Label text="Owned" name="LabelMoney" class="list-header-text" style="width: 20%; -unity-text-align: upper-right;"/>
+                </ui:VisualElement>
+                <ui:ScrollView name="ItemList" class="list-scroll-view">
+                    <ui:VisualElement class="list-elem-container">
+                        <ui:Image class="list-elem-icon" style="background-image: resource(&quot;Icons/Items/icon_items_ether_shard&quot;);"/>
+                        <ui:Label text="ItemName" class="list-elem-itemname"/>
+                        <ui:Label text="900 M" class="list-elem-label"/>
+                        <ui:Label text="x99" class="list-elem-money list-elem-label"/>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:Label text="&lt; Back" name="LabelBack" class="label-back"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: ItemGearStandardAugment
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Standard Augment
-  description: 'For Testing: +200% MoveSpeed'
+  description: Does nothing
   shortDescription: No effects
-  sellValue: 0
-  buyValue: 0
+  sellValue: 100
+  buyValue: 200
   type: 3
   rarity: 0
   icon: {fileID: 2800000, guid: 6962ffb59bbbe3e4cbb37ecac0b74df2, type: 3}
   consumeEffect: {fileID: 0}
   gearData:
     type: 3
-    effect: 3
-    effectIndex: 1000
-    effectValue: 2
-    combatModifier: {fileID: 11400000, guid: c1bb72a8083d19549869feba7c305504, type: 2}
+    effect: 0
+    effectIndex: 0
+    effectValue: 0
+    combatModifier: {fileID: 0}

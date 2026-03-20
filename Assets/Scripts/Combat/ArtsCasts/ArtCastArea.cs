@@ -35,6 +35,9 @@ public class ArtCastArea : ArtCastBase
     {
         timeAlive += Time.deltaTime;
 
+        if (castPositioning == CastPositioning.CasterToTarget)
+            CasterToTargetCurve();
+
         if (timeAlive > timeHitAfter && hitsApplied < artData.hits.Length)
         {
             CheckForHits();
@@ -45,9 +48,6 @@ public class ArtCastArea : ArtCastBase
         }
 
         CheckCancelStart();
-
-        if (castPositioning == CastPositioning.CasterToTarget)
-            CasterToTargetCurve();
 
         if (timeAlive > artData.castDuration && castDurationEnded == false) // do not destroy here if proper animations exist..
         {
@@ -106,6 +106,10 @@ public class ArtCastArea : ArtCastBase
         {
             colliders = Physics.OverlapSphere(castTransform.position, collisionHalfExtends.x);
         }
+
+
+        Debug.DrawLine(castTransform.position, castTransform.position + collisionHalfExtends, Color.indianRed, 2f);
+        Debug.DrawLine(castTransform.position, castTransform.position - collisionHalfExtends, Color.indianRed, 2f);
 
         foreach (Collider collider in colliders)
         { 

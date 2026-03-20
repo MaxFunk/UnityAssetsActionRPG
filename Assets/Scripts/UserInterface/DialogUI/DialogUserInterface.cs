@@ -112,6 +112,7 @@ public class DialogUserInterface : MonoBehaviour
         }
 
         LoadStep(0);
+        CheckInitialEvents(); // not optimal
     }
 
     public void DialogEnd() 
@@ -136,10 +137,10 @@ public class DialogUserInterface : MonoBehaviour
         promptLabels = promptContainer.Query<Label>("LabelPrompt").ToList();
     }
 
-    private void LoadStep(int nextStep)
+    public void LoadStep(int nextStep, bool ignoreEnd = false)
     {
         step = nextStep;        
-        if (step >= dialogData.dialogSteps.Length || (stepData != null && stepData.isEnd))
+        if (step >= dialogData.dialogSteps.Length || (stepData != null && stepData.isEnd && !ignoreEnd))
         {
             DialogEnd();
             return;
@@ -239,6 +240,16 @@ public class DialogUserInterface : MonoBehaviour
 
         var continueCondition = step < dialogData.dialogSteps.Length - 1 && !stepData.isEnd;
         displayIconContinue = continueCondition ? DisplayStyle.Flex : DisplayStyle.None;
+    }
+
+    private void CheckInitialEvents()
+    {
+        foreach (var eventIndex in dialogData.initialEventIndices)
+        {
+            if (eventIndex < 0 || eventIndex >= DialogEvents.Length) continue;
+
+            DialogEvents[eventIndex]?.Invoke();
+        }
     }
 
     private void CheckUnconditionalEvent()

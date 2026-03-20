@@ -88,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &942722655445558895
 GameObject:
@@ -138,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemChest
   relativeItemDropPosition: {x: 0, y: 1, z: 0}
   itemDrops: []
+  chestId: -1
 --- !u!114 &3050380361728903072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425e0f6d98ba5a843b1d991a80891cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  InteractionText: Interact with ???
+  InteractionId: -1
+  InteractionText: Open Chest
   MaxInteractions: 1
-  interActionsLeft: -1
   OnInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -168,6 +170,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  interactionsLeft: -1
 --- !u!65 &7621720873803652423
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MenuContainerMissions : MenuContainer
 {
-    private List<Mission> mainMissions = new();
-    private List<Mission> sideMissions = new();
-    private List<Mission> taskMissions = new();
+    private readonly List<Mission> mainMissions = new();
+    private readonly List<Mission> sideMissions = new();
+    private readonly List<Mission> taskMissions = new();
 
     public Visibility visibilityDetail = Visibility.Visible;
     public Mission detailMission = null;
     public MissionData detailMissionData = null;
 
+    private List<Label> headerLabels = new();
+    private List<Label> listLabels = new();
     private ScrollView scrollView = null;
     private int curType = 0;
     private int curIndex = 0;
@@ -25,8 +25,10 @@ public class MenuContainerMissions : MenuContainer
         containerObj = rootElement != null ? rootElement.Q<VisualElement>("MissionsView") : containerObj;
         if (containerObj == null) { return; }
 
+        containerObj.Q<Label>("LabelBack").RegisterCallback<ClickEvent>(OnLabelBackClick);
+
         scrollView = containerObj.Q<ScrollView>("ScrollView");
-        var headerLabels = containerObj.Query<Label>("HeaderLabel").ToList();
+        headerLabels = containerObj.Query<Label>("HeaderLabel").ToList();
         for (int i = 0; i < headerLabels.Count; i++)
         {
             headerLabels[i].RegisterCallback<ClickEvent, int>(OnHeaderLabelClick, i);
@@ -49,14 +51,18 @@ public class MenuContainerMissions : MenuContainer
 
     public override void SpecialEvent()
     {
-
+        curType++;
+        if (curType > 2)
+            curType = 0;
+        LoadMissionList(curType);
     }
 
     public override void DirectionalEvent(Vector2 navInput)
     {
+        curIndex = Mathf.Clamp(curIndex - Mathf.RoundToInt(navInput.y), 0, listLabels.Count - 1);
+        UpdateListSelection();
+    }
 
-    }   
-    
 
     private void FetchAndSortMissions()
     {
@@ -92,7 +98,8 @@ public class MenuContainerMissions : MenuContainer
     private void LoadMissionList(int type)
     {
         scrollView.Clear();
-        
+        listLabels.Clear();
+
         curType = type;
         List<Mission> missions = curType switch
         {
@@ -100,6 +107,10 @@ public class MenuContainerMissions : MenuContainer
             1 => sideMissions,
             _ => taskMissions
         };
+
+        foreach (var label in headerLabels)
+            label.RemoveFromClassList("header-selected");
+        headerLabels[type].AddToClassList("header-selected");
 
         for (int i = 0; i < missions.Count; i++)
         {
@@ -110,9 +121,11 @@ public class MenuContainerMissions : MenuContainer
             newLabel.RegisterCallback<ClickEvent, int>(OnListElementClick, i);
             newLabel.AddToClassList("list-label");
             scrollView.Add(newLabel);
+            listLabels.Add(newLabel);
         }
 
-        LoadDetail(0);
+        curIndex = 0;
+        UpdateListSelection();
     }
 
     private void LoadDetail(int index)
@@ -139,13 +152,28 @@ public class MenuContainerMissions : MenuContainer
         detailMissionData = detailMission.missionData;
     }
 
+    private void UpdateListSelection()
+    {
+        foreach (var label in listLabels)
+            label.RemoveFromClassList("list-label-selected");
+        if (listLabels.Count > 0)
+            listLabels[curIndex].AddToClassList("list-label-selected");
+        LoadDetail(curIndex);
+    }
+
     private void OnListElementClick(ClickEvent evt, int index)
     {
-        LoadDetail(index);
+        curIndex = index;
+        UpdateListSelection();
     }
 
     private void OnHeaderLabelClick(ClickEvent evt, int index)
     {
         LoadMissionList(index);
+    }
+
+    private void OnLabelBackClick(ClickEvent evt)
+    {
+        CancelEvent();
     }
 }
